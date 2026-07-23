@@ -1,0 +1,16 @@
+@import "tailwindcss";
+@import "../styles/tokens.css";
+
+@theme inline {
+  --color-background: var(--color-bg);
+  --color-foreground: var(--color-text-primary);
+  --color-brand: var(--color-primary);
+  --color-accent: var(--color-warm);
+  --color-surface: var(--color-surface-inset);
+  --font-sans: var(--font-body);
+  --font-serif: var(--font-display);
+  --font-mono: var(--font-mono-src);
+}
+
+/* tokens.css owns the reset, base type, fonts, and color system.
+   ponytail: no create-next-app overrides here — they fought the cream theme. */

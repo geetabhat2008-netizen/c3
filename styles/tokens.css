@@ -1,0 +1,679 @@
+/*
+ * CrownCalm — Design Tokens
+ * Master Strategy Design System · v2.0
+ * Light mode · Cream base · Brutalist-editorial
+ *
+ * Reference: Master Strategy visual (cream #F2ECE4 bg, charcoal text,
+ * Space Mono + Playfair Display, dithered dissolve accent blocks,
+ * strict vertical-column grid)
+ *
+ * Import in app/globals.css:
+ *   @import '../styles/tokens.css';
+ *
+ * RULE: Every value used in a component must come from a var() here.
+ * Hard-coded px or hex values in components are forbidden.
+ */
+
+:root {
+
+  /* ─────────────────────────────────────────────
+   * COLOR SYSTEM — LIGHT MODE
+   * Base: warm cream. Text: deep charcoal.
+   * Accent: indigo primary + terracotta warm.
+   * Phase palette: the dithered dissolve blocks.
+   * ───────────────────────────────────────────── */
+
+  /* Backgrounds — lightness hierarchy */
+  --color-bg:             #F2ECE4;   /* page background — warm cream */
+  --color-surface:        #EBE4DB;   /* cards, panels — slightly deeper cream */
+  --color-surface-raised: #E0D9CF;   /* elevated: dropdowns, modals */
+  --color-surface-inset:  #F7F3EE;   /* inset inputs, recessed fields */
+
+  /* Core text */
+  --color-text-primary:   #1A1A1A;   /* deep charcoal — NEVER pure black */
+  --color-text-secondary: #666666;   /* mid grey — body copy, descriptions */
+  --color-text-tertiary:  #999999;   /* light grey — eyebrows, timestamps, disabled */
+
+  /* Brand accents */
+  --color-primary:        #2563EB;   /* indigo — CTA buttons, links, active states */
+  --color-primary-hover:  #1D55D4;   /* -10% lightness — hover shift, same hue */
+  --color-primary-active: #1648B8;   /* pressed state */
+  --color-primary-subtle: rgba(37, 99, 235, 0.08);  /* tinted bg behind specs/tags */
+
+  --color-warm:           #E8624A;   /* terracotta — secondary CTA, emotional peak moments */
+  --color-warm-hover:     #D4533C;
+  --color-warm-subtle:    rgba(232, 98, 74, 0.08);
+
+  --color-tertiary:       #7628F3;   /* violet — supporting contrast, max 2× per page */
+
+  /* Text selection — faint indigo wash, ink deepens one step for a slight contrast lift */
+  --color-selection-bg:   rgba(37, 99, 235, 0.14);
+  --color-selection-text: #0E0E0E;
+
+  /* Spec / data color */
+  --color-spec:           #2563EB;   /* all <code> spec numbers */
+  --color-spec-bg:        rgba(37, 99, 235, 0.07);
+
+  /* Phase / dissolve-block palette
+   * Used for the dithered accent blocks on section headings,
+   * mechanism tags, and timeline phases.
+   * Each has a solid and a transparent-to form for the dissolve effect. */
+  --phase-1:       #D2B6F7;   /* lavender — Gate Control / Neuro-Massager */
+  --phase-2:       #E596FF;   /* magenta — Spectral / FL-41 */
+  --phase-3:       #F5B061;   /* ochre — Thermal / Cryo-Wrap */
+  --phase-4:       #FCD667;   /* yellow — Auditory / Sleep Buds */
+  --phase-5:       #6FA4FF;   /* cornflower — Bundle / Science */
+
+  /* Borders — dark-on-light */
+  --border-subtle:        rgba(26, 26, 26, 0.08);   /* cards, dividers */
+  --border-default:       rgba(26, 26, 26, 0.14);   /* inputs, explicit separators */
+  --border-strong:        rgba(26, 26, 26, 0.24);   /* active, focused states */
+  --border-accent:        rgba(37, 99, 235, 0.28);  /* primary accent borders */
+  --border-width:         1px;
+
+  /* Vertical grid rule — structural columns (see layout bible) */
+  --grid-rule-color:      rgba(26, 26, 26, 0.07);  /* ultra-thin column dividers */
+
+  /* Semantic */
+  --color-success:        #16A34A;
+  --color-error:          #DC2626;
+  --color-warning:        #D97706;
+
+
+  /* ─────────────────────────────────────────────
+   * TYPOGRAPHY
+   * Playfair Display: editorial display headings
+   * Space Mono: all labels, body, UI, specs
+   * The pair creates "brutalist-corporate" tension.
+   * ───────────────────────────────────────────── */
+
+  /* Font families — next/font self-hosts under a mangled name and exposes it as
+   * --font-display-src / --font-mono-src (see app/layout.tsx). Reference those so
+   * the real Playfair/Space Mono load; the literal names are only a fallback. */
+  --font-display:  var(--font-display-src), 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-mono:     var(--font-mono-src), 'Space Mono', 'JetBrains Mono', 'Courier New', monospace;
+  --font-body:     var(--font-body-src), 'Lora', Georgia, 'Times New Roman', serif;
+
+  /* Sharper rendering for small mono text (10-12px) */
+  --font-smoothing-sharp: antialiased;
+  --font-smoothing-sharp-moz: grayscale;
+
+  /*
+   * Google Fonts import — add to app/layout.tsx:
+   * https://fonts.googleapis.com/css2?
+   *   family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700
+   *   &family=Space+Mono:ital,wght@0,400;0,700;1,400
+   *   &display=swap
+   */
+
+  /* Display scale (Playfair Display) */
+  --text-display-xl:  clamp(52px, 7.5vw, 96px);    /* hero H1 */
+  --text-display-lg:  72px;                          /* section hero — from design.md */
+  --text-display-md:  clamp(36px, 4.5vw, 56px);     /* product names, section H2 */
+  --text-display-sm:  clamp(24px, 3vw, 36px);       /* card headlines, sub-sections */
+  --text-display-xs:  22px;                          /* pull quotes, minor headings */
+
+  /* Mono scale (Space Mono) */
+  --text-mono-lg:     17px;    /* primary body copy */
+  --text-mono-md:     14px;    /* secondary paragraphs, descriptions */
+  --text-mono-sm:     12px;    /* from design.md — body-md base size */
+  --text-mono-xs:     11px;    /* eyebrows, timestamps, labels, spec tags */
+  --text-mono-2xs:    10px;    /* attribution lines, legal micro-copy */
+
+  /* Line heights */
+  --leading-display:  1.0;     /* tight — from design.md (72px/72px) */
+  --leading-heading:  1.12;
+  --leading-body:     1.65;    /* mono body — readable but compact */
+  --leading-mono-sm:  1.5;     /* small mono labels */
+
+  /* Letter spacing — from design.md */
+  --tracking-display: -0.05em;  /* large display — tight, from design.md */
+  --tracking-heading: -0.02em;
+  --tracking-mono:     0.10em;  /* Space Mono body — slightly open, from design.md */
+  --tracking-eyebrow:  0.14em;  /* all-caps labels */
+  --tracking-caps:     0.08em;  /* mixed CAPS body text */
+
+  /* Font weights */
+  --weight-display:    400;   /* Playfair regular is already rich */
+  --weight-display-bd: 700;
+  --weight-mono:       400;
+  --weight-mono-bd:    700;
+
+  /* Max line lengths */
+  --measure-body:     62ch;
+  --measure-narrow:   44ch;
+
+
+  /* ─────────────────────────────────────────────
+   * SPACING SCALE — 8px base (from design.md)
+   * All spacing derives from 8px.
+   * 46.1px (≈ 46px) is the canonical section/card padding.
+   * ───────────────────────────────────────────── */
+
+  --space-1:    4px;
+  --space-2:    8px;    /* base unit — from design.md */
+  --space-3:    12px;
+  --space-4:    16px;   /* gap-lg — from design.md */
+  --space-5:    24px;
+  --space-6:    32px;
+  --space-7:    48px;
+  --space-8:    64px;
+  --space-9:    80px;
+  --space-10:   96px;
+  --space-11:   128px;
+  --space-12:   160px;
+
+  /* Canonical semantic spacing from design.md */
+  --gap-base:           8px;    /* from design.md: gap */
+  --gap-lg:             16px;   /* from design.md: gaps */
+  --padding-card:       46px;   /* from design.md: card-padding 46.1px */
+  --padding-section:    46px;   /* from design.md: section-padding 46.1px */
+  --padding-section-y:  clamp(48px, 6.5vw, 84px);  /* vertical section rhythm */
+  --padding-page-x:     max(46px, 5vw);            /* horizontal page edge padding */
+
+  /* Container widths */
+  --container-max:      1280px;
+  --container-content:  960px;
+  --container-narrow:   720px;
+
+
+  /* ─────────────────────────────────────────────
+   * GRID — from design.md
+   * "Strong" grid, full-bleed, 12-column.
+   * Vertical grid rules are a visual signature.
+   * ───────────────────────────────────────────── */
+
+  --grid-cols:      12;
+  --grid-gap:       8px;    /* from design.md */
+  --grid-gap-lg:    16px;
+  --grid-max:       var(--container-max);
+
+  /* Vertical rule lines — thin columns dividing the page */
+  --grid-rule-width: 1px;
+  --grid-rule-style: solid;
+  /* Use as background-image on sections:
+     repeating-linear-gradient(to right,
+       var(--grid-rule-color) 0px,
+       var(--grid-rule-color) 1px,
+       transparent 1px,
+       transparent calc(100% / 4)) */
+
+
+  /* ─────────────────────────────────────────────
+   * ELEVATION & DEPTH — Flat surface style
+   * From design.md: "Surface style: Flat"
+   * Depth via border contrast + subtle shadows only.
+   * NEVER heavy drop-shadows or layered blur.
+   * ───────────────────────────────────────────── */
+
+  --shadow-card:        0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
+  --shadow-card-hover:  0 2px 8px rgba(0,0,0,0.08), 0 8px 24px rgba(0,0,0,0.06);
+  --shadow-nav:         0 1px 0 var(--border-subtle), 0 4px 16px rgba(0,0,0,0.06);
+  --shadow-elevated:    0 0 0 1px var(--border-subtle), 0 8px 32px rgba(0,0,0,0.10);
+  --inset-highlight:    inset 0 1px 0 rgba(255,255,255,0.6); /* light catching top edge */
+
+
+  /* ─────────────────────────────────────────────
+   * BORDER RADIUS
+   * Restrained — no pill buttons, no heavy rounding.
+   * ───────────────────────────────────────────── */
+
+  --radius-btn:     6px;    /* buttons — NEVER 9999px (pill) */
+  --radius-card:    8px;
+  --radius-tag:     3px;
+  --radius-input:   6px;
+  --radius-image:   4px;
+  --radius-island:  9999px; /* nav island ONLY — the pill is the nav, not buttons */
+
+
+  /* ─────────────────────────────────────────────
+   * MOTION — "minimal" from design.md
+   * Easing favors "ease" — from design.md.
+   * Only animate transform + opacity.
+   * ───────────────────────────────────────────── */
+
+  --duration-instant:   0ms;
+  --duration-fast:      150ms;   /* hovers */
+  --duration-base:      280ms;   /* cards, button press */
+  --duration-moderate:  400ms;   /* accordion, drawer */
+  --duration-slow:      600ms;   /* section reveals */
+  --duration-hero:      900ms;   /* hero orchestration */
+
+  /* Easings — from design.md: "ease" */
+  --ease-default:   ease;
+  --ease-out:       cubic-bezier(0.0, 0.0, 0.2, 1.0);
+  --ease-in:        cubic-bezier(0.4, 0.0, 1.0, 1.0);
+  --ease-in-out:    cubic-bezier(0.4, 0.0, 0.2, 1.0);
+
+  /* Stagger delays */
+  --stagger-1: 0ms;
+  --stagger-2: 80ms;
+  --stagger-3: 160ms;
+  --stagger-4: 240ms;
+  --stagger-5: 320ms;
+
+
+  /* ─────────────────────────────────────────────
+   * COMPONENT TOKENS
+   * ───────────────────────────────────────────── */
+
+  /* Nav */
+  --nav-height:             64px;
+  --nav-island-max-width:   560px;
+  --nav-island-bg:          rgba(242, 236, 228, 0.88);   /* cream frosted glass */
+  --nav-island-border:      rgba(26, 26, 26, 0.12);
+  --nav-island-blur:        20px;
+  --nav-transparent-bg:     transparent;
+
+  /* Buttons */
+  --btn-height-sm:    36px;
+  --btn-height-md:    44px;
+  --btn-height-lg:    52px;   /* primary CTA minimum */
+  --btn-padding-x-sm: 16px;
+  --btn-padding-x-md: 24px;
+  --btn-padding-x-lg: 32px;
+
+  /* Touch targets */
+  --touch-min:    44px;
+  --touch-cta:    52px;
+
+  /* Specimen Expander */
+  --expander-inactive-h:    80px;
+  --expander-img-inactive:  112px;
+  --expander-transition:    var(--duration-moderate) var(--ease-in-out);
+
+  /* Trust bar */
+  --trustbar-h:       56px;
+  --trustbar-bg:      rgba(26, 26, 26, 0.03);
+  --trustbar-border:  var(--border-subtle);
+
+  /* Review drawer */
+  --drawer-bg:        var(--color-bg);
+  --drawer-border:    var(--border-default);
+  --drawer-radius-mobile:  16px 16px 0 0;
+  --drawer-radius-desktop: 12px;
+
+
+  /* ─────────────────────────────────────────────
+   * WEBGL / CANVAS BACKGROUND
+   * On cream background: dots are very faint indigo
+   * Dot-matrix grid, breathing pulse, pointer drift.
+   * ───────────────────────────────────────────── */
+
+  --webgl-dot-color:        rgba(37, 99, 235, 0.06);  /* faint indigo on cream */
+  --webgl-dot-radius:       1.2px;
+  --webgl-dot-spacing:      36px;
+  --webgl-pulse-speed:      0.006;    /* time increment per frame */
+  --webgl-pulse-amplitude:  0.5;      /* sin wave amplitude for breathing */
+  --webgl-pointer-strength: 18px;     /* max drift on pointer move */
+  --webgl-z-index:          0;        /* inside position:relative hero wrapper */
+
+
+  /* ─────────────────────────────────────────────
+   * Z-INDEX SCALE
+   * ───────────────────────────────────────────── */
+
+  --z-canvas:     0;
+  --z-content:    10;
+  --z-raised:     20;
+  --z-dropdown:   100;
+  --z-nav:        300;
+  --z-drawer:     400;
+  --z-overlay:    390;
+  --z-toast:      500;
+
+
+  /* ─────────────────────────────────────────────
+   * DITHERED DISSOLVE BLOCK
+   * The brand signature visual: each phase/mechanism
+   * heading has a solid color rect left that dissolves
+   * into a dithered pixel-art checkerboard to the right.
+   * Implemented as a CSS background-image or SVG pattern.
+   *
+   * Usage: apply .dissolve-block class to any accent
+   * container. The JS utility (dissolve.ts) generates
+   * the SVG pattern at runtime.
+   * ───────────────────────────────────────────── */
+
+  --dissolve-pixel-size:  4px;    /* size of each "pixel" in the dither */
+  --dissolve-fade-width:  120px;  /* how wide the dissolve zone is */
+
+}
+
+
+/* ─────────────────────────────────────────────
+ * REDUCED MOTION — mandatory accessibility
+ * All animations become instant. No exceptions.
+ * ───────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration:        0.01ms !important;
+    animation-iteration-count: 1      !important;
+    transition-duration:       0.01ms !important;
+    scroll-behavior:           auto   !important;
+  }
+}
+
+
+/* ─────────────────────────────────────────────
+ * GLOBAL BASE RESET
+ * ───────────────────────────────────────────── */
+
+*, *::before, *::after {
+  box-sizing:  border-box;
+  margin:      0;
+  padding:     0;
+}
+
+html {
+  background-color:        var(--color-bg);
+  color:                   var(--color-text-primary);
+  font-family:             var(--font-mono);
+  font-size:               var(--text-mono-sm);       /* 12px base from design.md */
+  line-height:             var(--leading-body);
+  letter-spacing:          var(--tracking-mono);
+  -webkit-font-smoothing:  antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering:          optimizeLegibility;
+  scroll-behavior:         smooth;
+}
+
+body {
+  min-height:   100vh;
+  overflow-x:   hidden;
+  background:   var(--color-bg);
+}
+
+
+/* ─────────────────────────────────────────────
+ * TYPE HIERARCHY
+ * ───────────────────────────────────────────── */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family:    var(--font-display);
+  font-weight:    var(--weight-display);
+  line-height:    var(--leading-heading);
+  letter-spacing: var(--tracking-display);
+  color:          var(--color-text-primary);
+}
+
+h1 { font-size: var(--text-display-xl); }
+h2 { font-size: var(--text-display-md); }
+h3 { font-size: var(--text-display-sm); }
+h4 { font-size: var(--text-display-xs); }
+
+p {
+  font-family:  var(--font-mono);
+  font-size:    var(--text-mono-sm);       /* 12px — from design.md body-md */
+  line-height:  var(--leading-body);
+  letter-spacing: var(--tracking-mono);
+  color:        var(--color-text-secondary);
+  max-width:    var(--measure-body);
+}
+
+/* Spec numbers — mechanism data */
+code {
+  font-family:    var(--font-mono);
+  font-size:      var(--text-mono-xs);
+  color:          var(--color-spec);
+  background:     var(--color-spec-bg);
+  padding:        2px 6px;
+  border-radius:  var(--radius-tag);
+  letter-spacing: 0.05em;
+  font-weight:    var(--weight-mono-bd);
+}
+
+/* Eyebrow labels — ALL CAPS Space Mono */
+.eyebrow {
+  font-family:    var(--font-mono);
+  font-size:      var(--text-mono-xs);     /* 11px */
+  font-weight:    var(--weight-mono-bd);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color:          var(--color-text-tertiary);
+}
+
+/* Focus ring */
+:focus-visible {
+  outline:        2px solid var(--color-primary);
+  outline-offset: 3px;
+  border-radius:  var(--radius-btn);
+}
+
+/* Text selection — quiet indigo wash; ink steps toward black for a slight contrast lift */
+::selection {
+  background: var(--color-selection-bg);
+  color:      var(--color-selection-text);
+}
+
+/* Headings keep their full weight when selected — no accent recolor, just deeper ink */
+h1::selection, h2::selection, h3::selection, h4::selection,
+h1 *::selection, h2 *::selection, h3 *::selection, h4 *::selection {
+  background: var(--color-selection-bg);
+  color:      var(--color-selection-text);
+}
+
+/* Spec numbers stay indigo under selection — the data color is the identity */
+code::selection {
+  background: var(--color-selection-bg);
+  color:      var(--color-primary-active);
+}
+
+/* Global link hover — ink deepens, underline settles in from a distance.
+ * Components with their own hover styles override this without conflict. */
+a {
+  transition:
+    color                     var(--duration-fast) var(--ease-default),
+    text-decoration-color     var(--duration-fast) var(--ease-default),
+    text-underline-offset     var(--duration-fast) var(--ease-default),
+    opacity                   var(--duration-fast) var(--ease-default);
+}
+
+a:hover {
+  text-underline-offset: 4px;
+}
+
+/* Unstyled links only — component-classed links keep their own hover treatments */
+a:not([class]):hover {
+  color: var(--color-primary-hover);
+  text-decoration-color: var(--color-primary-hover);
+}
+
+/* Interactive surface hover — one shared cursor + settle for anything clickable */
+button,
+[role='button'] {
+  transition:
+    background   var(--duration-fast) var(--ease-default),
+    color        var(--duration-fast) var(--ease-default),
+    border-color var(--duration-fast) var(--ease-default),
+    opacity      var(--duration-fast) var(--ease-default);
+}
+
+img {
+  display:   block;
+  max-width: 100%;
+  height:    auto;
+}
+
+
+/* ─────────────────────────────────────────────
+ * BUTTON BASE CLASSES
+ * ───────────────────────────────────────────── */
+
+.btn {
+  display:         inline-flex;
+  align-items:     center;
+  justify-content: center;
+  font-family:     var(--font-mono);
+  font-size:       var(--text-mono-xs);    /* 11px */
+  font-weight:     var(--weight-mono-bd);
+  letter-spacing:  var(--tracking-eyebrow);
+  text-transform:  uppercase;
+  border-radius:   var(--radius-btn);      /* 6px — NEVER pill */
+  border:          none;
+  cursor:          pointer;
+  min-height:      var(--btn-height-md);
+  padding:         0 var(--btn-padding-x-md);
+  text-decoration: none;
+  transition:
+    background     var(--duration-fast) var(--ease-default),
+    transform      var(--duration-fast) var(--ease-default),
+    box-shadow     var(--duration-base) var(--ease-default),
+    border-color   var(--duration-fast) var(--ease-default);
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color:      #ffffff;
+  min-height: var(--btn-height-lg);
+  padding:    0 var(--btn-padding-x-lg);
+}
+.btn-primary:hover {
+  background: var(--color-primary-hover);
+  transform:  translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.22);
+}
+.btn-primary:active {
+  background: var(--color-primary-active);
+  transform:  translateY(0);
+  box-shadow: none;
+}
+
+.btn-warm {
+  background: var(--color-warm);
+  color:      #ffffff;
+  min-height: var(--btn-height-lg);
+  padding:    0 var(--btn-padding-x-lg);
+}
+.btn-warm:hover {
+  background: var(--color-warm-hover);
+  transform:  translateY(-2px);
+  box-shadow: 0 6px 20px rgba(232, 98, 74, 0.22);
+}
+
+.btn-ghost {
+  background:   transparent;
+  color:        var(--color-text-secondary);
+  border:       1.5px solid var(--border-default);
+  min-height:   var(--btn-height-lg);
+  padding:      0 var(--btn-padding-x-md);
+}
+.btn-ghost:hover {
+  border-color: var(--border-strong);
+  color:        var(--color-text-primary);
+}
+
+
+/* ─────────────────────────────────────────────
+ * CARD BASE
+ * ───────────────────────────────────────────── */
+
+.card {
+  background:    var(--color-surface);
+  border:        var(--border-width) solid var(--border-subtle);
+  border-radius: var(--radius-card);
+  padding:       var(--padding-card);
+  box-shadow:    var(--inset-highlight), var(--shadow-card);
+  transition:    box-shadow var(--duration-base) var(--ease-default),
+                 border-color var(--duration-base) var(--ease-default);
+}
+.card:hover {
+  box-shadow:    var(--inset-highlight), var(--shadow-card-hover);
+  border-color:  var(--border-default);
+}
+
+
+/* ─────────────────────────────────────────────
+ * MECHANISM TAG
+ * ───────────────────────────────────────────── */
+
+.tag-mechanism {
+  display:        inline-flex;
+  align-items:    center;
+  gap:            var(--space-1);
+  font-family:    var(--font-mono);
+  font-size:      10px;
+  font-weight:    var(--weight-mono-bd);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color:          var(--color-primary);
+  background:     var(--color-primary-subtle);
+  border:         1px solid var(--border-accent);
+  border-radius:  var(--radius-tag);
+  padding:        3px 8px;
+}
+
+
+/* ─────────────────────────────────────────────
+ * DISSOLVE BLOCK — Brand signature texture
+ * A solid color rect that dissolves rightward
+ * into a dithered pixel-art checkerboard.
+ * Applied to phase/mechanism accent blocks.
+ *
+ * Each phase uses its phase color variable.
+ * The dither pattern is generated via canvas or
+ * SVG data URI. See dissolve.ts utility.
+ * ───────────────────────────────────────────── */
+
+.dissolve-block {
+  position:   relative;
+  overflow:   hidden;
+  /* Phase color set via inline style or modifier class */
+}
+.dissolve-block--phase-1 { background-color: var(--phase-1); }
+.dissolve-block--phase-2 { background-color: var(--phase-2); }
+.dissolve-block--phase-3 { background-color: var(--phase-3); }
+.dissolve-block--phase-4 { background-color: var(--phase-4); }
+.dissolve-block--phase-5 { background-color: var(--phase-5); }
+
+/* The dissolve canvas is absolutely positioned over the right edge */
+.dissolve-block__canvas {
+  position:       absolute;
+  top:            0;
+  right:          0;
+  height:         100%;
+  width:          var(--dissolve-fade-width);
+  pointer-events: none;
+}
+
+
+/* ─────────────────────────────────────────────
+ * LAYOUT UTILITIES
+ * ───────────────────────────────────────────── */
+
+.container {
+  width:      100%;
+  max-width:  var(--container-max);
+  margin:     0 auto;
+  padding:    0 var(--padding-page-x);
+}
+
+.container-content {
+  width:      100%;
+  max-width:  var(--container-content);
+  margin:     0 auto;
+  padding:    0 var(--padding-page-x);
+}
+
+section {
+  padding-top:    var(--padding-section-y);
+  padding-bottom: var(--padding-section-y);
+  position:       relative;
+}
+
+/* Grid rule overlay — structural vertical columns */
+.has-grid-rules::before {
+  content:            '';
+  position:           absolute;
+  inset:              0;
+  pointer-events:     none;
+  z-index:            0;
+  background-image:   repeating-linear-gradient(
+    to right,
+    var(--grid-rule-color) 0px,
+    var(--grid-rule-color) var(--grid-rule-width),
+    transparent var(--grid-rule-width),
+    transparent 25%
+  );
+}

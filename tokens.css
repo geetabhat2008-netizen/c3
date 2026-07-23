@@ -1,0 +1,461 @@
+/*
+ * CrownCalm — Design Tokens
+ * Master Strategy Design System · v1.0
+ *
+ * Import this file in app/globals.css:
+ *   @import '../styles/tokens.css';
+ *
+ * All spacing, color, type, motion, and elevation values
+ * live here. NEVER hard-code values — always use var(--token-name).
+ */
+
+:root {
+
+  /* ─────────────────────────────────────────────
+   * COLOR SYSTEM
+   * ───────────────────────────────────────────── */
+
+  /* Backgrounds */
+  --color-bg:           #000000;  /* page background — always black */
+  --color-surface:      #0a0a0a;  /* cards, panels over bg */
+  --color-surface-raised: #111111; /* elevated dialogs, dropdowns */
+
+  /* Brand accents */
+  --color-primary:      #2563EB;  /* main accent — buttons, links, active states */
+  --color-primary-hover:#3B72F5;  /* +10% lightness shift — never change hue */
+  --color-primary-active:#1D55D4; /* -10% lightness shift on press */
+
+  --color-tertiary:     #7628F3;  /* supporting contrast moments — max 2× per page */
+  --color-tertiary-hover:#8A3FFF;
+
+  /* Text hierarchy */
+  --color-text-primary: #EBEBEB;  /* never pure white — reduces halation on dark bg */
+  --color-text-secondary:#888888; /* secondary labels, descriptions */
+  --color-text-tertiary: #555555; /* eyebrows, placeholders, disabled states */
+
+  /* Spec / data color */
+  --color-spec:         #2563EB;  /* all <code> spec numbers — same as primary */
+  --color-spec-bg:      rgba(37, 99, 235, 0.08); /* subtle bg behind spec codes */
+
+  /* Borders */
+  --border-subtle:      rgba(255, 255, 255, 0.06); /* card borders, dividers */
+  --border-accent:      rgba(37, 99, 235, 0.3);    /* focused / active borders */
+  --border-width:       1px;
+
+  /* Semantic */
+  --color-success:      #22C55E;
+  --color-error:        #EF4444;
+  --color-warning:      #F59E0B;
+
+
+  /* ─────────────────────────────────────────────
+   * TYPOGRAPHY
+   * ───────────────────────────────────────────── */
+
+  /* Font families */
+  --font-display:  'Playfair Display', Georgia, serif;
+  --font-mono:     'Space Mono', 'Courier New', monospace;
+  --font-body:     'Lora', Georgia, 'Times New Roman', serif;
+
+  /* Google Fonts import — add to app/layout.tsx head:
+     https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@400;700&display=swap
+  */
+
+  /* Type scale — display */
+  --text-display-xl:  clamp(52px, 8vw, 96px);   /* hero headline */
+  --text-display-lg:  72px;                       /* section hero — Playfair, wt 400 */
+  --text-display-md:  clamp(36px, 5vw, 56px);    /* product names in expander */
+  --text-display-sm:  clamp(28px, 4vw, 40px);    /* section headlines */
+
+  /* Type scale — body (Space Mono) */
+  --text-body-lg:     17px;    /* primary reading */
+  --text-body-md:     14px;    /* secondary / labels */
+  --text-body-sm:     12px;    /* eyebrows, captions, specs */
+
+  /* Line heights */
+  --leading-display:  1.0;     /* hero — tight */
+  --leading-heading:  1.15;    /* section headings */
+  --leading-body:     1.8;     /* paragraphs */
+  --leading-mono:     1.5;     /* space mono body copy */
+
+  /* Letter spacing */
+  --tracking-display: -0.05em; /* large display headings */
+  --tracking-heading: -0.02em;
+  --tracking-body:    0.00em;
+  --tracking-mono:    0.10em;  /* space mono — always slightly open */
+  --tracking-eyebrow: 0.16em;  /* all-caps eyebrow labels */
+
+  /* Font weights */
+  --weight-display:   400;     /* Playfair — regular is already heavy */
+  --weight-display-bold: 700;
+  --weight-mono:      400;
+  --weight-mono-bold: 700;
+
+  /* Max line lengths */
+  --measure-body:     60ch;    /* body text columns — never wider */
+  --measure-narrow:   42ch;    /* tight prose blocks */
+
+
+  /* ─────────────────────────────────────────────
+   * SPACING SCALE (8px base unit)
+   * ───────────────────────────────────────────── */
+
+  --space-1:    4px;
+  --space-2:    8px;   /* base unit */
+  --space-3:    12px;
+  --space-4:    16px;
+  --space-5:    24px;
+  --space-6:    32px;
+  --space-7:    48px;
+  --space-8:    64px;
+  --space-9:    80px;
+  --space-10:   96px;
+  --space-11:   128px;
+  --space-12:   160px;
+
+  /* Semantic spacing */
+  --gap-card:         8px;    /* gap between grid cells */
+  --gap-section:      8px;    /* gap between major sections */
+  --padding-card:     46px;   /* card internal padding (from design guide: 46.1px) */
+  --padding-section:  46px;   /* section padding (from design guide: 46.1px) */
+  --padding-section-y: clamp(64px, 10vw, 128px); /* vertical section rhythm */
+
+  /* Container widths */
+  --container-max:    1280px;
+  --container-content: 960px; /* prose / focused content */
+  --container-narrow:  720px;
+
+
+  /* ─────────────────────────────────────────────
+   * GRID
+   * ───────────────────────────────────────────── */
+
+  --grid-cols:        12;
+  --grid-gap:         8px;     /* from design guide */
+  --grid-gap-lg:      16px;    /* larger gap for section-level grids */
+
+
+  /* ─────────────────────────────────────────────
+   * ELEVATION & DEPTH
+   * Surface style: Flat (from design guide)
+   * Borders + subtle contrast communicate depth — no heavy shadows
+   * ───────────────────────────────────────────── */
+
+  /* Flat card — border only */
+  --shadow-card:      none;
+  --shadow-card-hover: 0 0 0 1px var(--border-accent);
+
+  /* Nav (frosted glass state) */
+  --shadow-nav:       0 1px 0 var(--border-subtle), 0 4px 24px rgba(0,0,0,0.4);
+
+  /* Elevated panels (dropdowns, modals) */
+  --shadow-elevated:  0 0 0 1px var(--border-subtle), 0 8px 32px rgba(0,0,0,0.5);
+
+  /* Inset highlight (light catching top edge) */
+  --inset-highlight:  inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+
+  /* ─────────────────────────────────────────────
+   * BORDER RADIUS
+   * ───────────────────────────────────────────── */
+
+  --radius-btn:       6px;     /* buttons — NEVER pill (border-radius: 9999px) */
+  --radius-card:      8px;     /* cards and panels */
+  --radius-tag:       4px;     /* mechanism tags, badges */
+  --radius-input:     6px;     /* form inputs */
+  --radius-image:     4px;     /* product images in bento */
+
+
+  /* ─────────────────────────────────────────────
+   * MOTION TOKENS
+   * Motion level: minimal (from design guide)
+   * Only animate transform + opacity (never width/height/top/left)
+   * ─────────────────────────────���─────────────── */
+
+  /* Durations */
+  --duration-instant:  0ms;
+  --duration-fast:     150ms;  /* hover state transitions */
+  --duration-base:     280ms;  /* card lifts, button presses */
+  --duration-moderate: 400ms;  /* accordion open/close (Specimen Expander) */
+  --duration-slow:     600ms;  /* section entrance reveals */
+  --duration-hero:     900ms;  /* hero orchestration sequence */
+
+  /* Easings (from design guide: ease) */
+  --ease-default:      ease;
+  --ease-out:          cubic-bezier(0.0, 0.0, 0.2, 1.0); /* entrances */
+  --ease-in:           cubic-bezier(0.4, 0.0, 1.0, 1.0); /* exits */
+  --ease-in-out:       cubic-bezier(0.4, 0.0, 0.2, 1.0); /* accordion */
+
+  /* Delays for staggered reveals */
+  --stagger-1:         0ms;
+  --stagger-2:         80ms;
+  --stagger-3:         160ms;
+  --stagger-4:         240ms;
+  --stagger-5:         320ms;
+
+
+  /* ─────────────────────────────────────────────
+   * COMPONENT TOKENS
+   * ───────────────────────────────────────────── */
+
+  /* Nav */
+  --nav-height:           64px;
+  --nav-blur:             20px;
+  --nav-bg-scrolled:      rgba(0, 0, 0, 0.75);
+  --nav-border-scrolled:  var(--border-subtle);
+
+  /* Buttons */
+  --btn-height-sm:    36px;
+  --btn-height-md:    44px;
+  --btn-height-lg:    52px;     /* primary CTA — min touch target */
+  --btn-padding-x:    24px;
+  --btn-gap:          8px;
+
+  /* Touch targets (mobile accessibility) */
+  --touch-min:        44px;    /* WCAG minimum */
+  --touch-cta:        52px;    /* primary CTA minimum */
+
+  /* Specimen Expander */
+  --expander-inactive-height: 80px;  /* row height when collapsed */
+  --expander-active-height:   100vh; /* row height when expanded */
+  --expander-img-inactive:    120px; /* square product image, inactive */
+  --expander-transition:      var(--duration-moderate) var(--ease-in-out);
+
+  /* Trust bar */
+  --trustbar-height:    48px;
+  --trustbar-bg:        rgba(255, 255, 255, 0.03);
+  --trustbar-border:    var(--border-subtle);
+
+
+  /* ─────────────────────────────────────────────
+   * WEBGL BACKGROUND TOKENS
+   * Dot-matrix particle field — always lowest z-index
+   * Slow breathing pulse + pointer-reactive drift
+   * ───────────────────────────────────────────── */
+
+  --webgl-z-index:          -1;
+  --webgl-dot-color-r:      180;   /* soft red channel */
+  --webgl-dot-color-g:      80;    /* soft orange mix */
+  --webgl-dot-color-b:      60;
+  --webgl-dot-opacity:      0.15;  /* subtle — never overpowers content */
+  --webgl-dot-spacing:      32px;  /* spacing between dots in matrix */
+  --webgl-pulse-duration:   4000ms;/* breathing cycle */
+  --webgl-pointer-strength: 0.04;  /* max pointer drift — keep subtle */
+
+
+  /* ─────────────────────────────────────────────
+   * Z-INDEX SCALE
+   * ───────────────────────────────────────────── */
+
+  --z-webgl:      -1;
+  --z-base:        0;
+  --z-raised:      10;
+  --z-dropdown:    100;
+  --z-sticky:      200;
+  --z-nav:         300;
+  --z-modal:       400;
+  --z-toast:       500;
+
+}
+
+
+/* ─────────────────────────────────────────────
+ * REDUCED MOTION
+ * ALL animations disabled — instant opacity only
+ * This is non-negotiable accessibility
+ * ───────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration:   0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration:  0.01ms !important;
+    scroll-behavior:      auto !important;
+  }
+}
+
+
+/* ─────────────────────────────────────────────
+ * BASE RESET & GLOBAL STYLES
+ * ───────────────────────────────────────────── */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-mono);
+  font-size: var(--text-body-lg);
+  line-height: var(--leading-body);
+  letter-spacing: var(--tracking-mono);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Display headings — Playfair Display */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  line-height: var(--leading-heading);
+  letter-spacing: var(--tracking-display);
+  color: var(--color-text-primary);
+}
+
+h1 { font-size: var(--text-display-xl); }
+h2 { font-size: var(--text-display-md); }
+h3 { font-size: var(--text-display-sm); }
+
+/* Body copy */
+p {
+  font-family: var(--font-mono);
+  font-size: var(--text-body-lg);
+  line-height: var(--leading-mono);
+  color: var(--color-text-secondary);
+  max-width: var(--measure-body);
+}
+
+/* Spec / mechanism numbers */
+code {
+  font-family: var(--font-mono);
+  font-size: var(--text-body-sm);
+  color: var(--color-spec);
+  background: var(--color-spec-bg);
+  padding: 2px 6px;
+  border-radius: var(--radius-tag);
+  letter-spacing: 0.05em;
+}
+
+/* Eyebrow labels */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-body-sm);
+  font-weight: var(--weight-mono-bold);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+}
+
+/* Focus ring — accessible, on-brand */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+  border-radius: var(--radius-btn);
+}
+
+/* Images */
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Buttons — base (extend in components) */
+button, .btn {
+  font-family: var(--font-mono);
+  font-size: var(--text-body-sm);
+  font-weight: var(--weight-mono-bold);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  border-radius: var(--radius-btn);
+  border: none;
+  cursor: pointer;
+  min-height: var(--btn-height-md);
+  padding: 0 var(--btn-padding-x);
+  transition: background var(--duration-fast) var(--ease-default),
+              transform var(--duration-fast) var(--ease-default),
+              box-shadow var(--duration-base) var(--ease-default);
+}
+
+/* Primary button */
+.btn-primary {
+  background: var(--color-primary);
+  color: #ffffff;
+  min-height: var(--btn-height-lg);
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-hover);
+  transform: translateY(-2px);
+}
+
+.btn-primary:active {
+  background: var(--color-primary-active);
+  transform: translateY(0);
+}
+
+/* Ghost button */
+.btn-ghost {
+  background: transparent;
+  color: var(--color-text-primary);
+  border: 1.5px solid var(--border-subtle);
+  min-height: var(--btn-height-md);
+}
+
+.btn-ghost:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+/* Container utility */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--padding-card);
+}
+
+.container-content {
+  width: 100%;
+  max-width: var(--container-content);
+  margin: 0 auto;
+  padding: 0 var(--padding-card);
+}
+
+/* Section rhythm */
+section {
+  padding-top: var(--padding-section-y);
+  padding-bottom: var(--padding-section-y);
+}
+
+/* Card base */
+.card {
+  background: var(--color-surface);
+  border: var(--border-width) solid var(--border-subtle);
+  border-radius: var(--radius-card);
+  padding: var(--padding-card);
+  box-shadow: var(--inset-highlight);
+  transition: border-color var(--duration-base) var(--ease-default);
+}
+
+.card:hover {
+  border-color: var(--border-accent);
+}
+
+/* Mechanism tag */
+.tag-mechanism {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: var(--weight-mono-bold);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--color-primary);
+  background: var(--color-spec-bg);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-tag);
+  padding: 3px 8px;
+}

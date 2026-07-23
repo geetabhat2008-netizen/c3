@@ -1,0 +1,680 @@
+# CLAUDE CODE PROMPT — S5: Competitor Matrix
+
+Read README.md and tokens.css fully before writing any code.
+Fifth section on the homepage. Follows Five Pillars (S4).
+Component file: `components/CompetitorMatrix.tsx`
+
+---
+
+## PURPOSE
+
+Destroy Limiting Belief #2: "I've tried everything that works."
+Visual proof that every prior solution addressed 1 of 5 mechanisms.
+CrownCalm addresses all 5 simultaneously.
+Clinical. Confident. Never combative. No brand names — only categories.
+
+---
+
+## LAYOUT — OUTER WRAPPER
+
+```css
+section {
+  background: #F2ECE4;
+  padding: clamp(72px, 10vw, 128px) max(46px, 5.5vw);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Grid rule lines — identical to S2, S3, S4 */
+section::before {
+  content: '';
+  position: absolute; inset: 0;
+  pointer-events: none; z-index: 0;
+  background-image: repeating-linear-gradient(
+    to right,
+    rgba(26,26,26,0.055) 0px, rgba(26,26,26,0.055) 1px,
+    transparent 1px, transparent 25%
+  );
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+}
+```
+
+---
+
+## DATA
+
+```tsx
+const MECHANISMS = [
+  { label: 'Gate Control Activation',           color: '#D2B6F7', textColor: '#6B3FA0' },
+  { label: 'Spectral Filtration (FL-41)',        color: '#E596FF', textColor: '#7A2090' },
+  { label: 'Thermodynamic Vasoconstriction',     color: '#F5B061', textColor: '#7A4010' },
+  { label: 'Auditory Masking',                   color: '#F5D76E', textColor: '#7A6010' },
+  { label: 'Trigeminocervical Decompression',    color: '#8BB8FF', textColor: '#2B4F8A' },
+]
+
+// Result values: 'full' | 'partial' | 'none'
+const COMPETITORS = [
+  {
+    name: 'CrownCalm',
+    subtitle: 'Sanctuary Suite',
+    isCrownCalm: true,
+    image: { src: '/images/compare/crowncalm.webp', alt: 'The CrownCalm Sanctuary Suite' },
+    results: ['full', 'full', 'full', 'full', 'full'] as const,
+  },
+  {
+    name: 'Cold Cap Only',
+    subtitle: 'Generic cryo wrap',
+    isCrownCalm: false,
+    image: { src: '/images/compare/cold-cap.webp', alt: 'A generic cold cap product' },
+    results: ['none', 'none', 'partial', 'none', 'none'] as const,
+  },
+  {
+    name: 'Blue-Light Glasses',
+    subtitle: 'Generic blue-light filter',
+    isCrownCalm: false,
+    image: { src: '/images/compare/blue-light.webp', alt: 'Generic blue-light glasses' },
+    results: ['none', 'partial', 'none', 'none', 'none'] as const,
+  },
+  {
+    name: 'Generic Massager',
+    subtitle: 'Vibration-based head massager',
+    isCrownCalm: false,
+    image: { src: '/images/compare/massager-gen.webp', alt: 'A generic vibrating head massager' },
+    results: ['partial', 'none', 'none', 'none', 'none'] as const,
+  },
+  {
+    name: 'OTC Medication',
+    subtitle: 'Over-the-counter pain relief',
+    isCrownCalm: false,
+    image: { src: '/images/compare/otc-meds.webp', alt: 'Over-the-counter medication packaging' },
+    results: ['none', 'none', 'none', 'none', 'none'] as const,
+  },
+]
+
+// Score display per result type
+const RESULT_CONFIG = {
+  full:    { symbol: '✓', color: '#1A1A1A' },
+  partial: { symbol: '~', color: '#999999', label: 'partial' },
+  none:    { symbol: '—', color: '#CCCCCC' },
+}
+```
+
+---
+
+## SECTION HEADER
+
+```tsx
+<div style={{ marginBottom: '56px', maxWidth: '600px' }}>
+
+  <p style={{
+    fontFamily: 'Space Mono, monospace',
+    fontSize: '10px', fontWeight: 400,
+    letterSpacing: '0.16em', textTransform: 'uppercase',
+    color: '#BEBAB4', marginBottom: '20px',
+  }}>
+    The Comparison
+  </p>
+
+  <h2 style={{
+    fontFamily: 'Playfair Display, Georgia, serif',
+    fontSize: 'clamp(36px, 5vw, 62px)',
+    fontWeight: 400, lineHeight: 1.05,
+    letterSpacing: '-0.04em',
+    marginBottom: '20px',
+  }}>
+    <span style={{ display: 'block', color: '#1A1A1A' }}>
+      You haven't failed.
+    </span>
+    <span style={{ display: 'block', fontStyle: 'italic', color: '#C4503A' }}>
+      Single mechanisms have.
+    </span>
+  </h2>
+
+  <p style={{
+    fontFamily: 'Space Mono, monospace',
+    fontSize: '13px', lineHeight: 1.75,
+    letterSpacing: '0.03em', color: '#666666',
+    maxWidth: '440px', margin: 0,
+  }}>
+    Every solution you've tried addressed one neurological event.
+    The migraine cascade involves five simultaneously.
+    You've been sending one firefighter to a five-alarm fire.
+  </p>
+
+</div>
+```
+
+---
+
+## IMAGE STRIP
+
+A horizontal row of 5 product images above the table.
+CrownCalm is visually dominant — larger, with a phase-color border.
+Competitors are desaturated and slightly reduced in opacity.
+
+```tsx
+<div style={{
+  display: 'grid',
+  gridTemplateColumns: '1.4fr 1fr 1fr 1fr 1fr',  /* CrownCalm wider */
+  gap: '8px',
+  marginBottom: '0',
+  alignItems: 'end',
+}}>
+  {COMPETITORS.map((comp, i) => (
+    <CompareImage key={comp.name} comp={comp} index={i} />
+  ))}
+</div>
+```
+
+### CompareImage component
+
+```tsx
+function CompareImage({
+  comp, index,
+}: {
+  comp: typeof COMPETITORS[0]
+  index: number
+}) {
+  const [errored, setErrored] = useState(false)
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 12 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-40px' }}
+      transition={{ duration: 0.5, delay: index * 0.07, ease: 'ease' }}
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+        gap: '10px',
+      }}
+    >
+
+      {/* Image cell */}
+      <div style={{
+        width: '100%',
+        aspectRatio: comp.isCrownCalm ? '3/4' : '4/3',
+        borderRadius: '6px',
+        overflow: 'hidden',
+        border: comp.isCrownCalm
+          ? '1.5px solid rgba(210,182,247,0.7)'   /* lavender border */
+          : '1px solid rgba(26,26,26,0.08)',
+        filter: comp.isCrownCalm ? 'none' : 'grayscale(35%) opacity(0.75)',
+        transition: 'filter 200ms ease',
+        background: comp.isCrownCalm ? '#D2B6F718' : '#EBE4DB',
+        position: 'relative',
+      }}>
+
+        {/* Phase shimmer on CrownCalm only */}
+        {comp.isCrownCalm && (
+          <div style={{
+            position: 'absolute', inset: 0,
+            background: 'linear-gradient(145deg, rgba(210,182,247,0.08) 0%, transparent 60%)',
+            pointerEvents: 'none', zIndex: 1,
+          }} />
+        )}
+
+        {errored ? (
+          <div style={{
+            width: '100%', height: '100%',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            background: comp.isCrownCalm ? '#D2B6F718' : '#EBE4DB',
+          }}>
+            <span style={{
+              fontFamily: 'Space Mono, monospace',
+              fontSize: '8px', color: '#BEBAB4',
+              letterSpacing: '0.1em', textTransform: 'uppercase',
+              textAlign: 'center', padding: '0 8px',
+            }}>
+              {comp.name}
+            </span>
+          </div>
+        ) : (
+          <Image
+            src={comp.image.src}
+            alt={comp.image.alt}
+            fill
+            style={{ objectFit: 'cover' }}
+            onError={() => setErrored(true)}
+          />
+        )}
+
+      </div>
+
+      {/* Product name below image */}
+      <div>
+        <p style={{
+          fontFamily: comp.isCrownCalm
+            ? 'Playfair Display, Georgia, serif'
+            : 'Space Mono, monospace',
+          fontSize: comp.isCrownCalm ? '14px' : '10px',
+          fontWeight: comp.isCrownCalm ? 400 : 700,
+          fontStyle: comp.isCrownCalm ? 'italic' : 'normal',
+          color: comp.isCrownCalm ? '#1A1A1A' : '#999999',
+          letterSpacing: comp.isCrownCalm ? '-0.01em' : '0.1em',
+          textTransform: comp.isCrownCalm ? 'none' : 'uppercase',
+          margin: '0 0 3px',
+        }}>
+          {comp.name}
+        </p>
+        <p style={{
+          fontFamily: 'Space Mono, monospace',
+          fontSize: '9px', color: '#BEBAB4',
+          letterSpacing: '0.08em', textTransform: 'uppercase',
+          margin: 0,
+        }}>
+          {comp.subtitle}
+        </p>
+      </div>
+
+    </motion.div>
+  )
+}
+```
+
+---
+
+## COMPARISON TABLE
+
+Directly below the image strip. No gap between strip and table —
+they read as one unified component.
+
+```tsx
+<div style={{
+  marginTop: '32px',
+  overflowX: 'auto',        /* horizontal scroll on mobile */
+  WebkitOverflowScrolling: 'touch',
+}}>
+  <table style={{
+    width: '100%',
+    minWidth: '640px',        /* prevents collapse before scroll kicks in */
+    borderCollapse: 'collapse',
+  }}>
+
+    {/* Column header row */}
+    <thead>
+      <tr>
+        <th style={{
+          fontFamily: 'Space Mono, monospace',
+          fontSize: '9px', fontWeight: 700,
+          letterSpacing: '0.12em', textTransform: 'uppercase',
+          color: '#999999', textAlign: 'left',
+          padding: '10px 0',
+          borderBottom: '1px solid rgba(26,26,26,0.15)',
+          width: '32%',
+        }}>
+          Mechanism
+        </th>
+        {COMPETITORS.map(comp => (
+          <th key={comp.name} style={{
+            fontFamily: comp.isCrownCalm
+              ? 'Playfair Display, Georgia, serif'
+              : 'Space Mono, monospace',
+            fontSize: comp.isCrownCalm ? '12px' : '9px',
+            fontWeight: comp.isCrownCalm ? 400 : 700,
+            fontStyle: comp.isCrownCalm ? 'italic' : 'normal',
+            letterSpacing: comp.isCrownCalm ? '-0.01em' : '0.10em',
+            textTransform: comp.isCrownCalm ? 'none' : 'uppercase',
+            color: comp.isCrownCalm ? '#1A1A1A' : '#BEBAB4',
+            textAlign: 'center',
+            padding: '10px 8px',
+            borderBottom: '1px solid rgba(26,26,26,0.15)',
+          }}>
+            {comp.isCrownCalm ? 'CrownCalm' : ''}
+            {/* Competitors have no text in header — image strip serves as header */}
+          </th>
+        ))}
+      </tr>
+    </thead>
+
+    <tbody>
+      {MECHANISMS.map((mech, mechIndex) => (
+        <motion.tr
+          key={mech.label}
+          initial={{ opacity: 0, x: -8 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: '-20px' }}
+          transition={{
+            duration: 0.45,
+            delay: mechIndex * 0.06,
+            ease: 'ease',
+          }}
+          style={{
+            background: mechIndex % 2 === 0
+              ? `${mech.color}08`   /* very faint phase tint on alternating rows */
+              : 'transparent',
+          }}
+        >
+
+          {/* Mechanism label cell */}
+          <td style={{
+            padding: '14px 0',
+            borderBottom: '1px solid rgba(26,26,26,0.07)',
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+
+              {/* Phase color bar — left edge indicator */}
+              <div style={{
+                width: '4px', height: '20px',
+                borderRadius: '2px',
+                background: mech.color,
+                flexShrink: 0,
+              }} />
+
+              <span style={{
+                fontFamily: 'Space Mono, monospace',
+                fontSize: '11px', fontWeight: 400,
+                letterSpacing: '0.04em', color: '#444444',
+              }}>
+                {mech.label}
+              </span>
+
+            </div>
+          </td>
+
+          {/* Result cells */}
+          {COMPETITORS.map((comp, compIndex) => {
+            const result = comp.results[mechIndex]
+            const config = RESULT_CONFIG[result]
+
+            return (
+              <td key={comp.name} style={{
+                padding: '14px 8px',
+                borderBottom: '1px solid rgba(26,26,26,0.07)',
+                textAlign: 'center',
+                /* CrownCalm column: subtle left border */
+                borderLeft: comp.isCrownCalm
+                  ? '1px solid rgba(26,26,26,0.10)'
+                  : 'none',
+                borderRight: comp.isCrownCalm
+                  ? '1px solid rgba(26,26,26,0.10)'
+                  : 'none',
+              }}>
+                <span style={{
+                  fontFamily: 'Space Mono, monospace',
+                  fontSize: result === 'full' ? '16px' : '13px',
+                  fontWeight: result === 'full' ? 700 : 400,
+                  color: result === 'full' && comp.isCrownCalm
+                    ? mech.textColor    /* phase text color for CrownCalm ✓ */
+                    : config.color,
+                  lineHeight: 1,
+                }}>
+                  {config.symbol}
+                </span>
+                {result === 'partial' && (
+                  <span style={{
+                    display: 'block',
+                    fontFamily: 'Space Mono, monospace',
+                    fontSize: '8px', color: '#BEBAB4',
+                    letterSpacing: '0.08em', textTransform: 'uppercase',
+                    marginTop: '2px',
+                  }}>
+                    partial
+                  </span>
+                )}
+              </td>
+            )
+          })}
+
+        </motion.tr>
+      ))}
+
+      {/* Summary row */}
+      <tr style={{ background: 'rgba(26,26,26,0.03)' }}>
+        <td style={{
+          padding: '16px 0',
+          borderTop: '1.5px solid rgba(26,26,26,0.15)',
+        }}>
+          <span style={{
+            fontFamily: 'Space Mono, monospace',
+            fontSize: '10px', fontWeight: 700,
+            letterSpacing: '0.12em', textTransform: 'uppercase',
+            color: '#1A1A1A',
+            paddingLeft: '14px',
+          }}>
+            Mechanisms addressed
+          </span>
+        </td>
+        {COMPETITORS.map(comp => {
+          const score = comp.results.filter(r => r === 'full').length
+          const partial = comp.results.filter(r => r === 'partial').length
+          return (
+            <td key={comp.name} style={{
+              padding: '16px 8px',
+              borderTop: '1.5px solid rgba(26,26,26,0.15)',
+              borderLeft: comp.isCrownCalm
+                ? '1px solid rgba(26,26,26,0.10)'
+                : 'none',
+              borderRight: comp.isCrownCalm
+                ? '1px solid rgba(26,26,26,0.10)'
+                : 'none',
+              textAlign: 'center',
+            }}>
+              <span style={{
+                fontFamily: 'Space Mono, monospace',
+                fontSize: comp.isCrownCalm ? '16px' : '14px',
+                fontWeight: 700,
+                color: comp.isCrownCalm ? '#1A1A1A' : '#BEBAB4',
+                letterSpacing: '-0.02em',
+              }}>
+                {comp.isCrownCalm
+                  ? `${score} / 5`
+                  : `${score}${partial > 0 ? `+${partial}` : ''} / 5`
+                }
+              </span>
+            </td>
+          )
+        })}
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+```
+
+---
+
+## CLOSING QUOTE
+
+Full width, below the table. Same pattern as S3 pivot line.
+
+```tsx
+<motion.div
+  initial={{ opacity: 0, y: 10 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, margin: '-40px' }}
+  transition={{ duration: 0.6, delay: 0.2, ease: 'ease' }}
+  style={{
+    marginTop: '64px',
+    paddingTop: '48px',
+    borderTop: '1px solid rgba(26,26,26,0.10)',
+    textAlign: 'center',
+  }}
+>
+  <p style={{
+    fontFamily: 'Playfair Display, Georgia, serif',
+    fontSize: 'clamp(18px, 2.6vw, 28px)',
+    fontStyle: 'italic', fontWeight: 400,
+    color: '#1A1A1A', letterSpacing: '-0.02em',
+    marginBottom: '20px',
+  }}>
+    "You sent one firefighter to a five-alarm fire.
+    Here's the full crew."
+  </p>
+
+  {/* Text link — scrolls to S6 social proof */}
+  <button
+    onClick={() => document.getElementById('social-proof')
+      ?.scrollIntoView({ behavior: 'smooth' })}
+    style={{
+      fontFamily: 'Space Mono, monospace',
+      fontSize: '11px', fontWeight: 700,
+      letterSpacing: '0.14em', textTransform: 'uppercase',
+      color: '#1A1A1A', background: 'none', border: 'none',
+      borderBottom: '1.5px solid rgba(26,26,26,0.25)',
+      paddingBottom: '2px', cursor: 'pointer',
+      transition: 'border-color 150ms ease',
+    }}
+    onMouseEnter={e =>
+      ((e.target as HTMLElement).style.borderBottomColor = '#1A1A1A')
+    }
+    onMouseLeave={e =>
+      ((e.target as HTMLElement).style.borderBottomColor =
+        'rgba(26,26,26,0.25)')
+    }
+  >
+    ↓ See what people experienced
+  </button>
+
+</motion.div>
+```
+
+---
+
+## ANIMATION SUMMARY
+
+```
+Section header:
+  y 16→0  opacity 0→1  duration 0.6s  delay 0s  ease ease
+
+Image strip (5 cells stagger):
+  y 12→0  opacity 0→1  duration 0.5s  delay: i × 0.07s  ease ease
+
+Table rows (5 rows stagger):
+  x -8→0  opacity 0→1  duration 0.45s  delay: i × 0.06s  ease ease
+
+Closing quote:
+  y 10→0  opacity 0→1  duration 0.6s  delay 0.2s  ease ease
+
+prefers-reduced-motion: all final state, no animation
+```
+
+---
+
+## IMAGE FILE MAP
+
+```
+/public/images/compare/
+  crowncalm.webp     full Sanctuary Suite, all 5 products together
+  cold-cap.webp      generic ice pack / cold wrap
+  blue-light.webp    generic blue-light glasses
+  massager-gen.webp  generic vibrating head massager
+  otc-meds.webp      blister pack of pain relief tablets
+```
+
+All competitor images: desaturated 35% + opacity 75% via CSS `filter`.
+CrownCalm image: full color, phase-color border, slightly taller aspect ratio.
+
+---
+
+## MOBILE (< 768px)
+
+```
+Image strip:
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr
+  gap: 6px
+  each image: aspect-ratio 1/1 (square)
+  CrownCalm: same size as others (no 1.4fr advantage)
+  product name text: hidden on mobile (too small)
+
+Table:
+  overflow-x: auto + -webkit-overflow-scrolling: touch
+  min-width: 640px (forces horizontal scroll)
+  First column sticky: position: sticky; left: 0;
+    background: #F2ECE4; z-index: 10;
+    (prevents mechanism names from scrolling away)
+
+Closing quote:
+  font-size: clamp(16px, 4vw, 22px)
+  padding: 0 8px
+```
+
+### Sticky first column on mobile:
+
+```tsx
+// Apply to the <td> containing mechanism label only when on mobile
+// Use a useMediaQuery hook or CSS class:
+
+.mechanism-cell {
+  position: sticky;
+  left: 0;
+  background: #F2ECE4;
+  z-index: 10;
+}
+
+// Only on mobile — desktop: position: static
+@media (max-width: 767px) {
+  .mechanism-cell { position: sticky; left: 0; }
+}
+```
+
+---
+
+## ACCESSIBILITY
+
+- `<table>` with proper `<thead>` / `<tbody>` semantics
+- `<th scope="col">` on all column headers
+- `<th scope="row">` on the mechanism label cells
+- `aria-label="Mechanism comparison table"` on the `<table>` element
+- For screen readers: result symbols have `aria-label`:
+  - `✓` → `aria-label="Yes"`
+  - `~` → `aria-label="Partial"`
+  - `—` → `aria-label="No"`
+- All images have meaningful `alt` text (defined in data above)
+
+```tsx
+// Example on result cell:
+<span
+  aria-label={result === 'full' ? 'Yes' : result === 'partial' ? 'Partial' : 'No'}
+  role="img"
+  style={{ ... }}
+>
+  {config.symbol}
+</span>
+```
+
+---
+
+## RULES
+
+- Background `#F2ECE4` — no section color change
+- No blue filled buttons — closing link is text-link only
+- Competitor images: `filter: grayscale(35%) opacity(0.75)` — editorial, not mocking
+- CrownCalm ✓ symbols: `pillar.textColor` (phase color) — not a flat color
+- Phase color bars on row left edge: same 4px bar from S4 spec tags
+- `border-left` + `border-right` on CrownCalm column: `rgba(26,26,26,0.10)` — subtle column highlight
+- Never name actual competitor brands — categories only
+- `partial` label appears only on cells where result is `'partial'`
+- Summary row `5/5` for CrownCalm is the visual punchline — make it legible
+- Grid rule lines match all previous sections exactly
+- Animate only `opacity`, `transform` — no width/height animation
+
+---
+
+## CHECKLIST
+
+- [ ] Grid rule lines match S2–S4
+- [ ] H2 line 2 italic terracotta `#C4503A`
+- [ ] 5 competitor images in strip — CrownCalm wider + taller + phase border
+- [ ] Competitor images desaturated 35% + opacity 75%
+- [ ] CrownCalm image: full color, lavender border, inner shimmer gradient
+- [ ] Table has 5 mechanism rows + 1 summary row
+- [ ] 5 phase color bars on left edge of each mechanism row
+- [ ] Alternating row tint: faint phase color on even rows
+- [ ] CrownCalm column has subtle left/right borders
+- [ ] ✓ symbols use `mech.textColor` for CrownCalm only
+- [ ] `partial` label renders beneath `~` symbol
+- [ ] Summary row: `5 / 5` bold for CrownCalm, `1 / 5` muted for others
+- [ ] Closing quote Playfair italic centered
+- [ ] Scroll text-link below quote — no filled button
+- [ ] Table rows stagger in on scroll (x -8→0, delay 0.06s each)
+- [ ] `aria-label` on all result symbols
+- [ ] `<th scope>` on all header and row-header cells
+- [ ] Mobile: table horizontal scrolls, first column sticky
+- [ ] `prefers-reduced-motion` disables all animation
+- [ ] No horizontal overflow at 320px
