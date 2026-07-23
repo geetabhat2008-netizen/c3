@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import { useRef } from 'react'
 import { motion } from 'framer-motion'
 import './TestimonialCarousel.module.css'
 
@@ -50,15 +51,30 @@ const testimonials = [
 ]
 
 export default function TestimonialCarousel() {
+  const trackRef = useRef<HTMLDivElement>(null)
+
+  const scrollTestimonials = (direction: -1 | 1) => {
+    const track = trackRef.current
+    if (!track) return
+
+    track.scrollBy({ left: direction * track.clientWidth * 0.78, behavior: 'smooth' })
+  }
+
   return (
     <section id="reviews" className="testimonial-carousel" aria-labelledby="testimonial-carousel-title">
       <div className="testimonial-carousel__header">
-        <p>Stories from the Sanctuary</p>
-        <h2 id="testimonial-carousel-title">A protocol for when the storm arrives.</h2>
-        <span>How CrownCalm customers use the Sanctuary Suite through warning signs, workdays, and recovery.</span>
+        <div>
+          <p>Stories from the Sanctuary</p>
+          <h2 id="testimonial-carousel-title">A protocol for when the storm arrives.</h2>
+        </div>
+        <div className="testimonial-carousel__controls" aria-label="Testimonial navigation">
+          <button type="button" onClick={() => scrollTestimonials(-1)} aria-label="Previous testimonials">←</button>
+          <button type="button" onClick={() => scrollTestimonials(1)} aria-label="Next testimonials">→</button>
+        </div>
       </div>
 
       <motion.div
+        ref={trackRef}
         className="testimonial-carousel__track"
         initial="hidden"
         whileInView="visible"
@@ -86,14 +102,12 @@ export default function TestimonialCarousel() {
             />
             <div className="testimonial-carousel__shade" />
             <figcaption>
-              <span className="testimonial-carousel__quote-mark" aria-hidden="true">“</span>
               <blockquote>{testimonial.quote}</blockquote>
               <p><strong>{testimonial.name}</strong><span>{testimonial.role}</span></p>
             </figcaption>
           </motion.figure>
         ))}
       </motion.div>
-      <p className="testimonial-carousel__hint">Scroll to read more <span aria-hidden="true">→</span></p>
     </section>
   )
 }
