@@ -1,0 +1,56 @@
+:global(.testimonial-carousel__track) {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  width: 100%;
+  padding: 0 max(1.25rem, calc((100vw - 76rem) / 2)) 1.5rem;
+  scroll-padding-inline: max(1.25rem, calc((100vw - 76rem) / 2));
+  scroll-snap-type: x mandatory;
+  scrollbar-color: var(--color-tertiary) var(--color-surface-inset);
+  scrollbar-width: thin;
+}
+
+:global(.testimonial-carousel__track::-webkit-scrollbar) { height: 0.45rem; }
+:global(.testimonial-carousel__track::-webkit-scrollbar-track) { background: var(--color-surface-inset); }
+:global(.testimonial-carousel__track::-webkit-scrollbar-thumb) { background: var(--color-tertiary); border-radius: 999px; }
+
+:global(.testimonial-carousel__card) {
+  position: relative;
+  flex: 0 0 min(82vw, 22rem);
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  margin: 0;
+  border: 1px solid var(--border-subtle);
+  border-radius: 1rem;
+  background: var(--color-surface-inset);
+  scroll-snap-align: start;
+}
+
+:global(.testimonial-carousel__portrait) { object-fit: cover; transition: transform 600ms ease; }
+:global(.testimonial-carousel__card:hover .testimonial-carousel__portrait) { transform: scale(1.025); }
+:global(.testimonial-carousel__shade) { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 30%, rgba(20, 15, 24, 0.88) 100%); }
+
+:global(.testimonial-carousel__card figcaption) {
+  position: absolute;
+  inset: auto 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  color: var(--color-bg);
+}
+
+:global(.testimonial-carousel__quote-mark) { height: 1.4rem; font-family: var(--font-display); font-size: 3rem; line-height: 1; opacity: 0.55; }
+:global(.testimonial-carousel__card blockquote) { margin: 0; font-family: var(--font-display); font-size: 1.12rem; line-height: 1.45; text-wrap: pretty; }
+:global(.testimonial-carousel__card figcaption p) { display: flex; flex-direction: column; gap: 0.2rem; margin: 0; }
+:global(.testimonial-carousel__card figcaption strong) { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
+:global(.testimonial-carousel__card figcaption p span) { font-size: 0.75rem; opacity: 0.68; }
+
+@media (min-width: 48rem) {
+  :global(.testimonial-carousel__card) { flex-basis: min(42vw, 22rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :global(.testimonial-carousel__portrait),
+  :global(.testimonial-carousel__card:hover .testimonial-carousel__portrait) { transition: none; transform: none; }
+}

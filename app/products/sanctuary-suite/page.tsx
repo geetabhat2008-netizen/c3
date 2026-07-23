@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import SuiteProductPage from '../../../components/SuiteProductPage'
+import TestimonialCarousel from '../../../components/TestimonialCarousel'
 import FivePillars from '../../../components/FivePillars'
 import BenefitsShowcase from '../../../components/BenefitsShowcase'
 import FaqSection from '../../../components/FaqSection'
@@ -15,6 +16,7 @@ export default function SanctuarySuitePage() {
   return (
     <>
       <SuiteProductPage />
+      <TestimonialCarousel />
       <FivePillars />
       <BenefitsShowcase />
       <FaqSection />

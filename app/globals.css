@@ -14,3 +14,108 @@
 
 /* tokens.css owns the reset, base type, fonts, and color system.
    ponytail: no create-next-app overrides here — they fought the cream theme. */
+
+.testimonial-carousel {
+  overflow: hidden;
+  padding: clamp(4.5rem, 9vw, 8rem) 0;
+  background: var(--color-bg);
+}
+
+.testimonial-carousel__header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: min(100% - 2.5rem, 76rem);
+  margin: 0 auto clamp(2.5rem, 5vw, 4rem);
+}
+
+.testimonial-carousel__header > p,
+.testimonial-carousel__hint {
+  margin: 0;
+  color: var(--color-tertiary);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.testimonial-carousel__header h2 {
+  max-width: 17ch;
+  margin: 0;
+  color: var(--color-text-primary);
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 5vw, 4.75rem);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+
+.testimonial-carousel__header > span {
+  max-width: 36rem;
+  color: var(--color-text-secondary);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.testimonial-carousel__track {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  width: 100%;
+  padding: 0 max(1.25rem, calc((100vw - 76rem) / 2)) 1.5rem;
+  scroll-padding-inline: max(1.25rem, calc((100vw - 76rem) / 2));
+  scroll-snap-type: x mandatory;
+  scrollbar-color: var(--color-tertiary) var(--color-surface-inset);
+  scrollbar-width: thin;
+}
+
+.testimonial-carousel__track::-webkit-scrollbar { height: 0.45rem; }
+.testimonial-carousel__track::-webkit-scrollbar-track { background: var(--color-surface-inset); }
+.testimonial-carousel__track::-webkit-scrollbar-thumb { background: var(--color-tertiary); border-radius: 999px; }
+.testimonial-carousel__track:focus-visible { outline: 2px solid var(--color-tertiary); outline-offset: -2px; }
+
+.testimonial-carousel__card {
+  position: relative;
+  flex: 0 0 min(82vw, 22rem);
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  margin: 0;
+  border: 1px solid var(--border-subtle);
+  border-radius: 1rem;
+  background: var(--color-surface-inset);
+  scroll-snap-align: start;
+}
+
+.testimonial-carousel__portrait { object-fit: cover; transition: transform 600ms ease; }
+.testimonial-carousel__card:hover .testimonial-carousel__portrait { transform: scale(1.025); }
+.testimonial-carousel__shade { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 30%, rgba(20, 15, 24, 0.88) 100%); }
+
+.testimonial-carousel__card figcaption {
+  position: absolute;
+  inset: auto 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  color: var(--color-bg);
+}
+
+.testimonial-carousel__quote-mark { height: 1.4rem; font-family: var(--font-display); font-size: 3rem; line-height: 1; opacity: 0.55; }
+.testimonial-carousel__card blockquote { margin: 0; font-family: var(--font-display); font-size: 1.12rem; line-height: 1.45; text-wrap: pretty; }
+.testimonial-carousel__card figcaption p { display: flex; flex-direction: column; gap: 0.2rem; margin: 0; }
+.testimonial-carousel__card figcaption strong { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.testimonial-carousel__card figcaption p span { font-size: 0.75rem; opacity: 0.68; }
+.testimonial-carousel__hint { width: min(100% - 2.5rem, 76rem); margin: 1rem auto 0; color: var(--color-text-tertiary); }
+
+@media (min-width: 48rem) {
+  .testimonial-carousel__header { display: grid; grid-template-columns: 1fr 0.7fr; align-items: end; }
+  .testimonial-carousel__header > p { grid-column: 1 / -1; }
+  .testimonial-carousel__card { flex-basis: min(42vw, 22rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .testimonial-carousel__portrait,
+  .testimonial-carousel__card:hover .testimonial-carousel__portrait { transition: none; transform: none; }
+}
+
