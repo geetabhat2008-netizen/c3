@@ -1,6 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 
 const EASE: [number, number, number, number] = [0, 0, 0.2, 1]
@@ -202,7 +203,13 @@ export default function PainAcknowledgment() {
                     aria-hidden
                   />
                   <div className="pain__panel-image">
-                    <img src={layer.image || '/placeholder.svg'} alt={layer.imageAlt} />
+                    <Image
+                      src={layer.image || '/placeholder.svg'}
+                      alt={layer.imageAlt}
+                      fill
+                      sizes="(max-width: 860px) 100vw, 50vw"
+                      style={{ objectFit: 'cover' }}
+                    />
                     <div className="pain__panel-caption" aria-hidden>
                       <span className="pain__panel-caption-dot" style={{ background: layer.color }} />
                       <span className="pain__panel-caption-text">

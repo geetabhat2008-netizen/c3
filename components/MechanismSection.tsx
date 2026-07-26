@@ -1,10 +1,8 @@
 'use client'
 
 import { useRef } from 'react'
-import { useInView, useReducedMotion, motion } from 'framer-motion'
+import { useInView, useReducedMotion } from 'framer-motion'
 import DissolveBlock from './DissolveBlock'
-
-const EASE: [number, number, number, number] = [0, 0, 0.2, 1]
 
 // ── Part A: the cost. Plain typographic columns — a thin colored rule is the
 // only nod to the phase palette here (no pixelated blocks; those cheapen when
@@ -108,16 +106,6 @@ export default function MechanismSection() {
   const diagramRef = useRef<HTMLDivElement>(null)
   const inView = useInView(diagramRef, { once: true, amount: 0.3 })
   const active = inView || !!reduce
-
-  const rise = (delay: number) =>
-    reduce
-      ? { initial: { opacity: 1 }, whileInView: { opacity: 1 }, transition: { duration: 0.01 } }
-      : {
-          initial: { opacity: 0, y: 20 },
-          whileInView: { opacity: 1, y: 0 },
-          viewport: { once: true, amount: 0.3 },
-          transition: { delay, duration: 0.6, ease: EASE },
-        }
 
   return (
     <section id="mechanism" className="mech has-grid-rules" aria-label="The real cost and the mechanism">

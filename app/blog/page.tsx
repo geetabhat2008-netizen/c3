@@ -1,4 +1,6 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
+import Link from 'next/link'
 import { POSTS } from '../../lib/blog'
 import Footer from '../../components/Footer'
 
@@ -30,9 +32,15 @@ export default function BlogIndex() {
         </header>
 
         {/* ---- Featured ---- */}
-        <a href={`/blog/${featured.slug}`} className="feat">
+        <Link href={`/blog/${featured.slug}`} className="feat">
           <div className="feat__media">
-            <img src={featured.hero || "/placeholder.svg"} alt={featured.heroAlt} />
+            <Image
+              src={featured.hero || '/placeholder.svg'}
+              alt={featured.heroAlt}
+              fill
+              sizes="(max-width: 900px) 100vw, 42vw"
+              style={{ objectFit: 'cover' }}
+            />
           </div>
           <div className="feat__body">
             <div className="feat__meta">
@@ -47,7 +55,7 @@ export default function BlogIndex() {
             <p className="feat__dek">{featured.dek}</p>
             <span className="feat__cta meta-mono">Read the essay →</span>
           </div>
-        </a>
+        </Link>
 
         {/* ---- Grid ---- */}
         <div className="grid-head">
@@ -56,9 +64,15 @@ export default function BlogIndex() {
         </div>
         <div className="grid">
           {rest.map((post) => (
-            <a key={post.slug} href={`/blog/${post.slug}`} className="card">
+            <Link key={post.slug} href={`/blog/${post.slug}`} className="card">
               <div className="card__media">
-                <img src={post.hero || "/placeholder.svg"} alt={post.heroAlt} />
+                <Image
+                  src={post.hero || '/placeholder.svg'}
+                  alt={post.heroAlt}
+                  fill
+                  sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
+                  style={{ objectFit: 'cover' }}
+                />
               </div>
               <div className="card__meta">
                 <span className="chip" style={{ background: post.phase }}>
@@ -68,7 +82,7 @@ export default function BlogIndex() {
               </div>
               <h3 className="card__title">{post.title}</h3>
               <p className="card__dek">{post.dek}</p>
-            </a>
+            </Link>
           ))}
         </div>
       </main>
@@ -158,6 +172,7 @@ export default function BlogIndex() {
           border-radius: 12px;
           overflow: hidden;
           aspect-ratio: 4 / 3;
+          position: relative;
         }
         .feat__media img {
           width: 100%;
@@ -223,6 +238,7 @@ export default function BlogIndex() {
           border-radius: 14px;
           overflow: hidden;
           aspect-ratio: 3 / 2;
+          position: relative;
         }
         .card__media img {
           width: 100%;

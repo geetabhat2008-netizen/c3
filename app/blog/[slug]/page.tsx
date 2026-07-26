@@ -1,4 +1,6 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
+import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { POSTS, getPost, type BlogBlock } from '../../../lib/blog'
 import Footer from '../../../components/Footer'
@@ -66,6 +68,9 @@ function Block({ block, phase }: { block: BlogBlock; phase: string }) {
     case 'image':
       return (
         <figure className="art__fig">
+          {/* eslint-disable-next-line @next/next/no-img-element -- blog body images have
+              unknown intrinsic dimensions; next/image fill or fixed sizing would require
+              per-image metadata that is not available in the blog data model */}
           <img src={block.src || "/placeholder.svg"} alt={block.alt} />
           {block.caption && <figcaption>{block.caption}</figcaption>}
         </figure>
@@ -92,9 +97,9 @@ export default async function BlogArticle({
       <main className="art">
         {/* ---- Header ---- */}
         <header className="art__head">
-          <a href="/blog" className="art__back">
+          <Link href="/blog" className="art__back">
             ← The Journal
-          </a>
+          </Link>
           <div className="art__meta">
             <span className="art__chip" style={{ background: post.phase }}>
               {post.category}
@@ -109,7 +114,13 @@ export default async function BlogArticle({
 
         {/* ---- Hero ---- */}
         <div className="art__hero">
-          <img src={post.hero || "/placeholder.svg"} alt={post.heroAlt} />
+          <Image
+            src={post.hero || '/placeholder.svg'}
+            alt={post.heroAlt}
+            fill
+            sizes="(max-width: 1000px) 100vw, 1000px"
+            style={{ objectFit: 'cover' }}
+          />
         </div>
 
         {/* ---- Body ---- */}
@@ -125,11 +136,11 @@ export default async function BlogArticle({
         </article>
 
         {/* ---- Next ---- */}
-        <a href={`/blog/${next.slug}`} className="art__next">
+        <Link href={`/blog/${next.slug}`} className="art__next">
           <span className="art__next-label">Read next</span>
           <span className="art__next-title">{next.title}</span>
           <span className="art__next-arrow">→</span>
-        </a>
+        </Link>
       </main>
       <Footer />
 
@@ -206,6 +217,7 @@ export default async function BlogArticle({
           border-radius: 18px;
           overflow: hidden;
           aspect-ratio: 21 / 10;
+          position: relative;
         }
         .art__hero img {
           width: 100%;

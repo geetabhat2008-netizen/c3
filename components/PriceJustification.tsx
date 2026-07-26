@@ -64,25 +64,22 @@ const PRICE = 345
 /* ANIMATED COUNTER                                                    */
 /* ------------------------------------------------------------------ */
 
-function Counter({
+/** Handles only the rAF animation; never calls setState in an effect branch
+ *  that skips the animation — the reduced-motion path is handled by the
+ *  Counter wrapper which renders a plain value without any state at all. */
+function CounterAnimated({
   target,
   duration = 1.4,
   start,
-  reduce,
 }: {
   target: number
   duration?: number
   start: boolean
-  reduce: boolean
 }) {
-  const [value, setValue] = useState(reduce ? target : 0)
+  const [value, setValue] = useState(0)
   const raf = useRef<number | null>(null)
 
   useEffect(() => {
-    if (reduce) {
-      setValue(target)
-      return
-    }
     if (!start) return
     const t0 = performance.now()
     const tick = (t: number) => {
@@ -95,9 +92,26 @@ function Counter({
     return () => {
       if (raf.current) cancelAnimationFrame(raf.current)
     }
-  }, [start, target, duration, reduce])
+  }, [start, target, duration])
 
   return <>{value.toLocaleString()}</>
+}
+
+/** Public API: when reduced motion is preferred renders the target directly
+ *  (no state, no effect); otherwise delegates to CounterAnimated. */
+function Counter({
+  target,
+  duration = 1.4,
+  start,
+  reduce,
+}: {
+  target: number
+  duration?: number
+  start: boolean
+  reduce: boolean
+}) {
+  if (reduce) return <>{target.toLocaleString()}</>
+  return <CounterAnimated target={target} duration={duration} start={start} />
 }
 
 /* ------------------------------------------------------------------ */

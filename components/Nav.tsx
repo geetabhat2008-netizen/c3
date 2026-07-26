@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import Link from 'next/link'
 
 const LINKS = ['Science', 'Products', 'Blog']
 
@@ -33,7 +34,7 @@ export default function Nav() {
 
   return (
     <nav ref={navRef} className="nav" aria-label="Primary">
-      <a href="/" className="nav__logo">CrownCalm</a>
+      <Link href="/" className="nav__logo">CrownCalm</Link>
 
       <div className="nav__links">
         {LINKS.map((l) => (

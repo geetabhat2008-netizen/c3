@@ -157,7 +157,7 @@ export default function ReviewsWall() {
         <div className="rw__wall" id="reviews">
           {COLUMNS.map((column, ci) => (
             <div key={ci} className={`rw__col rw__col--${ci + 1}`}>
-              {column.map((item, ii) => {
+              {column.map((item) => {
                 if (item.kind === 'video') {
                   return (
                     <button

@@ -268,6 +268,9 @@ export default function SuiteProductPage() {
               ['paypal', 'PayPal'],
             ].map(([slug, name]) => (
               <span key={slug} className="sp__pay-chip">
+                {/* eslint-disable-next-line @next/next/no-img-element -- payment-logo
+                    SVGs use `height:14px; width:auto` in CSS; intrinsic width varies per
+                    logo so next/image fixed/fill sizing would distort them */}
                 <img src={`/images/payments/${slug}.svg`} alt={name} loading="lazy" />
               </span>
             ))}
