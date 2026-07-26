@@ -24,7 +24,7 @@ export type BlogPost = {
 export const POSTS: BlogPost[] = [
   {
     slug: 'the-bucket-theory',
-    title: 'The Wine Didn\u2019t Do It',
+    title: 'Why the same glass of wine triggers one day, not another',
     dek: 'Why the same glass of red destroys you on Tuesday and does nothing on Saturday \u2014 and what that tells you about how migraines actually work.',
     category: 'The Framework',
     date: 'June 2026',
@@ -41,7 +41,7 @@ export const POSTS: BlogPost[] = [
         type: 'p',
         text: 'Most people conclude their nervous system is random. Moody. Broken. It\u2019s none of those things. It\u2019s a bucket.',
       },
-      { type: 'h2', text: 'The bucket, explained' },
+      { type: 'h2', text: 'How the threshold model works' },
       {
         type: 'p',
         text: 'Your nervous system has a threshold \u2014 think of it as the rim of a bucket. Every single day, inputs pour in. The fluorescent light in your office. Pour. The three-hour meeting where you forgot to drink water. Pour. The argument at breakfast. Pour. The bad night of sleep behind all of it. Pour.',
@@ -54,7 +54,7 @@ export const POSTS: BlogPost[] = [
         type: 'pull',
         text: 'You were never fighting one trigger. You were losing a volume management problem.',
       },
-      { type: 'h2', text: 'Same trigger, different Tuesday' },
+      { type: 'h2', text: 'Why the same trigger produces different outcomes' },
       {
         type: 'p',
         text: 'This is where almost everyone goes wrong. They hunt for the villain \u2014 the one food, one light, one stress event that \u201Ccauses\u201D their migraines. There is no single villain. There is only the level of the bucket when the last thing gets added.',
@@ -73,10 +73,10 @@ export const POSTS: BlogPost[] = [
       },
       {
         type: 'tip',
-        title: 'Try this tonight',
+        title: 'A 24-hour trigger review',
         text: 'Think back to your last attack \u2014 not the pain itself, but the 24 hours before it. Write down everything that poured in: sleep, meals, light, noise, stress. Almost everyone who does this once is shocked. Not by what they find, but by how obvious the stack becomes in hindsight.',
       },
-      { type: 'h2', text: 'The part nobody tells you: the bucket isn\u2019t fixed' },
+      { type: 'h2', text: 'Your threshold changes day to day' },
       {
         type: 'p',
         text: 'Here\u2019s the hopeful bit. The rim of your bucket \u2014 your threshold \u2014 moves. Good sleep raises it. Hydration raises it. Calming input like rhythmic pressure, softened light, and masked sound raises it. Which means you have two levers, not one: reduce what pours in, and raise the rim itself.',
@@ -93,7 +93,7 @@ export const POSTS: BlogPost[] = [
   },
   {
     slug: 'the-prodrome-window',
-    title: 'Your Migraine Warns You. You Keep Missing It.',
+    title: 'How to recognize the prodrome window',
     dek: 'The yawning, the neck stiffness, the weird carb craving \u2014 your attack announces itself hours before the pain. Learn to hear it.',
     category: 'Early Warning',
     date: 'June 2026',
@@ -110,7 +110,7 @@ export const POSTS: BlogPost[] = [
         type: 'p',
         text: 'That letter is called the prodrome \u2014 the warning phase that arrives hours, sometimes a full day, before the pain. And because its symptoms seem completely unrelated to a headache, almost everyone misses it.',
       },
-      { type: 'h2', text: 'What the letter says' },
+      { type: 'h2', text: 'Common prodrome signals' },
       {
         type: 'p',
         text: 'The prodrome doesn\u2019t look like a migraine. It looks like a slightly off day. Which is exactly why it slips past you.',
@@ -138,7 +138,7 @@ export const POSTS: BlogPost[] = [
         type: 'pull',
         text: 'The prodrome is your intervention window. The bucket is filling, but it has not overflowed. Yet.',
       },
-      { type: 'h2', text: 'Why this window matters more than anything else' },
+      { type: 'h2', text: 'Why early intervention matters' },
       {
         type: 'p',
         text: 'Once an attack is at full intensity, everything you do is damage control. But in the prodrome? The wave hasn\u2019t triggered. The system is strained, not broken. Intervene here \u2014 dim the inputs, get horizontal, hydrate hard, close the gate with cold or rhythmic pressure \u2014 and you can sometimes stop the attack from ever reaching full force.',
@@ -149,10 +149,10 @@ export const POSTS: BlogPost[] = [
       },
       {
         type: 'tip',
-        title: 'The Prodrome Log',
+        title: 'Start a prodrome log',
         text: 'Keep a running note on your phone titled \u201CProdrome Log.\u201D Every time you notice any of the signals above, jot the time and what you felt. After two weeks, patterns emerge. You\u2019ll discover your personal prodrome signature \u2014 an early warning system no device can replicate.',
       },
-      { type: 'h2', text: 'What to actually do when the letter arrives' },
+      { type: 'h2', text: 'What to do when prodrome begins' },
       {
         type: 'list',
         items: [
@@ -175,7 +175,7 @@ export const POSTS: BlogPost[] = [
   },
   {
     slug: 'the-migraine-hangover',
-    title: 'The Headache Ended. The Migraine Didn\u2019t.',
+    title: 'Postdrome: the 24 hours after migraine pain',
     dek: 'Postdrome \u2014 the fog, the fatigue, the fragile day after \u2014 is not recovery. Treating it like one is why your attacks come in pairs.',
     category: 'Recovery',
     date: 'May 2026',
@@ -192,7 +192,7 @@ export const POSTS: BlogPost[] = [
         type: 'p',
         text: 'That second attack wasn\u2019t bad luck. It was a predictable consequence of the most common mistake in migraine management: treating the postdrome like recovery.',
       },
-      { type: 'h2', text: 'What\u2019s actually happening the day after' },
+      { type: 'h2', text: 'What happens during postdrome' },
       {
         type: 'p',
         text: 'The electrical storm has passed, but your nervous system is exhausted. Deep, unusual fatigue. Cognitive fog \u2014 thinking feels like wading. Mood that\u2019s either flat or strangely euphoric. A scalp and neck that still feel tender for no reason.',
@@ -209,7 +209,7 @@ export const POSTS: BlogPost[] = [
         type: 'pull',
         text: 'Postdrome is not recovery. It\u2019s vulnerability. Your bucket is nearly empty \u2014 but the rim is at its lowest.',
       },
-      { type: 'h2', text: 'The trap' },
+      { type: 'h2', text: 'Why attacks cluster' },
       {
         type: 'p',
         text: 'Here\u2019s the cruel mechanics of it. After an attack, your bucket has drained \u2014 but your threshold has dropped with it. The rim sits lower than usual. The bucket fills faster. The same Tuesday that your normal self would shrug off can tip your postdrome self straight into round two.',
@@ -231,7 +231,7 @@ export const POSTS: BlogPost[] = [
       },
       {
         type: 'tip',
-        title: 'The one-line rule',
+        title: 'Protect the postdrome window',
         text: 'The migraine did not end when the headache stopped. It ends when your threshold is fully restored. Usually that\u2019s 24 to 48 hours after the pain \u2014 protect that window like it\u2019s part of the attack, because neurologically, it is.',
       },
       {
@@ -242,7 +242,7 @@ export const POSTS: BlogPost[] = [
   },
   {
     slug: 'your-office-is-the-trigger',
-    title: 'It\u2019s Not You. It\u2019s the Ceiling.',
+    title: 'Managing migraine triggers at work',
     dek: 'Fluorescent flicker, screen glare, open-plan noise, forgotten water \u2014 the modern office is a bucket-filling machine. Here\u2019s how to disarm it.',
     category: 'Environment',
     date: 'May 2026',
@@ -255,7 +255,7 @@ export const POSTS: BlogPost[] = [
         type: 'lead',
         text: 'You feel fine at breakfast. By 3 p.m. there\u2019s a familiar tightness behind your right eye. By dinner, you\u2019re bargaining with your own skull. What happened in between? Eight hours in a room designed \u2014 accidentally but thoroughly \u2014 to fill your bucket.',
       },
-      { type: 'h2', text: 'The four office taps' },
+      { type: 'h2', text: 'Four common workplace triggers' },
       {
         type: 'p',
         text: 'Most offices pour into your nervous system from four directions at once. Individually, each is survivable. Together, running all day, they\u2019re a stack.',
@@ -277,7 +277,7 @@ export const POSTS: BlogPost[] = [
         type: 'pull',
         text: 'You sat under the same lights last month and felt fine. The lights didn\u2019t change. Your bucket level did.',
       },
-      { type: 'h2', text: 'Disarming the room' },
+      { type: 'h2', text: 'Reducing sensory load at work' },
       {
         type: 'p',
         text: 'You can\u2019t renovate your office. You can change what reaches your nervous system. That distinction is everything.',
@@ -296,10 +296,10 @@ export const POSTS: BlogPost[] = [
       },
       {
         type: 'tip',
-        title: 'The 3 p.m. audit',
+        title: 'Run a 3 p.m. audit',
         text: 'Set one daily alarm for 3 p.m. When it fires, ask: have I had water? Have I eaten? How long since I looked away from the screen? Three questions, thirty seconds. It catches the afternoon stack while it\u2019s still catchable.',
       },
-      { type: 'h2', text: 'The meeting survival rule' },
+      { type: 'h2', text: 'A practical rule for long meetings' },
       {
         type: 'p',
         text: 'Long meetings are trigger stacks in a conference room: fluorescent light, one droning voice, no water, no movement. Walk in with a full glass. Sit where you\u2019re not staring into a window\u2019s glare. And if the meeting runs past an hour, excusing yourself for two minutes isn\u2019t rude \u2014 it\u2019s maintenance.',
@@ -312,7 +312,7 @@ export const POSTS: BlogPost[] = [
   },
   {
     slug: 'the-travel-protocol',
-    title: 'Flying With a Sensitive Head',
+    title: 'A practical migraine protocol for travel',
     dek: 'Cabin pressure, recycled air, broken routines, airport lighting \u2014 travel is a perfect storm. Here\u2019s the protocol that lets you board anyway.',
     category: 'Protocols',
     date: 'April 2026',
@@ -325,7 +325,7 @@ export const POSTS: BlogPost[] = [
         type: 'lead',
         text: 'For a lot of migraine sufferers, travel stopped being exciting years ago. It became a gamble \u2014 will this trip cost me a day in a dark hotel room? Here\u2019s the honest answer: travel is a stack of triggers. And stacks can be managed.',
       },
-      { type: 'h2', text: 'Why travel hits so hard' },
+      { type: 'h2', text: 'Why travel raises migraine load' },
       {
         type: 'p',
         text: 'Count the taps. A 4 a.m. alarm that wrecks your sleep rhythm. Airport halls lit like operating theaters. Dehydrating cabin air \u2014 humidity around 10\u201320%, drier than most deserts. Barometric pressure changes your nervous system can literally measure. Skipped meals, disrupted routines, and the low hum of travel stress underneath all of it.',
@@ -342,7 +342,7 @@ export const POSTS: BlogPost[] = [
         type: 'pull',
         text: 'You don\u2019t cancel the trip. You board with a lower bucket than everyone else on the plane.',
       },
-      { type: 'h2', text: 'Two days before: pre-drain the bucket' },
+      { type: 'h2', text: '48 hours before departure' },
       {
         type: 'list',
         items: [
@@ -352,7 +352,7 @@ export const POSTS: BlogPost[] = [
           'Pack your relief tools in the carry-on. Checked luggage can\u2019t help you at 35,000 feet.',
         ],
       },
-      { type: 'h2', text: 'Flight day: the boarding protocol' },
+      { type: 'h2', text: 'A flight-day protocol' },
       {
         type: 'p',
         text: 'Airports are sensory casinos \u2014 no windows, relentless light, constant announcements. Tinted lenses go on at the terminal door, not when the headache starts. Earbuds with a steady masking sound turn gate chaos into background texture.',
@@ -363,10 +363,10 @@ export const POSTS: BlogPost[] = [
       },
       {
         type: 'tip',
-        title: 'The hotel reset',
+        title: 'Reset after check-in',
         text: 'First fifteen minutes after check-in, before anything else: curtains drawn, water poured, ten minutes of quiet with cold or gentle pressure at the base of the skull. It feels indulgent. It\u2019s not \u2014 it drains the airport out of your bucket before the trip begins.',
       },
-      { type: 'h2', text: 'The return leg nobody plans for' },
+      { type: 'h2', text: 'Plan for the first day home' },
       {
         type: 'p',
         text: 'Most travel migraines don\u2019t hit on the way out \u2014 they hit the day after you get home, when the accumulated stack finally lands on a tired system. Treat your first day back like a postdrome day: slow morning, filtered light, aggressive hydration, early night. Book it into the trip like it\u2019s a hotel night, because neurologically, it is.',
@@ -379,7 +379,7 @@ export const POSTS: BlogPost[] = [
   },
   {
     slug: 'stop-hunting-the-villain',
-    title: 'You Cut the Cheese. The Migraines Stayed.',
+    title: 'Why elimination diets often miss the full trigger load',
     dek: 'Wine, chocolate, gluten, caffeine \u2014 you\u2019ve eliminated them all, one grim month at a time. Here\u2019s why the elimination game keeps failing.',
     category: 'The Framework',
     date: 'April 2026',
@@ -396,7 +396,7 @@ export const POSTS: BlogPost[] = [
         type: 'p',
         text: 'If that story stings, good news: the problem was never your willpower. It was the strategy.',
       },
-      { type: 'h2', text: 'The villain myth' },
+      { type: 'h2', text: 'The limits of single-trigger thinking' },
       {
         type: 'p',
         text: 'The elimination approach rests on a single assumption: somewhere in your life is one villain \u2014 one food, one drink, one habit \u2014 that causes your migraines. Find it, remove it, be free.',
@@ -413,7 +413,7 @@ export const POSTS: BlogPost[] = [
         type: 'pull',
         text: 'The elimination diet removes one input out of forty \u2014 and leaves the other thirty-nine pouring.',
       },
-      { type: 'h2', text: 'Why it feels like it works (at first)' },
+      { type: 'h2', text: 'Why elimination can appear effective at first' },
       {
         type: 'p',
         text: 'Here\u2019s the trap that keeps everyone playing. When you start an elimination diet, you usually clean up everything at once \u2014 you sleep better, drink more water, eat regular meals, pay attention. The bucket drains. The migraines ease. And the diet takes the credit.',
@@ -422,7 +422,7 @@ export const POSTS: BlogPost[] = [
         type: 'p',
         text: 'Then life returns. Sleep slips, meetings stack, hydration fades \u2014 and the attacks come back even though you never touched the forbidden food again. Cue the conclusion: \u201CI must have another trigger.\u201D And the hunt begins anew.',
       },
-      { type: 'h2', text: 'What to do instead' },
+      { type: 'h2', text: 'Track cumulative load, not a single trigger' },
       {
         type: 'p',
         text: 'Stop asking \u201Cwhat causes my migraines?\u201D and start asking \u201Cwhat fills my bucket fastest?\u201D Those are different questions with different answers \u2014 and only the second one is useful.',
@@ -438,7 +438,7 @@ export const POSTS: BlogPost[] = [
       },
       {
         type: 'tip',
-        title: 'The Saturday test',
+        title: 'Compare a low-load day',
         text: 'Want proof? Notice what you can get away with on a relaxed Saturday after two good nights of sleep \u2014 the wine, the cheese, the late night. Same \u201Ctriggers,\u201D no attack. That\u2019s not luck. That\u2019s headroom.',
       },
       {

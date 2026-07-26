@@ -392,10 +392,10 @@ export default function FivePillars() {
       <div className="fp__inner">
         {/* HEADER */}
         <div className="fp__head">
-          <p className="fp__eyebrow">The Engineering</p>
+          <p className="fp__eyebrow">Mechanism architecture</p>
           <h2 className="fp__h2">
-            <span>Here&apos;s why it</span>
-            <span className="fp__h2-italic">actually works.</span>
+            <span>Five mechanisms.</span>
+            <span className="fp__h2-italic">One coordinated protocol.</span>
           </h2>
           <p className="fp__sub">
             Five documented neurological mechanisms. Each product exists because of a specific,

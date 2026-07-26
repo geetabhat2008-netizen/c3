@@ -115,9 +115,9 @@ export default function MechanismSection() {
         <div className="mech__cost-panel">
           <header className="mech__head">
             <div>
-              <p className="mech__eyebrow">The real cost of migraine</p>
+              <p className="mech__eyebrow">Migraine beyond the pain phase</p>
               <h2 className="mech__hook">
-                It was never <span className="italic">just a headache.</span>
+                The burden extends across body, function, and identity.
               </h2>
             </div>
             <p className="mech__intro">
@@ -143,9 +143,9 @@ export default function MechanismSection() {
         <div className="mech__physics">
           <div className="mech__copy">
             <h2 className="mech__h2">
-              <span>Your migraines</span>
-              <span>aren&apos;t random.</span>
-              <span className="italic">They&apos;re physics.</span>
+              <span>The threshold model</span>
+              <span>explains why attacks</span>
+              <span className="italic">feel unpredictable.</span>
             </h2>
 
             <p className="mech__p">
@@ -154,7 +154,7 @@ export default function MechanismSection() {
               It&apos;s physics.
             </p>
             <p className="mech__p">
-              CrownCalm doesn&apos;t treat the overflow. It empties the bucket from four
+              CrownCalm doesn&apos;t treat the overflow. It empties the bucket from five
               directions simultaneously — and raises the rim.
             </p>
 
@@ -171,7 +171,7 @@ export default function MechanismSection() {
             </div>
 
             <Link href="/#five-pillars" className="mech__cta">
-              <span>See the four mechanisms</span>
+              <span>See the five mechanisms</span>
               <span className="mech__cta-arrow" aria-hidden>↓</span>
             </Link>
           </div>
@@ -192,7 +192,7 @@ export default function MechanismSection() {
             <div className="mech__stage">
               <span className="mech__rim-label">Raised Threshold</span>
 
-              <svg className="mech__svg" viewBox="0 0 200 220" role="img" aria-label="A neurological bucket filling past its rim, then drained from four directions">
+              <svg className="mech__svg" viewBox="0 0 200 220" role="img" aria-label="A neurological bucket filling past its rim, then drained from five directions">
                 <defs>
                   <clipPath id="bucketClip">
                     <path d="M46,30 L154,30 L148,172 Q148,194 130,194 L70,194 Q52,194 52,172 Z" />

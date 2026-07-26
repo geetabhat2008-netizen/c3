@@ -26,37 +26,37 @@ const REVIEWS = [
   {
     name: 'K.M.', role: 'Nurse, 34', tenure: 'Week 3', color: '#D2B6F7', tag: 'Light',
     image: '/images/lifestyle/office-glasses.png',
-    headline: 'The glasses changed everything about office work.',
+    headline: 'Office light became easier to manage.',
     body: "I wear the FL-41 shield from 9am. By 3pm I've stopped doing my usual 'how much longer can I last' math. The sub-visible flicker reduction is real — I can feel it when I take them off.",
   },
   {
     name: 'D.R.', role: 'Marketing Director, 41', tenure: 'Day 18', color: '#E596FF', tag: 'Focus',
     image: '/images/lifestyle/morning-session.png',
-    headline: "The massager doesn't feel like much. Until it does.",
+    headline: 'The difference appeared after seven sessions.',
     body: "First three sessions I thought I'd wasted $345. Session seven, the pressure behind my eye hadn't arrived by noon. I kept every meeting that Tuesday.",
   },
   {
     name: 'T.B.', role: 'Parent, 38', tenure: 'Week 2', color: '#F5B061', tag: 'Sleep',
     image: '/images/lifestyle/sleep-buds.png',
-    headline: 'Brown Noise is not white noise. This matters.',
+    headline: 'Brown noise worked differently from white noise.',
     body: "I tried white noise apps for years. The sleep buds are different. The low-frequency profile doesn't add to the load. I stopped waking at 2am with pressure by Week 2.",
   },
   {
     name: 'A.S.', role: 'Teacher, 29', tenure: 'Day 12', color: '#FCD667', tag: 'Attack',
     image: '/images/lifestyle/cryo-attack.png',
-    headline: 'The cold wrap sequence changed the outcome.',
+    headline: 'The cooling sequence changed the result.',
     body: 'Heat first, then cold. I always did it backwards. The ebook explains why. First time I did it in the right order — the attack never fully arrived.',
   },
   {
     name: 'R.P.', role: 'Researcher, 44', tenure: 'Month 3', color: '#6FA4FF', tag: 'Focus',
     image: '/images/lifestyle/cervical-desk.png',
-    headline: 'I was the sceptic in this story.',
+    headline: 'A three-month assessment from a skeptic.',
     body: "I have a neuroscience background. I expected wellness nonsense. The Gate Control literature is real. I ordered it as an experiment. I'm now on Month 3.",
   },
   {
     name: 'M.L.', role: 'Analyst, 32', tenure: 'Week 6', color: '#D2B6F7', tag: 'Light',
     image: '/images/lifestyle/office-glasses.png',
-    headline: 'The 15-minute calibration note saved me from returning it.',
+    headline: 'The adjustment period was worth waiting through.',
     body: "The glasses looked pink. I almost returned them in 10 minutes. The ebook said to wait. At 12 minutes the tint receded. I've worn them every workday since.",
   },
 ]
@@ -192,7 +192,7 @@ function ReviewsCarousel() {
       <div className="reviews__head">
         <div className="reviews__headtext">
           <h2 className="reviews__title">
-            Over 4,000 People,<br />Fewer Lost Days
+            What members noticed<br />in the first 30 days.
           </h2>
           <div className="reviews__filters" role="tablist" aria-label="Filter outcomes">
             {REVIEW_FILTERS.map((f) => (
@@ -273,18 +273,18 @@ export default function HeroSection() {
         <div className="hero__left">
           <motion.p className="hero__eyebrow" {...rise(16, 0.1, 0.55)}>
             <span className="hero__eyebrow-tick" aria-hidden />
-            Neurological Environment Management
+            The CrownCalm Migraine Protocol
           </motion.p>
 
           <h1 className="hero__h1">
-            <motion.span {...rise(20, 0.2, 0.65)}>You&apos;ve tried everything.</motion.span>
-            <motion.span className="italic" {...rise(20, 0.3, 0.65)}>Nothing&apos;s worked</motion.span>
-            <motion.span {...rise(20, 0.4, 0.65)}>well enough.</motion.span>
+            <motion.span {...rise(20, 0.2, 0.65)}>Migraine support,</motion.span>
+            <motion.span className="italic" {...rise(20, 0.3, 0.65)}>engineered around</motion.span>
+            <motion.span {...rise(20, 0.4, 0.65)}>five mechanisms.</motion.span>
           </h1>
 
           <motion.p className="hero__sub" {...rise(14, 0.5, 0.55)}>
-            Four neurological mechanisms. One compound protocol. The first migraine
-            system that manages conditions — not symptoms.
+            The Sanctuary Suite coordinates light filtration, rhythmic compression,
+            cooling, sound masking, and cervical support in one structured protocol.
           </motion.p>
 
           <motion.div className="hero__ctas" {...rise(10, 0.62, 0.5)}>

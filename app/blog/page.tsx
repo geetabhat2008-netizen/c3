@@ -7,7 +7,7 @@ import Footer from '../../components/Footer'
 export const metadata: Metadata = {
   title: 'The Journal — CrownCalm',
   description:
-    'Field notes for the sensitized mind. Practical, honest writing on living well with a migraine brain — no jargon, no pamphlets.',
+    'Practical migraine science for daily life, including triggers, prodrome, postdrome, work, travel, and recovery.',
 }
 
 export default function BlogIndex() {
@@ -20,9 +20,9 @@ export default function BlogIndex() {
         <header className="journal__head">
           <p className="journal__eyebrow">The Journal</p>
           <h1 className="journal__title">
-            Field notes for the
+            Practical migraine science
             <br />
-            <em>sensitized</em> mind.
+            for daily life.
           </h1>
           <p className="journal__dek">
             {

@@ -8,36 +8,36 @@ const TABS = [
   {
     id: 'morning', label: 'Morning', time: '6–9am', image: '/images/lifestyle/morning-session.png',
     alt: 'A woman using the Neuro-Massager during a quiet morning routine', title: 'Morning Focus',
-    body: 'Start with the gate already closed — 15 quiet minutes before the day begins.',
-    stat: '15', unit: 'min', statTitle: 'before your day begins', statBody: 'Rhythmic compression helps close the pain gate before daily sensory load builds.',
+    body: 'Begin the day with 15 minutes of rhythmic compression.',
+    stat: '15', unit: 'min', statTitle: 'A short pre-work session', statBody: 'Rhythmic compression helps close the pain gate before daily sensory load builds.',
     mode: 'Morning Session', spec1: '15 minutes', spec2: '20–40 kPa', quote: 'I do 15 minutes before I open my laptop. I haven’t missed a Monday in six weeks.', name: 'K.M.',
   },
   {
     id: 'office', label: 'Office', time: '9am–5pm', image: '/images/lifestyle/office-glasses.png',
     alt: 'A man wearing the FL-41 Optic Shield at a bright office desk', title: 'At the Office',
-    body: 'Filter the exact wavelength that fires the pathway, so 3pm never becomes a countdown.',
-    stat: '80', unit: '%', statTitle: 'of trigger light filtered', statBody: 'FL-41 lenses reduce exposure across the working day without darkening your world.',
+    body: 'Filter the 480–520 nm range during screen-heavy hours.',
+    stat: '80', unit: '%', statTitle: 'Targeted trigger-light filtration', statBody: 'FL-41 lenses reduce exposure across the working day without darkening your world.',
     mode: 'Optic Shield', spec1: '480–520 nm', spec2: 'All-day wear', quote: 'By 3pm I’ve stopped my usual countdown to how much longer I can last.', name: 'D.R.',
   },
   {
     id: 'attack', label: 'Attack', time: 'Any time', image: '/images/lifestyle/cryo-attack.png',
     alt: 'A woman resting with the Cryo-Compression Core in a dim room', title: 'At the First Sign',
-    body: 'Cold at the vascular source, in the right order — before the attack fully arrives.',
-    stat: '20', unit: 'min', statTitle: 'at first onset', statBody: 'Targeted cooling constricts inflamed vessels while gentle pressure settles the signal.',
+    body: 'Apply targeted cooling at the first sign of an attack.',
+    stat: '20', unit: 'min', statTitle: 'Cooling at early onset', statBody: 'Targeted cooling constricts inflamed vessels while gentle pressure settles the signal.',
     mode: 'Cryo Relief', spec1: '2–8°C', spec2: '20 min max', quote: 'The first time I used the cryo wrap in the right order, the attack never fully arrived.', name: 'A.S.',
   },
   {
     id: 'sleep', label: 'Sleep', time: '10pm–6am', image: '/images/lifestyle/sleep-buds.png',
     alt: 'A woman sleeping on her side wearing the Acoustic Silence Sleep Buds', title: 'Rest & Sleep',
-    body: 'Mask the room without pillow pressure, so sensory load does not follow you into sleep.',
-    stat: '30', unit: 'dB', statTitle: 'of disruption masked', statBody: 'Low-profile buds deliver brown noise for side-sleep comfort through the night.',
+    body: 'Use low-profile sound masking without added pillow pressure.',
+    stat: '30', unit: 'dB', statTitle: 'Overnight sound masking', statBody: 'Low-profile buds deliver brown noise for side-sleep comfort through the night.',
     mode: 'Sleep Mode', spec1: '10 hr playback', spec2: 'Brown noise', quote: 'I stopped waking at 2am with pressure behind my eye. It’s part of my nightly routine.', name: 'T.B.',
   },
   {
     id: 'desk', label: 'Desk', time: 'Work hours', image: '/images/lifestyle/cervical-desk.png',
     alt: 'A man wearing the Cervical Axis Module at a modern desk', title: 'At the Desk',
-    body: 'Decompress the second gate cranial devices cannot reach while you continue your day.',
-    stat: '60', unit: 'min', statTitle: 'of targeted decompression', statBody: 'The cervical module addresses upper-neck tension without interrupting desk work.',
+    body: 'Address upper-cervical tension while you work.',
+    stat: '60', unit: 'min', statTitle: 'Upper-cervical support', statBody: 'The cervical module addresses upper-neck tension without interrupting desk work.',
     mode: 'Desk Mode', spec1: 'C0–C2 target', spec2: '60 min wear', quote: 'The neck module is the only piece I wear on calls. My afternoon threshold is higher.', name: 'R.P.',
   },
 ] as const
@@ -54,8 +54,8 @@ export default function ProtocolInYourDay() {
       <div className="piyd__inner">
         <header className="piyd__header">
           <div>
-            <p className="piyd__eyebrow">The protocol, hour by hour</p>
-            <h2>A pillar for every part of your day.</h2>
+            <p className="piyd__eyebrow">A practical daily protocol</p>
+            <h2>How the protocol fits into a typical day.</h2>
             <p className="piyd__lede">One compound protocol adapts from morning focus and office light to attacks, sleep, and desk work.</p>
           </div>
           <a href="/products" className="piyd__cta">Explore the Suite <span aria-hidden="true">↗</span></a>

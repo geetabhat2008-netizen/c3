@@ -247,11 +247,11 @@ export default function FaqSection() {
         {/* ---------- Header: title left, collage right ---------- */}
         <div className="faq__head">
           <motion.div className="faq__head-copy" {...fadeUp(0)}>
-            <p className="faq__eyebrow">Common Questions</p>
+            <p className="faq__eyebrow">Before you begin</p>
             <h2 id="faq-heading" className="faq__title text-balance">
-              Frequently
+              Clear answers about the suite,
               <br />
-              asked, <em>honestly</em> answered.
+              the protocol, and the guarantee.
             </h2>
             <p className="faq__dek">
               Everything the label does not tell you — mechanisms, limits, and

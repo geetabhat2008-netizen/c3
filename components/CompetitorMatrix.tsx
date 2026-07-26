@@ -254,10 +254,10 @@ export default function CompetitorMatrix() {
           viewport={{ once: true, margin: '-60px' }}
           transition={reduce ? { duration: 0 } : { duration: 0.6 }}
         >
-          <p className="cm__eyebrow">The Comparison</p>
+          <p className="cm__eyebrow">Coverage by mechanism</p>
           <h2 className="cm__title">
-            <span className="cm__title-line">You haven&apos;t failed.</span>
-            <span className="cm__title-line cm__title-line--accent">Single mechanisms have.</span>
+            <span className="cm__title-line">Most migraine products address</span>
+            <span className="cm__title-line cm__title-line--accent">one mechanism at a time.</span>
           </h2>
         </motion.div>
 

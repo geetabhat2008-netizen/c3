@@ -186,10 +186,10 @@ export default function PriceJustification() {
 
         <motion.div className="price__board" {...fadeUp(0)}>
           <header className="price__header">
-            <p className="price__eyebrow">Five-year cost comparison</p>
+            <p className="price__eyebrow">Five-year ownership cost</p>
             <h2 className="price__h2">
-              The cost of migraine care,
-              <span className="price__h2-italic">made visible.</span>
+              Compare the long-term cost
+              <span className="price__h2-italic">of common migraine options.</span>
             </h2>
             <p className="price__sub">
               A one-time Sanctuary Suite purchase compared with common recurring options.

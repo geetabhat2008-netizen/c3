@@ -12,8 +12,8 @@ const PAIN_LAYERS = [
     id: 'storm',
     color: '#D2B6F7',
     deep: '#6B3FA0',
-    label: 'The Storm',
-    title: 'The body.',
+    label: 'Physical',
+    title: 'Physical symptoms',
     image: '/images/pain/storm.png',
     imageAlt:
       'A woman sitting on the edge of a bed in a dark room, pressing her palm against her forehead in pain',
@@ -28,8 +28,8 @@ const PAIN_LAYERS = [
     id: 'theft',
     color: '#F5B061',
     deep: '#8A4A10',
-    label: 'The Theft',
-    title: 'The life.',
+    label: 'Functional',
+    title: 'Daily disruption',
     image: '/images/pain/theft.png',
     imageAlt:
       'An empty chair at a warmly lit dinner table while a celebration continues blurred in the background',
@@ -44,8 +44,8 @@ const PAIN_LAYERS = [
     id: 'erosion',
     color: '#8BB8FF',
     deep: '#2B4F8A',
-    label: 'The Erosion',
-    title: 'The self.',
+    label: 'Identity',
+    title: 'Changes in self-perception',
     image: '/images/pain/erosion.png',
     imageAlt:
       'A woman looking at her faint, blurred reflection in a rain-streaked window at dusk',
@@ -109,12 +109,12 @@ export default function PainAcknowledgment() {
         <div className="pain__header">
           <div>
             <motion.p className="pain__eyebrow" {...fadeUp(0.05)}>
-              The Three Layers
+              The lived impact
             </motion.p>
             <h2 className="pain__h2">
-              <motion.span {...fadeUp(0.1)}>You know exactly</motion.span>
-              <motion.span className="pain__h2-italic" {...fadeUp(0.15)}>
-                what this costs.
+              <motion.span {...fadeUp(0.1)}>Migraine carries a physical,</motion.span>
+              <motion.span {...fadeUp(0.15)}>
+                functional, and personal cost.
               </motion.span>
             </h2>
           </div>
@@ -265,7 +265,7 @@ export default function PainAcknowledgment() {
         {/* PIVOT */}
         <motion.div className="pain__pivot" {...fadeUp(0.3)}>
           <p className="pain__pivot-quote">
-            &ldquo;That&apos;s not you. That&apos;s an incomplete tool set.&rdquo;
+            The problem is not a lack of effort. It is a mismatch between the tools and the load.
           </p>
           <a
             href="#five-pillars"
@@ -275,7 +275,7 @@ export default function PainAcknowledgment() {
               document.getElementById('five-pillars')?.scrollIntoView({ behavior: 'smooth' })
             }}
           >
-            ↓ Here is what actually works
+            Review the five mechanisms ↓
           </a>
         </motion.div>
       </div>

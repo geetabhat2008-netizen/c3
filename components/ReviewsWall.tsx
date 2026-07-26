@@ -138,8 +138,8 @@ export default function ReviewsWall() {
         {/* ---- Header ---- */}
         <header className="rw__head">
           <h2 className="rw__h2">
-            Thousands of trusted reviews
-            <span className="rw__h2-sub">from sensitized minds like yours.</span>
+            Member reports from
+            <span className="rw__h2-sub">across the 30-day protocol.</span>
           </h2>
           <div className="rw__head-side">
             <p className="rw__agg">

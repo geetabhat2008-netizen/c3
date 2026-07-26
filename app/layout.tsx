@@ -30,7 +30,7 @@ const lora = Lora({
 export const metadata: Metadata = {
   title: "CrownCalm — The Sanctuary Suite",
   description:
-    "Four neurological mechanisms. One compound protocol. The first migraine system that manages conditions — not symptoms.",
+    "The Sanctuary Suite coordinates five migraine-support mechanisms in one structured daily protocol.",
 };
 
 export default function RootLayout({

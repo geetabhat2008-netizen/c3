@@ -15,7 +15,7 @@ const CATEGORIES = [
     textColor: '#6B3FA0',
     image: '/images/lifestyle/morning-session.png',
     alt: 'Morning Neuro-Massager session in soft daylight',
-    headline: 'Reduce Stress,\nReclaim Baseline',
+    headline: 'Reduce\nSensory Load',
     description:
       'Closes the two primary input channels — trigeminal gate and the 480–520nm light band — so your nervous system has room to settle.',
     stats: [
@@ -36,7 +36,7 @@ const CATEGORIES = [
     textColor: '#7A2090',
     image: '/images/lifestyle/sleep-buds.png',
     alt: 'Acoustic Silence Sleep Buds resting before bed',
-    headline: 'Drift Deeper,\nWake Restored',
+    headline: 'Protect the\nSleep Window',
     description:
       'Masks auditory load and holds vasoconstriction through the 20-minute window — removing the barriers that keep you awake.',
     stats: [
@@ -57,7 +57,7 @@ const CATEGORIES = [
     textColor: '#7A4010',
     image: '/images/lifestyle/office-glasses.png',
     alt: 'FL-41 Optic Shield worn at a desk workstation',
-    headline: 'Clear Mind,\nSteady Flow',
+    headline: 'Preserve Focus\nUnder Load',
     description:
       "With photosensitivity and neck tension off your cognitive load, you don't fight to concentrate — you just have it.",
     stats: [
@@ -85,8 +85,8 @@ export default function BenefitsShowcase() {
       <div className="benefits__container">
         <header className="benefits__header">
           <h2 className="benefits__h2">
-            Meet The Benefits
-            <span className="benefits__h2-2">You Can Actually Feel</span>
+            Outcomes the protocol
+            <span className="benefits__h2-2">is designed to support.</span>
           </h2>
         </header>
 
