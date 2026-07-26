@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import Image from 'next/image'
+import Link from 'next/link'
 import DissolveBlock from './DissolveBlock'
 
 const EASE: [number, number, number, number] = [0, 0, 0.2, 1]
@@ -288,9 +289,9 @@ export default function HeroSection() {
 
           <motion.div className="hero__ctas" {...rise(10, 0.62, 0.5)}>
             <a href="/products" className="btn hero__cta-primary">Begin the Protocol</a>
-            <a href="/science" className="btn btn-ghost hero__cta-ghost">
+            <Link href="/#mechanism" className="btn btn-ghost hero__cta-ghost">
               Understand the Science <span className="hero__arrow" aria-hidden>→</span>
-            </a>
+            </Link>
           </motion.div>
         </div>
 

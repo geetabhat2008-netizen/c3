@@ -3,7 +3,11 @@
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 
-const LINKS = ['Science', 'Products', 'Blog']
+const LINKS = [
+  { label: 'Science', href: '/#mechanism' },
+  { label: 'Products', href: '/products' },
+  { label: 'Blog', href: '/blog' },
+]
 
 export default function Nav() {
   const navRef = useRef<HTMLElement>(null)
@@ -37,8 +41,8 @@ export default function Nav() {
       <Link href="/" className="nav__logo">CrownCalm</Link>
 
       <div className="nav__links">
-        {LINKS.map((l) => (
-          <a key={l} href={`/${l.toLowerCase()}`} className="nav__link">{l}</a>
+        {LINKS.map((link) => (
+          <Link key={link.label} href={link.href} className="nav__link">{link.label}</Link>
         ))}
       </div>
 
@@ -62,8 +66,10 @@ export default function Nav() {
         <div className="nav__overlay" role="dialog" aria-modal="true">
           <button className="nav__close" aria-label="Close menu" onClick={() => setOpen(false)}>×</button>
           <div className="nav__overlay-links">
-            {LINKS.map((l) => (
-              <a key={l} href={`/${l.toLowerCase()}`} onClick={() => setOpen(false)}>{l}</a>
+            {LINKS.map((link) => (
+              <Link key={link.label} href={link.href} onClick={() => setOpen(false)}>
+                {link.label}
+              </Link>
             ))}
           </div>
           <a href="/products" className="nav__overlay-cta btn" onClick={() => setOpen(false)}>

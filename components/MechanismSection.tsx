@@ -2,6 +2,7 @@
 
 import { useRef } from 'react'
 import { useInView, useReducedMotion } from 'framer-motion'
+import Link from 'next/link'
 import DissolveBlock from './DissolveBlock'
 
 // ── Part A: the cost. Plain typographic columns — a thin colored rule is the
@@ -169,10 +170,10 @@ export default function MechanismSection() {
               ))}
             </div>
 
-            <a href="/science" className="mech__cta">
+            <Link href="/#five-pillars" className="mech__cta">
               <span>See the four mechanisms</span>
               <span className="mech__cta-arrow" aria-hidden>↓</span>
-            </a>
+            </Link>
           </div>
 
           {/* RIGHT — bucket diagram */}
