@@ -19,47 +19,6 @@ const PHASES: [string, string][] = [
   ['#6FA4FF', 'The Compound Protocol'],
 ]
 
-const REVIEW_FILTERS = ['All', 'Light', 'Focus', 'Attack', 'Sleep'] as const
-
-const REVIEWS = [
-  {
-    name: 'K.M.', role: 'Nurse, 34', tenure: 'Week 3', color: '#D2B6F7', tag: 'Light',
-    image: '/images/lifestyle/office-glasses.png',
-    headline: 'The glasses changed everything about office work.',
-    body: "I wear the FL-41 shield from 9am. By 3pm I've stopped doing my usual 'how much longer can I last' math. The sub-visible flicker reduction is real — I can feel it when I take them off.",
-  },
-  {
-    name: 'D.R.', role: 'Marketing Director, 41', tenure: 'Day 18', color: '#E596FF', tag: 'Focus',
-    image: '/images/lifestyle/morning-session.png',
-    headline: "The massager doesn't feel like much. Until it does.",
-    body: "First three sessions I thought I'd wasted $345. Session seven, the pressure behind my eye hadn't arrived by noon. I kept every meeting that Tuesday.",
-  },
-  {
-    name: 'T.B.', role: 'Parent, 38', tenure: 'Week 2', color: '#F5B061', tag: 'Sleep',
-    image: '/images/lifestyle/sleep-buds.png',
-    headline: 'Brown Noise is not white noise. This matters.',
-    body: "I tried white noise apps for years. The sleep buds are different. The low-frequency profile doesn't add to the load. I stopped waking at 2am with pressure by Week 2.",
-  },
-  {
-    name: 'A.S.', role: 'Teacher, 29', tenure: 'Day 12', color: '#FCD667', tag: 'Attack',
-    image: '/images/lifestyle/cryo-attack.png',
-    headline: 'The cold wrap sequence changed the outcome.',
-    body: 'Heat first, then cold. I always did it backwards. The ebook explains why. First time I did it in the right order — the attack never fully arrived.',
-  },
-  {
-    name: 'R.P.', role: 'Researcher, 44', tenure: 'Month 3', color: '#6FA4FF', tag: 'Focus',
-    image: '/images/lifestyle/cervical-desk.png',
-    headline: 'I was the sceptic in this story.',
-    body: "I have a neuroscience background. I expected wellness nonsense. The Gate Control literature is real. I ordered it as an experiment. I'm now on Month 3.",
-  },
-  {
-    name: 'M.L.', role: 'Analyst, 32', tenure: 'Week 6', color: '#D2B6F7', tag: 'Light',
-    image: '/images/lifestyle/office-glasses.png',
-    headline: 'The 15-minute calibration note saved me from returning it.',
-    body: "The glasses looked pink. I almost returned them in 10 minutes. The ebook said to wait. At 12 minutes the tint receded. I've worn them every workday since.",
-  },
-]
-
 // Faint indigo dot-matrix on cream — breathing pulse + pointer drift.
 function CanvasBackground() {
   const ref = useRef<HTMLCanvasElement>(null)
@@ -113,7 +72,7 @@ function CanvasBackground() {
           const opacity = 0.03 + 0.04 * Math.abs(Math.sin(time + i * 0.4 + j * 0.3))
           ctx.beginPath()
           ctx.arc(x, y, RADIUS, 0, Math.PI * 2)
-          ctx.fillStyle = `rgba(37, 99, 235, ${opacity})`
+          ctx.fillStyle = `rgba(15, 15, 15, ${opacity * 0.4})`
           ctx.fill()
         }
       }
@@ -171,81 +130,6 @@ function TrustBar({ onOpen, reduce }: { onOpen: () => void; reduce: boolean | nu
   )
 }
 
-// Filterable testimonial carousel. Category pills filter the set; a horizontal
-// scroll-snap rail holds photo-topped quote cards with prev/next controls.
-function ReviewsCarousel() {
-  const [filter, setFilter] = useState<(typeof REVIEW_FILTERS)[number]>('All')
-  const railRef = useRef<HTMLDivElement>(null)
-
-  const cards = filter === 'All' ? REVIEWS : REVIEWS.filter((r) => r.tag === filter)
-
-  const scrollBy = (dir: 1 | -1) => {
-    const rail = railRef.current
-    if (!rail) return
-    const amount = Math.min(rail.clientWidth * 0.8, 360)
-    rail.scrollBy({ left: dir * amount, behavior: 'smooth' })
-  }
-
-  return (
-    <section id="testimonials" className="reviews" aria-label="Verified outcomes">
-      <div className="reviews__head">
-        <div className="reviews__headtext">
-          <h2 className="reviews__title">
-            Over 4,000 People,<br />Fewer Lost Days
-          </h2>
-          <div className="reviews__filters" role="tablist" aria-label="Filter outcomes">
-            {REVIEW_FILTERS.map((f) => (
-              <button
-                key={f}
-                role="tab"
-                aria-selected={filter === f}
-                className={`reviews__filter${filter === f ? ' is-active' : ''}`}
-                onClick={() => setFilter(f)}
-              >
-                {f}
-              </button>
-            ))}
-          </div>
-        </div>
-        <div className="reviews__nav">
-          <button className="reviews__arrow" onClick={() => scrollBy(-1)} aria-label="Previous outcomes">
-            ←
-          </button>
-          <button className="reviews__arrow" onClick={() => scrollBy(1)} aria-label="Next outcomes">
-            →
-          </button>
-        </div>
-      </div>
-
-      <div className="reviews__rail" ref={railRef}>
-        {cards.map((r) => (
-          <article className="rcard" key={r.name + r.headline}>
-            <div className="rcard__media">
-              <Image
-                src={r.image || '/placeholder.svg'}
-                alt=""
-                fill
-                sizes="(max-width: 767px) 78vw, 320px"
-                style={{ objectFit: 'cover' }}
-              />
-              <span className="rcard__tag" style={{ background: r.color }}>{r.tag}</span>
-            </div>
-            <div className="rcard__body">
-              <span className="rcard__stars">★★★★★</span>
-              <h3 className="rcard__headline">{r.headline}</h3>
-              <p className="rcard__quote">{r.body}</p>
-              <div className="rcard__foot">
-                <span className="rcard__name">{r.name}</span>
-                <span className="rcard__meta">{r.role} · Verified · {r.tenure}</span>
-              </div>
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-  )
-}
-
 export default function HeroSection() {
   const reduce = useReducedMotion()
 
@@ -265,7 +149,20 @@ export default function HeroSection() {
     : { initial: { opacity: 0, x: 16 }, animate: { opacity: 1, x: 0 }, transition: { delay: 0.3, duration: 0.8, ease: EASE } }
 
   return (
-    <main className="hero has-grid-rules">
+    <main className="hero">
+      {/* Ambient Sanctuary Atmosphere under Floating Nav Bar */}
+      <div className="hero__ambient-sanctuary" aria-hidden="true">
+        <Image
+          src="/images/lifestyle/hero-sanctuary-ambient.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="hero__ambient-img"
+        />
+        <div className="hero__ambient-gradient" />
+      </div>
+
       <CanvasBackground />
 
       <div className="hero__grid">
@@ -276,14 +173,17 @@ export default function HeroSection() {
           </motion.p>
 
           <h1 className="hero__h1">
-            <motion.span {...rise(20, 0.2, 0.65)}>You&apos;ve tried everything.</motion.span>
-            <motion.span className="italic" {...rise(20, 0.3, 0.65)}>Nothing&apos;s worked</motion.span>
-            <motion.span {...rise(20, 0.4, 0.65)}>well enough.</motion.span>
+            <motion.span className="hero__h1-lead" {...rise(20, 0.2, 0.65)}>
+              You&apos;ve tried everything.
+            </motion.span>
+            <motion.span className="hero__h1-sub" {...rise(20, 0.3, 0.65)}>
+              Nothing worked well enough.
+            </motion.span>
           </h1>
 
           <motion.p className="hero__sub" {...rise(14, 0.5, 0.55)}>
             Four neurological mechanisms. One compound protocol. The first migraine
-            system that manages conditions — not symptoms.
+            system that manages conditions, not symptoms.
           </motion.p>
 
           <motion.div className="hero__ctas" {...rise(10, 0.62, 0.5)}>
@@ -305,18 +205,44 @@ export default function HeroSection() {
 
       <TrustBar onOpen={scrollToReviews} reduce={reduce} />
 
-      <ReviewsCarousel />
-
       <style>{`
         /* batch 6: hero styles */
         .hero {
           min-height: 100vh;
           position: relative;
           overflow: hidden;
-          background: var(--color-bg);
+          background: var(--color-bg-primary, #FAFAF9);
           padding-top: var(--nav-height);
           display: flex;
           flex-direction: column;
+        }
+        .hero__ambient-sanctuary {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 580px;
+          overflow: hidden;
+          z-index: 0;
+          pointer-events: none;
+        }
+        .hero__ambient-img {
+          object-fit: cover;
+          object-position: center 22%;
+          opacity: 0.84;
+          filter: saturate(114%) contrast(103%);
+        }
+        .hero__ambient-gradient {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(
+            180deg,
+            rgba(250, 250, 249, 0) 0%,
+            rgba(250, 250, 249, 0.04) 22%,
+            rgba(250, 250, 249, 0.42) 54%,
+            rgba(250, 250, 249, 0.92) 82%,
+            var(--color-bg-primary, #FAFAF9) 100%
+          );
         }
         .hero__canvas,
         .hero__canvas-fallback {
@@ -328,7 +254,7 @@ export default function HeroSection() {
           pointer-events: none;
         }
         .hero__canvas-fallback {
-          background: radial-gradient(ellipse at 20% 60%, rgba(37, 99, 235, 0.04) 0%, transparent 55%);
+          background: radial-gradient(ellipse at 20% 60%, rgba(15, 15, 15, 0.02) 0%, transparent 55%);
         }
 
         .hero__grid {
@@ -346,39 +272,46 @@ export default function HeroSection() {
           display: flex;
           align-items: center;
           font-family: var(--font-mono);
-          font-size: 11px;
-          font-weight: 700;
-          letter-spacing: 0.16em;
+          font-size: var(--text-mono-xs);
+          font-weight: var(--weight-mono-md);
+          letter-spacing: var(--tracking-eyebrow);
           text-transform: uppercase;
           color: var(--color-text-secondary);
           margin-bottom: 24px;
         }
         .hero__eyebrow-tick {
           width: 22px;
-          height: 9px;
+          height: 8px;
           margin-right: 12px;
-          background: var(--color-warm);
-          border-radius: 1px;
+          background: var(--color-text-primary);
+          border-radius: 2px;
         }
         .hero__h1 {
           font-family: var(--font-display);
-          font-size: clamp(52px, 7.5vw, 96px);
-          font-weight: 400;
-          line-height: 1;
-          letter-spacing: -0.05em;
-          color: var(--color-text-primary);
+          font-size: var(--text-display-xl);
+          line-height: var(--leading-display);
+          letter-spacing: var(--tracking-display);
           margin-bottom: 28px;
         }
-        .hero__h1 span { display: block; font-style: normal; }
-        .hero__h1 .italic { font-style: italic; }
+        .hero__h1-lead {
+          display: block;
+          font-weight: 700;
+          color: var(--color-text-primary);
+        }
+        .hero__h1-sub {
+          display: block;
+          font-weight: 500;
+          color: var(--color-text-secondary);
+          margin-top: 4px;
+        }
         .hero__sub {
           font-family: var(--font-body);
-          font-size: 16px;
-          font-weight: 400;
-          line-height: 1.65;
-          letter-spacing: 0;
+          font-size: var(--text-body-lg);
+          font-weight: var(--weight-body);
+          line-height: var(--leading-body);
+          letter-spacing: var(--tracking-body);
           color: var(--color-text-secondary);
-          max-width: 460px;
+          max-width: 480px;
           margin-bottom: 40px;
         }
         .hero__ctas { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
@@ -387,21 +320,22 @@ export default function HeroSection() {
           align-items: center;
           justify-content: center;
           background: var(--color-text-primary);
-          color: var(--color-bg);
+          color: #FAFAF9;
+          font-weight: 500;
           min-height: var(--btn-height-lg);
-          padding: 0 26px;
+          padding: 0 28px;
           border-radius: 9999px;
-          box-shadow: 0 2px 10px rgba(26, 26, 26, 0.12);
+          box-shadow: 0 2px 10px rgba(15, 15, 15, 0.12);
           transition: background 200ms var(--ease-out), transform 200ms var(--ease-out), box-shadow 200ms var(--ease-out);
         }
         .hero__cta-primary:hover {
-          background: var(--color-warm);
-          color: #fff;
+          background: #2A2A2E;
+          color: #FFFFFF;
           transform: translateY(-2px);
-          box-shadow: 0 8px 22px rgba(232, 98, 74, 0.3);
+          box-shadow: 0 8px 22px rgba(15, 15, 15, 0.2);
         }
         .hero__cta-primary:active {
-          background: var(--color-warm-hover);
+          background: #000000;
           transform: translateY(0);
           box-shadow: none;
         }
@@ -409,17 +343,17 @@ export default function HeroSection() {
           display: inline-flex;
           align-items: center;
           font-weight: 500;
-          letter-spacing: 0.1em;
+          letter-spacing: 0.04em;
           min-height: var(--btn-height-lg);
-          padding: 0 22px;
+          padding: 0 24px;
           border-radius: 9999px;
-          border: 1px solid var(--border-default);
+          border: 1px solid rgba(15, 15, 15, 0.15);
           background: transparent;
           color: var(--color-text-primary);
           transition: background 200ms var(--ease-out), border-color 200ms var(--ease-out), transform 200ms var(--ease-out);
         }
         .hero__cta-ghost:hover {
-          background: rgba(26, 26, 26, 0.04);
+          background: rgba(15, 15, 15, 0.04);
           border-color: var(--color-text-primary);
           transform: translateY(-2px);
         }
@@ -506,158 +440,6 @@ export default function HeroSection() {
           text-transform: uppercase;
           letter-spacing: 0.08em;
         }
-
-        /* Filterable testimonial carousel */
-        .reviews {
-          position: relative;
-          z-index: 1;
-          padding: clamp(56px, 8vw, 88px) 0 clamp(64px, 9vw, 96px);
-          background: var(--color-bg);
-          border-bottom: 1px solid var(--border-subtle);
-        }
-        .reviews__head {
-          padding: 0 var(--padding-page-x);
-          margin-bottom: 32px;
-          display: flex;
-          align-items: flex-end;
-          justify-content: space-between;
-          gap: 24px;
-          flex-wrap: wrap;
-        }
-        .reviews__title {
-          font-family: var(--font-display);
-          font-size: clamp(30px, 4vw, 46px);
-          font-weight: 400;
-          line-height: 1.05;
-          letter-spacing: -0.03em;
-          color: var(--color-text-primary);
-          margin: 0 0 20px;
-        }
-        .reviews__filters { display: flex; gap: 8px; flex-wrap: wrap; }
-        .reviews__filter {
-          font-family: var(--font-mono);
-          font-size: 11px;
-          font-weight: 600;
-          letter-spacing: 0.04em;
-          padding: 7px 16px;
-          border-radius: 9999px;
-          border: 1px solid var(--border-subtle);
-          background: transparent;
-          color: var(--color-text-secondary);
-          cursor: pointer;
-          transition: background 180ms var(--ease-out), color 180ms var(--ease-out), border-color 180ms var(--ease-out);
-        }
-        .reviews__filter:hover { background: rgba(26,26,26,0.04); }
-        .reviews__filter.is-active {
-          background: var(--color-text-primary);
-          border-color: var(--color-text-primary);
-          color: var(--color-bg);
-        }
-        .reviews__nav { display: flex; gap: 8px; }
-        .reviews__arrow {
-          width: 44px;
-          height: 44px;
-          border-radius: 50%;
-          border: 1px solid var(--border-default);
-          background: var(--color-surface);
-          color: var(--color-text-primary);
-          font-size: 16px;
-          cursor: pointer;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          transition: background 180ms var(--ease-out), transform 180ms var(--ease-out);
-        }
-        .reviews__arrow:hover { background: var(--color-warm); color: #fff; transform: translateY(-2px); }
-
-        .reviews__rail {
-          display: flex;
-          gap: 18px;
-          padding: 8px var(--padding-page-x) 4px;
-          overflow-x: auto;
-          scroll-snap-type: x mandatory;
-          scrollbar-width: none;
-        }
-        .reviews__rail::-webkit-scrollbar { display: none; }
-
-        .rcard {
-          flex: 0 0 320px;
-          width: 320px;
-          scroll-snap-align: start;
-          display: flex;
-          flex-direction: column;
-          background: var(--color-surface);
-          border: 1px solid var(--border-subtle);
-          border-radius: 16px;
-          overflow: hidden;
-          box-shadow: var(--shadow-card);
-          transition: transform 220ms var(--ease-out), box-shadow 220ms var(--ease-out);
-        }
-        .rcard:hover { transform: translateY(-4px); box-shadow: var(--shadow-card-hover); }
-        .rcard__media {
-          position: relative;
-          width: 100%;
-          aspect-ratio: 4 / 3;
-          background: var(--color-surface-raised);
-        }
-        .rcard__tag {
-          position: absolute;
-          top: 12px;
-          left: 12px;
-          font-family: var(--font-mono);
-          font-size: 10px;
-          font-weight: 700;
-          letter-spacing: 0.06em;
-          text-transform: uppercase;
-          color: #1A1A1A;
-          padding: 5px 11px;
-          border-radius: 9999px;
-          box-shadow: 0 2px 8px rgba(26,26,26,0.18);
-        }
-        .rcard__body { display: flex; flex-direction: column; gap: 10px; padding: 20px; flex: 1; }
-        .rcard__stars { color: var(--color-primary); font-size: 12px; letter-spacing: 2px; }
-        .rcard__headline {
-          font-family: var(--font-display);
-          font-size: 19px;
-          font-weight: 500;
-          line-height: 1.25;
-          letter-spacing: -0.01em;
-          color: var(--color-text-primary);
-          margin: 0;
-        }
-        .rcard__quote {
-          font-family: var(--font-body);
-          font-size: 14px;
-          line-height: 1.6;
-          color: var(--color-text-secondary);
-          margin: 0;
-          display: -webkit-box;
-          -webkit-line-clamp: 4;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-        }
-        .rcard__foot {
-          margin-top: auto;
-          padding-top: 14px;
-          border-top: 1px solid var(--border-subtle);
-          display: flex;
-          flex-direction: column;
-          gap: 3px;
-        }
-        .rcard__name {
-          font-family: var(--font-mono);
-          font-size: 12px;
-          font-weight: 700;
-          letter-spacing: 0.04em;
-          color: var(--color-text-primary);
-        }
-        .rcard__meta {
-          font-family: var(--font-mono);
-          font-size: 10px;
-          letter-spacing: 0.04em;
-          text-transform: uppercase;
-          color: var(--color-text-tertiary);
-        }
         @media (min-width: 768px) {
           /* cascading timeline offsets — echoes the Master Strategy reference */
           .hero__stack > :nth-child(1) { width: 68%; margin-left: 0; }
@@ -684,8 +466,6 @@ export default function HeroSection() {
           .hero__cta-primary, .hero__cta-ghost { width: 100%; justify-content: center; }
           .trustbar { gap: 0; }
           .trustbar__signals { display: none; }
-          .reviews__head { align-items: flex-start; }
-          .rcard { flex-basis: 78vw; width: 78vw; }
         }
       `}</style>
     </main>

@@ -4,7 +4,7 @@
  * Light mode · Cream base · Brutalist-editorial
  *
  * Reference: Master Strategy visual (cream #F2ECE4 bg, charcoal text,
- * Space Mono + Playfair Display, dithered dissolve accent blocks,
+ * Geist + Geist Mono, dithered dissolve accent blocks,
  * strict vertical-column grid)
  *
  * Import in app/globals.css:
@@ -14,134 +14,237 @@
  * Hard-coded px or hex values in components are forbidden.
  */
 
+/* ==========================================================================
+   SELF-HOSTED FONTS: GEIST & GEIST MONO (Vercel)
+   ========================================================================== */
+
+/* Geist Sans (Display & Body) */
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/geist/geist-sans/Geist-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/geist/geist-sans/Geist-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/geist/geist-sans/Geist-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/geist/geist-sans/Geist-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Geist Mono (Spec / Data / Technical Labels) */
+@font-face {
+  font-family: 'Geist Mono';
+  src: url('/fonts/geist/geist-mono/GeistMono-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geist Mono';
+  src: url('/fonts/geist/geist-mono/GeistMono-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geist Mono';
+  src: url('/fonts/geist/geist-mono/GeistMono-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
 
   /* ─────────────────────────────────────────────
-   * COLOR SYSTEM — LIGHT MODE
-   * Base: warm cream. Text: deep charcoal.
-   * Accent: indigo primary + terracotta warm.
-   * Phase palette: the dithered dissolve blocks.
+   * COLOR SYSTEM — EIGHT SLEEP PALETTE (Source of Truth)
+   * Dominant: White / Off-white (#FAFAF9).
+   * Secondary cards/sections: Light Warm-Gray (#F2F1ED).
+   * Text: Near-black (#0F0F0F) & Muted Gray (#6B6B6B).
+   * Feature sections: Deep near-black (#0A0A0F).
+   * Cinematic sections: Navy-to-black (#1A2233 -> #0A0A0F).
+   * Announcement bar: Muted Slate-Blue (#4B617A).
+   * Functional Accents ONLY: Cool Cryo (#4A7FC9), Warm Heat (#C9503A).
    * ───────────────────────────────────────────── */
 
-  /* Backgrounds — lightness hierarchy */
-  --color-bg:             #F2ECE4;   /* page background — warm cream */
-  --color-surface:        #EBE4DB;   /* cards, panels — slightly deeper cream */
-  --color-surface-raised: #E0D9CF;   /* elevated: dropdowns, modals */
-  --color-surface-inset:  #F7F3EE;   /* inset inputs, recessed fields */
+  --color-bg-primary: #FAFAF9;        /* dominant white / off-white background */
+  --color-bg-secondary: #F2F1ED;      /* light warm-gray for cards / muted sections */
+  --color-text-primary: #0F0F0F;      /* near-black primary text & CTAs */
+  --color-text-secondary: #6B6B6B;    /* muted gray for body/sub-copy & multi-gray headlines */
+  --color-text-tertiary: #999999;     /* light gray for subtle captions */
+  --color-dark-section: #0A0A0F;      /* deep near-black feature sections & footer */
+  --color-dark-gradient-start: #1A2233; /* navy for cinematic gradient sections */
+  --color-announcement-bar: #4B617A;  /* muted slate-blue announcement bar */
+  --color-accent-cool: #4A7FC9;       /* FUNCTIONAL ONLY: Cryo/cold telemetry */
+  --color-accent-warm: #C9503A;       /* FUNCTIONAL ONLY: Postdrome heat telemetry */
 
-  /* Core text */
-  --color-text-primary:   #1A1A1A;   /* deep charcoal — NEVER pure black */
-  --color-text-secondary: #666666;   /* mid grey — body copy, descriptions */
-  --color-text-tertiary:  #999999;   /* light grey — eyebrows, timestamps, disabled */
+  /* Backwards-compatible aliases */
+  --color-bg: var(--color-bg-primary);
+  --color-surface: var(--color-bg-secondary);
+  --color-surface-raised: #E8E7E2;
+  --color-surface-inset: #F7F7F6;
+  --color-charcoal: var(--color-text-primary);
+  --color-charcoal-warm: var(--color-dark-section);
+  --color-bg-warm-dark: var(--color-dark-section);
+  --color-cream: var(--color-bg-primary);
+  --color-warm: var(--color-text-primary);
+  --color-warm-hover: #222222;
+  --color-warm-subtle: rgba(15, 15, 15, 0.06);
 
   /* Brand accents */
-  --color-primary:        #2563EB;   /* indigo — CTA buttons, links, active states */
-  --color-primary-hover:  #1D55D4;   /* -10% lightness — hover shift, same hue */
-  --color-primary-active: #1648B8;   /* pressed state */
-  --color-primary-subtle: rgba(37, 99, 235, 0.08);  /* tinted bg behind specs/tags */
+  --color-primary: #0F0F0F;
+  --color-primary-hover: #262626;
+  --color-primary-active: #000000;
+  --color-primary-subtle: rgba(15, 15, 15, 0.05);
 
-  --color-warm:           #E8624A;   /* terracotta — secondary CTA, emotional peak moments */
-  --color-warm-hover:     #D4533C;
-  --color-warm-subtle:    rgba(232, 98, 74, 0.08);
-
-  --color-tertiary:       #7628F3;   /* violet — supporting contrast, max 2× per page */
+  --color-tertiary: #7628F3;
+  /* violet — supporting contrast, max 2× per page */
 
   /* Text selection — faint indigo wash, ink deepens one step for a slight contrast lift */
-  --color-selection-bg:   rgba(37, 99, 235, 0.14);
+  --color-selection-bg: rgba(37, 99, 235, 0.14);
   --color-selection-text: #0E0E0E;
 
   /* Spec / data color */
-  --color-spec:           #2563EB;   /* all <code> spec numbers */
-  --color-spec-bg:        rgba(37, 99, 235, 0.07);
+  --color-spec: #2563EB;
+  /* all <code> spec numbers */
+  --color-spec-bg: rgba(37, 99, 235, 0.07);
 
   /* Phase / dissolve-block palette
    * Used for the dithered accent blocks on section headings,
    * mechanism tags, and timeline phases.
    * Each has a solid and a transparent-to form for the dissolve effect. */
-  --phase-1:       #D2B6F7;   /* lavender — Gate Control / Neuro-Massager */
-  --phase-2:       #E596FF;   /* magenta — Spectral / FL-41 */
-  --phase-3:       #F5B061;   /* ochre — Thermal / Cryo-Wrap */
-  --phase-4:       #FCD667;   /* yellow — Auditory / Sleep Buds */
-  --phase-5:       #6FA4FF;   /* cornflower — Bundle / Science */
+  --phase-1: #D2B6F7;
+  /* lavender — Gate Control / Neuro-Massager */
+  --phase-2: #E596FF;
+  /* magenta — Spectral / FL-41 */
+  --phase-3: #F5B061;
+  /* ochre — Thermal / Cryo-Wrap */
+  --phase-4: #FCD667;
+  /* yellow — Auditory / Sleep Buds */
+  --phase-5: #6FA4FF;
+  /* cornflower — Bundle / Science */
 
   /* Borders — dark-on-light */
-  --border-subtle:        rgba(26, 26, 26, 0.08);   /* cards, dividers */
-  --border-default:       rgba(26, 26, 26, 0.14);   /* inputs, explicit separators */
-  --border-strong:        rgba(26, 26, 26, 0.24);   /* active, focused states */
-  --border-accent:        rgba(37, 99, 235, 0.28);  /* primary accent borders */
-  --border-width:         1px;
+  --border-subtle: rgba(26, 26, 26, 0.08);
+  /* cards, dividers */
+  --border-default: rgba(26, 26, 26, 0.14);
+  /* inputs, explicit separators */
+  --border-strong: rgba(26, 26, 26, 0.24);
+  /* active, focused states */
+  --border-accent: rgba(37, 99, 235, 0.28);
+  /* primary accent borders */
+  --border-width: 1px;
 
-  /* Vertical grid rule — structural columns (see layout bible) */
-  --grid-rule-color:      rgba(26, 26, 26, 0.07);  /* ultra-thin column dividers */
+  /* Vertical grid rule — structural columns (disabled) */
+  --grid-rule-color: transparent;
+  /* ultra-thin column dividers */
 
   /* Semantic */
-  --color-success:        #16A34A;
-  --color-error:          #DC2626;
-  --color-warning:        #D97706;
+  --color-success: #16A34A;
+  --color-error: #DC2626;
+  --color-warning: #D97706;
 
 
   /* ─────────────────────────────────────────────
    * TYPOGRAPHY
-   * Playfair Display: editorial display headings
-   * Space Mono: all labels, body, UI, specs
-   * The pair creates "brutalist-corporate" tension.
+   * Geist Sans: single unified family for all display headings and body copy
+   * Geist Mono: clinical precision for specs, timestamps, and data labels
+   * Hierarchy differentiated strictly through weight and scale
    * ───────────────────────────────────────────── */
 
-  /* Font families — next/font self-hosts under a mangled name and exposes it as
-   * --font-display-src / --font-mono-src (see app/layout.tsx). Reference those so
-   * the real Playfair/Space Mono load; the literal names are only a fallback. */
-  --font-display:  var(--font-display-src), 'Playfair Display', Georgia, 'Times New Roman', serif;
-  --font-mono:     var(--font-mono-src), 'Space Mono', 'JetBrains Mono', 'Courier New', monospace;
-  --font-body:     var(--font-body-src), 'Lora', Georgia, 'Times New Roman', serif;
+  /* Font families */
+  --font-display: var(--font-geist-sans), 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: var(--font-geist-sans), 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: var(--font-geist-sans), 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: var(--font-geist-mono), 'Geist Mono', ui-monospace, monospace;
+  --font-fraunces: 'Fraunces', Georgia, serif;
+  --font-general-sans: 'General Sans', var(--font-body), -apple-system, BlinkMacSystemFont, sans-serif;
 
-  /* Sharper rendering for small mono text (10-12px) */
+  /* Sharper rendering */
   --font-smoothing-sharp: antialiased;
   --font-smoothing-sharp-moz: grayscale;
 
-  /*
-   * Google Fonts import — add to app/layout.tsx:
-   * https://fonts.googleapis.com/css2?
-   *   family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700
-   *   &family=Space+Mono:ital,wght@0,400;0,700;1,400
-   *   &display=swap
-   */
+  /* Display scale (Eight Sleep typography — bold, expansive display scale) */
+  --text-display-xl: clamp(44px, 5.8vw, 76px);
+  /* hero H1 — dominating, bold */
+  --text-display-lg: clamp(34px, 4.6vw, 62px);
+  /* section hero */
+  --text-display-md: clamp(26px, 3.4vw, 42px);
+  /* product names, section H2 */
+  --text-display-sm: clamp(19px, 2.2vw, 26px);
+  /* card headlines, sub-sections */
+  --text-display-xs: 16px;
+  /* pull quotes, minor headings */
 
-  /* Display scale (Playfair Display) */
-  --text-display-xl:  clamp(52px, 7.5vw, 96px);    /* hero H1 */
-  --text-display-lg:  72px;                          /* section hero — from design.md */
-  --text-display-md:  clamp(36px, 4.5vw, 56px);     /* product names, section H2 */
-  --text-display-sm:  clamp(24px, 3vw, 36px);       /* card headlines, sub-sections */
-  --text-display-xs:  22px;                          /* pull quotes, minor headings */
+  /* Body & UI scale (Geist) */
+  --text-body-lg: 16px;
+  --text-body-md: 15px;
+  --text-body-sm: 13px;
+  /* card details, meta */
+  --text-body-xs: 12px;
+  /* tiny captions */
 
-  /* Mono scale (Space Mono) */
-  --text-mono-lg:     17px;    /* primary body copy */
-  --text-mono-md:     14px;    /* secondary paragraphs, descriptions */
-  --text-mono-sm:     12px;    /* from design.md — body-md base size */
-  --text-mono-xs:     11px;    /* eyebrows, timestamps, labels, spec tags */
-  --text-mono-2xs:    10px;    /* attribution lines, legal micro-copy */
+  /* Mono scale (Geist Mono) */
+  --text-mono-lg: 14px;
+  --text-mono-md: 13px;
+  --text-mono-sm: 12px;
+  --text-mono-xs: 11px;
+  --text-mono-2xs: 10px;
 
   /* Line heights */
-  --leading-display:  1.0;     /* tight — from design.md (72px/72px) */
-  --leading-heading:  1.12;
-  --leading-body:     1.65;    /* mono body — readable but compact */
-  --leading-mono-sm:  1.5;     /* small mono labels */
+  --leading-display: 1.1;
+  /* tight display rhythm */
+  --leading-heading: 1.2;
+  /* section headings */
+  --leading-body: 1.6;
+  /* comfortable Geist reading rhythm */
+  --leading-mono-sm: 1.5;
+  /* small mono labels */
 
-  /* Letter spacing — from design.md */
-  --tracking-display: -0.05em;  /* large display — tight, from design.md */
-  --tracking-heading: -0.02em;
-  --tracking-mono:     0.10em;  /* Space Mono body — slightly open, from design.md */
-  --tracking-eyebrow:  0.14em;  /* all-caps labels */
-  --tracking-caps:     0.08em;  /* mixed CAPS body text */
+  /* Letter spacing — Geist needs little to no tracking adjustment */
+  --tracking-display: -0.02em;
+  /* tightened slightly at large display sizes */
+  --tracking-heading: -0.015em;
+  --tracking-body: 0;
+  --tracking-mono: 0;
+  --tracking-eyebrow: 0.08em;
+  --tracking-caps: 0.06em;
 
-  /* Font weights */
-  --weight-display:    400;   /* Playfair regular is already rich */
+  /* Font weights — clear weight contrast */
+  --weight-display: 600;
   --weight-display-bd: 700;
-  --weight-mono:       400;
-  --weight-mono-bd:    700;
+  --weight-body: 400;
+  --weight-body-md: 500;
+  --weight-body-bd: 600;
+  --weight-mono: 400;
+  --weight-mono-md: 500;
+  --weight-mono-bd: 600;
 
   /* Max line lengths */
-  --measure-body:     62ch;
-  --measure-narrow:   44ch;
+  --measure-body: 62ch;
+  --measure-narrow: 44ch;
 
 
   /* ─────────────────────────────────────────────
@@ -150,31 +253,39 @@
    * 46.1px (≈ 46px) is the canonical section/card padding.
    * ───────────────────────────────────────────── */
 
-  --space-1:    4px;
-  --space-2:    8px;    /* base unit — from design.md */
-  --space-3:    12px;
-  --space-4:    16px;   /* gap-lg — from design.md */
-  --space-5:    24px;
-  --space-6:    32px;
-  --space-7:    48px;
-  --space-8:    64px;
-  --space-9:    80px;
-  --space-10:   96px;
-  --space-11:   128px;
-  --space-12:   160px;
+  --space-1: 4px;
+  --space-2: 8px;
+  /* base unit — from design.md */
+  --space-3: 12px;
+  --space-4: 16px;
+  /* gap-lg — from design.md */
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 80px;
+  --space-10: 96px;
+  --space-11: 128px;
+  --space-12: 160px;
 
   /* Canonical semantic spacing from design.md */
-  --gap-base:           8px;    /* from design.md: gap */
-  --gap-lg:             16px;   /* from design.md: gaps */
-  --padding-card:       46px;   /* from design.md: card-padding 46.1px */
-  --padding-section:    46px;   /* from design.md: section-padding 46.1px */
-  --padding-section-y:  clamp(48px, 6.5vw, 84px);  /* vertical section rhythm */
-  --padding-page-x:     max(46px, 5vw);            /* horizontal page edge padding */
+  --gap-base: 8px;
+  /* from design.md: gap */
+  --gap-lg: 16px;
+  /* from design.md: gaps */
+  --padding-card: 46px;
+  /* from design.md: card-padding 46.1px */
+  --padding-section: 46px;
+  /* from design.md: section-padding 46.1px */
+  --padding-section-y: clamp(48px, 6.5vw, 84px);
+  /* vertical section rhythm */
+  --padding-page-x: clamp(16px, 4vw, 46px);
+  /* horizontal page edge padding */
 
   /* Container widths */
-  --container-max:      1280px;
-  --container-content:  960px;
-  --container-narrow:   720px;
+  --container-max: 1280px;
+  --container-content: 960px;
+  --container-narrow: 720px;
 
 
   /* ─────────────────────────────────────────────
@@ -183,10 +294,11 @@
    * Vertical grid rules are a visual signature.
    * ───────────────────────────────────────────── */
 
-  --grid-cols:      12;
-  --grid-gap:       8px;    /* from design.md */
-  --grid-gap-lg:    16px;
-  --grid-max:       var(--container-max);
+  --grid-cols: 12;
+  --grid-gap: 8px;
+  /* from design.md */
+  --grid-gap-lg: 16px;
+  --grid-max: var(--container-max);
 
   /* Vertical rule lines — thin columns dividing the page */
   --grid-rule-width: 1px;
@@ -206,11 +318,12 @@
    * NEVER heavy drop-shadows or layered blur.
    * ───────────────────────────────────────────── */
 
-  --shadow-card:        0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
-  --shadow-card-hover:  0 2px 8px rgba(0,0,0,0.08), 0 8px 24px rgba(0,0,0,0.06);
-  --shadow-nav:         0 1px 0 var(--border-subtle), 0 4px 16px rgba(0,0,0,0.06);
-  --shadow-elevated:    0 0 0 1px var(--border-subtle), 0 8px 32px rgba(0,0,0,0.10);
-  --inset-highlight:    inset 0 1px 0 rgba(255,255,255,0.6); /* light catching top edge */
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.04);
+  --shadow-card-hover: 0 2px 8px rgba(0, 0, 0, 0.08), 0 8px 24px rgba(0, 0, 0, 0.06);
+  --shadow-nav: 0 1px 0 var(--border-subtle), 0 4px 16px rgba(0, 0, 0, 0.06);
+  --shadow-elevated: 0 0 0 1px var(--border-subtle), 0 8px 32px rgba(0, 0, 0, 0.10);
+  --inset-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  /* light catching top edge */
 
 
   /* ─────────────────────────────────────────────
@@ -218,12 +331,14 @@
    * Restrained — no pill buttons, no heavy rounding.
    * ───────────────────────────────────────────── */
 
-  --radius-btn:     6px;    /* buttons — NEVER 9999px (pill) */
-  --radius-card:    8px;
-  --radius-tag:     3px;
-  --radius-input:   6px;
-  --radius-image:   4px;
-  --radius-island:  9999px; /* nav island ONLY — the pill is the nav, not buttons */
+  --radius-btn: 6px;
+  /* buttons — NEVER 9999px (pill) */
+  --radius-card: 8px;
+  --radius-tag: 3px;
+  --radius-input: 6px;
+  --radius-image: 4px;
+  --radius-island: 9999px;
+  /* nav island ONLY — the pill is the nav, not buttons */
 
 
   /* ─────────────────────────────────────────────
@@ -232,18 +347,23 @@
    * Only animate transform + opacity.
    * ───────────────────────────────────────────── */
 
-  --duration-instant:   0ms;
-  --duration-fast:      150ms;   /* hovers */
-  --duration-base:      280ms;   /* cards, button press */
-  --duration-moderate:  400ms;   /* accordion, drawer */
-  --duration-slow:      600ms;   /* section reveals */
-  --duration-hero:      900ms;   /* hero orchestration */
+  --duration-instant: 0ms;
+  --duration-fast: 150ms;
+  /* hovers */
+  --duration-base: 280ms;
+  /* cards, button press */
+  --duration-moderate: 400ms;
+  /* accordion, drawer */
+  --duration-slow: 600ms;
+  /* section reveals */
+  --duration-hero: 900ms;
+  /* hero orchestration */
 
   /* Easings — from design.md: "ease" */
-  --ease-default:   ease;
-  --ease-out:       cubic-bezier(0.0, 0.0, 0.2, 1.0);
-  --ease-in:        cubic-bezier(0.4, 0.0, 1.0, 1.0);
-  --ease-in-out:    cubic-bezier(0.4, 0.0, 0.2, 1.0);
+  --ease-default: ease;
+  --ease-out: cubic-bezier(0.0, 0.0, 0.2, 1.0);
+  --ease-in: cubic-bezier(0.4, 0.0, 1.0, 1.0);
+  --ease-in-out: cubic-bezier(0.4, 0.0, 0.2, 1.0);
 
   /* Stagger delays */
   --stagger-1: 0ms;
@@ -257,40 +377,39 @@
    * COMPONENT TOKENS
    * ───────────────────────────────────────────── */
 
-  /* Nav */
-  --nav-height:             64px;
-  --nav-island-max-width:   560px;
-  --nav-island-bg:          rgba(242, 236, 228, 0.88);   /* cream frosted glass */
-  --nav-island-border:      rgba(26, 26, 26, 0.12);
-  --nav-island-blur:        20px;
-  --nav-transparent-bg:     transparent;
+  /* Nav & Fixed Header (Therabody 3-zone layout + Announcement bar) */
+  --announcement-height: 36px;
+  --nav-bar-height: 72px;
+  --header-height: calc(var(--announcement-height) + var(--nav-bar-height));
+  --nav-height: 108px;
 
   /* Buttons */
-  --btn-height-sm:    36px;
-  --btn-height-md:    44px;
-  --btn-height-lg:    52px;   /* primary CTA minimum */
+  --btn-height-sm: 36px;
+  --btn-height-md: 44px;
+  --btn-height-lg: 52px;
+  /* primary CTA minimum */
   --btn-padding-x-sm: 16px;
   --btn-padding-x-md: 24px;
   --btn-padding-x-lg: 32px;
 
   /* Touch targets */
-  --touch-min:    44px;
-  --touch-cta:    52px;
+  --touch-min: 44px;
+  --touch-cta: 52px;
 
   /* Specimen Expander */
-  --expander-inactive-h:    80px;
-  --expander-img-inactive:  112px;
-  --expander-transition:    var(--duration-moderate) var(--ease-in-out);
+  --expander-inactive-h: 80px;
+  --expander-img-inactive: 112px;
+  --expander-transition: var(--duration-moderate) var(--ease-in-out);
 
   /* Trust bar */
-  --trustbar-h:       56px;
-  --trustbar-bg:      rgba(26, 26, 26, 0.03);
-  --trustbar-border:  var(--border-subtle);
+  --trustbar-h: 56px;
+  --trustbar-bg: rgba(26, 26, 26, 0.03);
+  --trustbar-border: var(--border-subtle);
 
   /* Review drawer */
-  --drawer-bg:        var(--color-bg);
-  --drawer-border:    var(--border-default);
-  --drawer-radius-mobile:  16px 16px 0 0;
+  --drawer-bg: var(--color-bg);
+  --drawer-border: var(--border-default);
+  --drawer-radius-mobile: 16px 16px 0 0;
   --drawer-radius-desktop: 12px;
 
 
@@ -300,27 +419,32 @@
    * Dot-matrix grid, breathing pulse, pointer drift.
    * ───────────────────────────────────────────── */
 
-  --webgl-dot-color:        rgba(37, 99, 235, 0.06);  /* faint indigo on cream */
-  --webgl-dot-radius:       1.2px;
-  --webgl-dot-spacing:      36px;
-  --webgl-pulse-speed:      0.006;    /* time increment per frame */
-  --webgl-pulse-amplitude:  0.5;      /* sin wave amplitude for breathing */
-  --webgl-pointer-strength: 18px;     /* max drift on pointer move */
-  --webgl-z-index:          0;        /* inside position:relative hero wrapper */
+  --webgl-dot-color: rgba(37, 99, 235, 0.06);
+  /* faint indigo on cream */
+  --webgl-dot-radius: 1.2px;
+  --webgl-dot-spacing: 36px;
+  --webgl-pulse-speed: 0.006;
+  /* time increment per frame */
+  --webgl-pulse-amplitude: 0.5;
+  /* sin wave amplitude for breathing */
+  --webgl-pointer-strength: 18px;
+  /* max drift on pointer move */
+  --webgl-z-index: 0;
+  /* inside position:relative hero wrapper */
 
 
   /* ─────────────────────────────────────────────
    * Z-INDEX SCALE
    * ───────────────────────────────────────────── */
 
-  --z-canvas:     0;
-  --z-content:    10;
-  --z-raised:     20;
-  --z-dropdown:   100;
-  --z-nav:        300;
-  --z-drawer:     400;
-  --z-overlay:    390;
-  --z-toast:      500;
+  --z-canvas: 0;
+  --z-content: 10;
+  --z-raised: 20;
+  --z-dropdown: 100;
+  --z-nav: 300;
+  --z-drawer: 400;
+  --z-overlay: 390;
+  --z-toast: 500;
 
 
   /* ─────────────────────────────────────────────
@@ -335,8 +459,10 @@
    * the SVG pattern at runtime.
    * ───────────────────────────────────────────── */
 
-  --dissolve-pixel-size:  4px;    /* size of each "pixel" in the dither */
-  --dissolve-fade-width:  120px;  /* how wide the dissolve zone is */
+  --dissolve-pixel-size: 4px;
+  /* size of each "pixel" in the dither */
+  --dissolve-fade-width: 120px;
+  /* how wide the dissolve zone is */
 
 }
 
@@ -347,11 +473,14 @@
  * ───────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration:        0.01ms !important;
-    animation-iteration-count: 1      !important;
-    transition-duration:       0.01ms !important;
-    scroll-behavior:           auto   !important;
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
@@ -360,29 +489,31 @@
  * GLOBAL BASE RESET
  * ───────────────────────────────────────────── */
 
-*, *::before, *::after {
-  box-sizing:  border-box;
-  margin:      0;
-  padding:     0;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {
-  background-color:        var(--color-bg);
-  color:                   var(--color-text-primary);
-  font-family:             var(--font-mono);
-  font-size:               var(--text-mono-sm);       /* 12px base from design.md */
-  line-height:             var(--leading-body);
-  letter-spacing:          var(--tracking-mono);
-  -webkit-font-smoothing:  antialiased;
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  font-size: var(--text-body-md);
+  line-height: var(--leading-body);
+  letter-spacing: var(--tracking-body);
+  -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-rendering:          optimizeLegibility;
-  scroll-behavior:         smooth;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
 }
 
 body {
-  min-height:   100vh;
-  overflow-x:   hidden;
-  background:   var(--color-bg);
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: var(--color-bg);
 }
 
 
@@ -390,84 +521,113 @@ body {
  * TYPE HIERARCHY
  * ───────────────────────────────────────────── */
 
-h1, h2, h3, h4, h5, h6 {
-  font-family:    var(--font-display);
-  font-weight:    var(--weight-display);
-  line-height:    var(--leading-heading);
-  letter-spacing: var(--tracking-display);
-  color:          var(--color-text-primary);
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  line-height: var(--leading-heading);
+  letter-spacing: var(--tracking-heading);
+  color: var(--color-text-primary);
 }
 
-h1 { font-size: var(--text-display-xl); }
-h2 { font-size: var(--text-display-md); }
-h3 { font-size: var(--text-display-sm); }
-h4 { font-size: var(--text-display-xs); }
+h1 {
+  font-size: var(--text-display-xl);
+  font-weight: var(--weight-display-bd);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
+}
+
+h2 {
+  font-size: var(--text-display-md);
+  font-weight: var(--weight-display);
+}
+
+h3 {
+  font-size: var(--text-display-sm);
+  font-weight: var(--weight-display);
+}
+
+h4 {
+  font-size: var(--text-display-xs);
+  font-weight: var(--weight-display);
+}
 
 p {
-  font-family:  var(--font-mono);
-  font-size:    var(--text-mono-sm);       /* 12px — from design.md body-md */
-  line-height:  var(--leading-body);
-  letter-spacing: var(--tracking-mono);
-  color:        var(--color-text-secondary);
-  max-width:    var(--measure-body);
+  font-family: var(--font-body);
+  font-size: var(--text-body-md);
+  line-height: var(--leading-body);
+  letter-spacing: var(--tracking-body);
+  color: var(--color-text-secondary);
+  max-width: var(--measure-body);
 }
 
 /* Spec numbers — mechanism data */
 code {
-  font-family:    var(--font-mono);
-  font-size:      var(--text-mono-xs);
-  color:          var(--color-spec);
-  background:     var(--color-spec-bg);
-  padding:        2px 6px;
-  border-radius:  var(--radius-tag);
+  font-family: var(--font-mono);
+  font-size: var(--text-mono-xs);
+  color: var(--color-spec);
+  background: var(--color-spec-bg);
+  padding: 2px 6px;
+  border-radius: var(--radius-tag);
   letter-spacing: 0.05em;
-  font-weight:    var(--weight-mono-bd);
+  font-weight: var(--weight-mono-bd);
 }
 
 /* Eyebrow labels — ALL CAPS Space Mono */
 .eyebrow {
-  font-family:    var(--font-mono);
-  font-size:      var(--text-mono-xs);     /* 11px */
-  font-weight:    var(--weight-mono-bd);
+  font-family: var(--font-mono);
+  font-size: var(--text-mono-xs);
+  /* 11px */
+  font-weight: var(--weight-mono-bd);
   letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
-  color:          var(--color-text-tertiary);
+  color: var(--color-text-tertiary);
 }
 
 /* Focus ring */
 :focus-visible {
-  outline:        2px solid var(--color-primary);
+  outline: 2px solid var(--color-primary);
   outline-offset: 3px;
-  border-radius:  var(--radius-btn);
+  border-radius: var(--radius-btn);
 }
 
 /* Text selection — quiet indigo wash; ink steps toward black for a slight contrast lift */
 ::selection {
   background: var(--color-selection-bg);
-  color:      var(--color-selection-text);
+  color: var(--color-selection-text);
 }
 
 /* Headings keep their full weight when selected — no accent recolor, just deeper ink */
-h1::selection, h2::selection, h3::selection, h4::selection,
-h1 *::selection, h2 *::selection, h3 *::selection, h4 *::selection {
+h1::selection,
+h2::selection,
+h3::selection,
+h4::selection,
+h1 *::selection,
+h2 *::selection,
+h3 *::selection,
+h4 *::selection {
   background: var(--color-selection-bg);
-  color:      var(--color-selection-text);
+  color: var(--color-selection-text);
 }
 
 /* Spec numbers stay indigo under selection — the data color is the identity */
 code::selection {
   background: var(--color-selection-bg);
-  color:      var(--color-primary-active);
+  color: var(--color-primary-active);
 }
 
 /* Global link hover — ink deepens, underline settles in from a distance.
  * Components with their own hover styles override this without conflict. */
 a {
   transition:
-    color                     var(--duration-fast) var(--ease-default),
-    text-decoration-color     var(--duration-fast) var(--ease-default),
-    text-underline-offset     var(--duration-fast) var(--ease-default),
-    opacity                   var(--duration-fast) var(--ease-default);
+    color var(--duration-fast) var(--ease-default),
+    text-decoration-color var(--duration-fast) var(--ease-default),
+    text-underline-offset var(--duration-fast) var(--ease-default),
+    opacity var(--duration-fast) var(--ease-default);
 }
 
 a:hover {
@@ -484,84 +644,264 @@ a:not([class]):hover {
 button,
 [role='button'] {
   transition:
-    background   var(--duration-fast) var(--ease-default),
-    color        var(--duration-fast) var(--ease-default),
+    background var(--duration-fast) var(--ease-default),
+    color var(--duration-fast) var(--ease-default),
     border-color var(--duration-fast) var(--ease-default),
-    opacity      var(--duration-fast) var(--ease-default);
+    opacity var(--duration-fast) var(--ease-default);
 }
 
 img {
-  display:   block;
+  display: block;
   max-width: 100%;
-  height:    auto;
+  height: auto;
 }
 
 
 /* ─────────────────────────────────────────────
- * BUTTON BASE CLASSES
+ * GLOBAL BUTTON SYSTEM (4 TIERS + ICON-ONLY)
  * ───────────────────────────────────────────── */
 
-.btn {
-  display:         inline-flex;
-  align-items:     center;
-  justify-content: center;
-  font-family:     var(--font-mono);
-  font-size:       var(--text-mono-xs);    /* 11px */
-  font-weight:     var(--weight-mono-bd);
-  letter-spacing:  var(--tracking-eyebrow);
-  text-transform:  uppercase;
-  border-radius:   var(--radius-btn);      /* 6px — NEVER pill */
-  border:          none;
-  cursor:          pointer;
-  min-height:      var(--btn-height-md);
-  padding:         0 var(--btn-padding-x-md);
-  text-decoration: none;
-  transition:
-    background     var(--duration-fast) var(--ease-default),
-    transform      var(--duration-fast) var(--ease-default),
-    box-shadow     var(--duration-base) var(--ease-default),
-    border-color   var(--duration-fast) var(--ease-default);
-}
-
+/* Tier 1 — Primary (Identity-Language CTA) */
+.btn-tier1,
 .btn-primary {
-  background: var(--color-primary);
-  color:      #ffffff;
-  min-height: var(--btn-height-lg);
-  padding:    0 var(--btn-padding-x-lg);
-}
-.btn-primary:hover {
-  background: var(--color-primary-hover);
-  transform:  translateY(-2px);
-  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.22);
-}
-.btn-primary:active {
-  background: var(--color-primary-active);
-  transform:  translateY(0);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #1A1A2E;
+  color: #FFFFFF;
+  font-family: var(--font-general-sans, var(--font-body), sans-serif);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+  border-radius: 8px; /* Reserved for Tier 1 & Tier 2 */
+  border: none;
+  cursor: pointer;
+  height: 48px;
+  padding: 14px 28px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 150ms ease, opacity 150ms ease;
   box-shadow: none;
 }
 
-.btn-warm {
-  background: var(--color-warm);
-  color:      #ffffff;
-  min-height: var(--btn-height-lg);
-  padding:    0 var(--btn-padding-x-lg);
-}
-.btn-warm:hover {
-  background: var(--color-warm-hover);
-  transform:  translateY(-2px);
-  box-shadow: 0 6px 20px rgba(232, 98, 74, 0.22);
+.btn-tier1:hover,
+.btn-primary:hover {
+  background: #252542; /* ~8% lighter */
+  color: #FFFFFF;
+  transform: none;
+  box-shadow: none;
 }
 
-.btn-ghost {
-  background:   transparent;
-  color:        var(--color-text-secondary);
-  border:       1.5px solid var(--border-default);
-  min-height:   var(--btn-height-lg);
-  padding:      0 var(--btn-padding-x-md);
+.btn-tier1:active,
+.btn-primary:active {
+  background: #14141F; /* slight dark press */
+  transform: none;
+  box-shadow: none;
 }
+
+.btn-tier1:disabled,
+.btn-primary:disabled {
+  opacity: 0.4;
+  cursor: default;
+  pointer-events: none;
+}
+
+.btn-tier1--full {
+  width: 100%;
+}
+
+.btn-tier1--inverted {
+  background: #FFFFFF;
+  color: #1A1A2E;
+}
+
+.btn-tier1--inverted:hover {
+  background: #EFEADD;
+  color: #1A1A2E;
+}
+
+/* Tier 2 — Secondary (Supporting Action) */
+.btn-tier2,
+.btn-secondary,
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1.5px solid #1A1A2E;
+  color: #1A1A2E;
+  font-family: var(--font-general-sans, var(--font-body), sans-serif);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+  border-radius: 8px; /* Matches Tier 1 */
+  cursor: pointer;
+  height: 48px;
+  padding: 14px 28px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 150ms ease, border-color 150ms ease, opacity 150ms ease;
+  box-shadow: none;
+}
+
+.btn-tier2:hover,
+.btn-secondary:hover,
 .btn-ghost:hover {
-  border-color: var(--border-strong);
-  color:        var(--color-text-primary);
+  background: rgba(26, 26, 46, 0.06); /* Faint tint, NOT solid invert */
+  color: #1A1A2E;
+  border-color: #1A1A2E;
+  transform: none;
+}
+
+.btn-tier2:active,
+.btn-secondary:active,
+.btn-ghost:active {
+  background: rgba(26, 26, 46, 0.12);
+  transform: none;
+}
+
+.btn-tier2:disabled,
+.btn-secondary:disabled,
+.btn-ghost:disabled {
+  opacity: 0.4;
+  border-color: rgba(26, 26, 46, 0.4);
+  color: rgba(26, 26, 46, 0.4);
+  cursor: default;
+  pointer-events: none;
+}
+
+.btn-tier2--inverted {
+  border-color: rgba(255, 255, 255, 0.7);
+  color: #FFFFFF;
+}
+
+.btn-tier2--inverted:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: #FFFFFF;
+  color: #FFFFFF;
+}
+
+/* Tier 3 — Utility / Pill (State Selection Only) */
+.btn-tier3,
+.btn-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 8px 16px;
+  border-radius: 9999px; /* Reserved for Tier 3 state selection */
+  background: transparent;
+  border: 1px solid #E5E0D5;
+  color: #1A1A2E;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+}
+
+.btn-tier3:hover,
+.btn-pill:hover {
+  border-color: rgba(26, 26, 46, 0.35);
+}
+
+.btn-tier3.is-active,
+.btn-tier3--active,
+.btn-pill.is-active {
+  background: #4361EE; /* Brand Indigo accent */
+  color: #FFFFFF;
+  border-color: #4361EE;
+}
+
+/* Tier 4 — Text Link / Tertiary */
+.btn-tier4,
+.btn-link {
+  background: none;
+  border: none;
+  color: #1A1A2E;
+  font-family: var(--font-general-sans, var(--font-body), sans-serif);
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 150ms ease;
+}
+
+.btn-tier4:hover,
+.btn-link:hover {
+  text-decoration: underline;
+}
+
+.btn-tier4--overlay {
+  background: rgba(26, 26, 46, 0.7);
+  color: #FFFFFF !important;
+  border-radius: 16px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-tier4--overlay:hover {
+  background: rgba(26, 26, 46, 0.88);
+  text-decoration: none !important;
+}
+
+/* Icon-Only Buttons (Stepper, Carousel Arrows, Expand/Collapse, Drawer Close) */
+.btn-icon,
+.btn-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #F5F0E8;
+  border: 1px solid #E5E0D5;
+  color: #1A1A2E;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  outline: none;
+  flex-shrink: 0;
+  transition: background-color 150ms ease, border-color 150ms ease, transform 150ms ease;
+}
+
+.btn-icon:hover:not(:disabled),
+.btn-circle:hover:not(:disabled) {
+  background: rgba(26, 26, 46, 0.06);
+}
+
+.btn-icon:disabled,
+.btn-circle:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+@media (max-width: 640px) {
+  .btn-tier1,
+  .btn-primary,
+  .btn-tier2,
+  .btn-secondary,
+  .btn-ghost {
+    height: 44px;
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+  .btn-icon,
+  .btn-circle {
+    width: 40px;
+    height: 40px;
+  }
 }
 
 
@@ -570,17 +910,18 @@ img {
  * ───────────────────────────────────────────── */
 
 .card {
-  background:    var(--color-surface);
-  border:        var(--border-width) solid var(--border-subtle);
+  background: var(--color-surface);
+  border: var(--border-width) solid var(--border-subtle);
   border-radius: var(--radius-card);
-  padding:       var(--padding-card);
-  box-shadow:    var(--inset-highlight), var(--shadow-card);
-  transition:    box-shadow var(--duration-base) var(--ease-default),
-                 border-color var(--duration-base) var(--ease-default);
+  padding: var(--padding-card);
+  box-shadow: var(--inset-highlight), var(--shadow-card);
+  transition: box-shadow var(--duration-base) var(--ease-default),
+    border-color var(--duration-base) var(--ease-default);
 }
+
 .card:hover {
-  box-shadow:    var(--inset-highlight), var(--shadow-card-hover);
-  border-color:  var(--border-default);
+  box-shadow: var(--inset-highlight), var(--shadow-card-hover);
+  border-color: var(--border-default);
 }
 
 
@@ -589,19 +930,19 @@ img {
  * ───────────────────────────────────────────── */
 
 .tag-mechanism {
-  display:        inline-flex;
-  align-items:    center;
-  gap:            var(--space-1);
-  font-family:    var(--font-mono);
-  font-size:      10px;
-  font-weight:    var(--weight-mono-bd);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: var(--weight-mono-bd);
   letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
-  color:          var(--color-primary);
-  background:     var(--color-primary-subtle);
-  border:         1px solid var(--border-accent);
-  border-radius:  var(--radius-tag);
-  padding:        3px 8px;
+  color: var(--color-primary);
+  background: var(--color-primary-subtle);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-tag);
+  padding: 3px 8px;
 }
 
 
@@ -617,23 +958,38 @@ img {
  * ───────────────────────────────────────────── */
 
 .dissolve-block {
-  position:   relative;
-  overflow:   hidden;
+  position: relative;
+  overflow: hidden;
   /* Phase color set via inline style or modifier class */
 }
-.dissolve-block--phase-1 { background-color: var(--phase-1); }
-.dissolve-block--phase-2 { background-color: var(--phase-2); }
-.dissolve-block--phase-3 { background-color: var(--phase-3); }
-.dissolve-block--phase-4 { background-color: var(--phase-4); }
-.dissolve-block--phase-5 { background-color: var(--phase-5); }
+
+.dissolve-block--phase-1 {
+  background-color: var(--phase-1);
+}
+
+.dissolve-block--phase-2 {
+  background-color: var(--phase-2);
+}
+
+.dissolve-block--phase-3 {
+  background-color: var(--phase-3);
+}
+
+.dissolve-block--phase-4 {
+  background-color: var(--phase-4);
+}
+
+.dissolve-block--phase-5 {
+  background-color: var(--phase-5);
+}
 
 /* The dissolve canvas is absolutely positioned over the right edge */
 .dissolve-block__canvas {
-  position:       absolute;
-  top:            0;
-  right:          0;
-  height:         100%;
-  width:          var(--dissolve-fade-width);
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: var(--dissolve-fade-width);
   pointer-events: none;
 }
 
@@ -643,37 +999,42 @@ img {
  * ───────────────────────────────────────────── */
 
 .container {
-  width:      100%;
-  max-width:  var(--container-max);
-  margin:     0 auto;
-  padding:    0 var(--padding-page-x);
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--padding-page-x);
 }
 
 .container-content {
-  width:      100%;
-  max-width:  var(--container-content);
-  margin:     0 auto;
-  padding:    0 var(--padding-page-x);
+  width: 100%;
+  max-width: var(--container-content);
+  margin: 0 auto;
+  padding: 0 var(--padding-page-x);
 }
 
 section {
-  padding-top:    var(--padding-section-y);
+  padding-top: var(--padding-section-y);
   padding-bottom: var(--padding-section-y);
-  position:       relative;
+  position: relative;
 }
 
-/* Grid rule overlay — structural vertical columns */
+/* In-page anchor offset so fixed header doesn't cover section headings */
+section[id],
+main[id],
+div[id],
+article[id] {
+  scroll-margin-top: calc(var(--nav-height, 102px) + 20px);
+}
+
+@media (max-width: 640px) {
+  :root {
+    --announcement-height: 34px;
+    --nav-bar-height: 56px;
+    --nav-height: 90px;
+  }
+}
+
+/* Grid rule overlay — disabled */
 .has-grid-rules::before {
-  content:            '';
-  position:           absolute;
-  inset:              0;
-  pointer-events:     none;
-  z-index:            0;
-  background-image:   repeating-linear-gradient(
-    to right,
-    var(--grid-rule-color) 0px,
-    var(--grid-rule-color) var(--grid-rule-width),
-    transparent var(--grid-rule-width),
-    transparent 25%
-  );
+  display: none;
 }

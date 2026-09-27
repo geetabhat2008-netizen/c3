@@ -1,36 +1,13 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Space_Mono, Lora } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 import Nav from "../components/Nav";
 
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  style: ["normal", "italic"],
-  variable: "--font-display-src",
-  display: "swap",
-});
-
-const spaceMono = Space_Mono({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  style: ["normal", "italic"],
-  variable: "--font-mono-src",
-  display: "swap",
-});
-
-const lora = Lora({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  style: ["normal", "italic"],
-  variable: "--font-body-src",
-  display: "swap",
-});
-
 export const metadata: Metadata = {
-  title: "CrownCalm — The Sanctuary Suite",
+  title: "CrownCalm: The Sanctuary Suite",
   description:
-    "Four neurological mechanisms. One compound protocol. The first migraine system that manages conditions — not symptoms.",
+    "Four neurological mechanisms. One compound protocol. The first migraine system that manages conditions, not symptoms.",
 };
 
 export default function RootLayout({
@@ -41,8 +18,20 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${playfair.variable} ${spaceMono.variable} ${lora.variable}`}
+      className={`${GeistSans.variable} ${GeistMono.variable}`}
     >
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,600&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body>
         <Nav />
         {children}
@@ -50,3 +39,4 @@ export default function RootLayout({
     </html>
   );
 }
+

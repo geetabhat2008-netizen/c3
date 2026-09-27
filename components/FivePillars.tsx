@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
-import DissolveBlock from './DissolveBlock'
 
 const PILLARS = [
   {
@@ -11,16 +10,14 @@ const PILLARS = [
     number: '01',
     phase: 1,
     color: '#D2B6F7',
-    textColor: '#6B3FA0',
     mechanism: 'GATE CONTROL ACTIVATION',
     product: '360° Neuro-Massager',
-    mechTitle: 'Gate Control Theory.',
     differentiator:
-      '"Every other head massager vibrates. Vibration is disorganized. Disorganized input doesn\'t close the pain gate. This one breathes. Rhythmic. Organized. Gate-closing."',
+      'Every other head massager vibrates. Vibration is disorganized. Disorganized input doesn\'t close the pain gate. This one breathes. Rhythmic. Organized. Gate-closing.',
     points: [
-      '**Gate control** — rhythmic, organized compression activates **T5 neurons**, closing the pain gate before signals reach the brain. Random vibration reads as **noise**: no gate response.',
-      '**Therapeutic window** — pneumatic air-cells hold **20–40 kPa**. Above 40, the body triggers **muscular guarding**. Below 20, the gate stays open.',
-      '**15-min auto-shutoff** — the nervous system **habituates** after 15 minutes. Stopping preserves the mechanism, not a safety feature.',
+      '**Gate control** — Rhythmic compression activates **T5 neurons**, closing the pain gate before signals reach the brain. Random vibration doesn\'t trigger this response.',
+      '**Therapeutic window** — Pneumatic air-cells maintain **20–40 kPa**. Above 40 triggers muscular guarding; below 20 fails to close the gate.',
+      '**15-min auto-shutoff** — The nervous system habituates after **15 minutes**. Halting the cycle preserves neurological response.',
     ],
     table: [
       ['Pressure', '20–40 kPa'],
@@ -39,16 +36,14 @@ const PILLARS = [
     number: '02',
     phase: 2,
     color: '#E596FF',
-    textColor: '#7A2090',
     mechanism: 'SPECTRAL FILTRATION',
     product: 'FL-41 Optic Shield',
-    mechTitle: 'The ipRGC pathway.',
     differentiator:
-      '"The lights you\'re reading this under right now flicker 100–120 times per second. You can\'t see it. Your nervous system registers every cycle."',
+      'The lights you\'re reading this under right now flicker 100–120 times per second. You can\'t see it. Your nervous system registers every cycle.',
     points: [
-      '**The ipRGC pathway** — retinal cells wired to the brain\'s **pain centers**, not vision. Fired maximally by the **480–520nm** blue-green band.',
-      '**Precision filtration** — FL-41 blocks up to **80%** of that exact band. Not a generic blue-light lens: a targeted **spectral filter**.',
-      '**The rose tint** — vision recalibrates within **10–15 min** and the pink recedes. Filtration stays fully active. The tint is proof it\'s working.',
+      '**ipRGC pathway** — Retinal cells wired directly to pain centers fire maximally from the **480–520nm** blue-green band.',
+      '**Precision filtration** — Optical-grade FL-41 lenses block up to **80%** of that specific trigger band.',
+      '**Rose tint** — Vision recalibrates within **10–15 minutes** while filtration stays fully active.',
     ],
     table: [
       ['Target band', '480–520nm'],
@@ -67,19 +62,17 @@ const PILLARS = [
     number: '03',
     phase: 3,
     color: '#F5B061',
-    textColor: '#7A4010',
     mechanism: 'THERMODYNAMIC VASOCONSTRICTION',
     product: 'Cryo-Compression Core',
-    mechTitle: 'Cold that has a reason.',
     differentiator:
-      '"Ice during the attack. Warmth after the storm. Most people do this backwards — and wonder why the cold stops working after 20 minutes."',
+      'Ice during the attack. Warmth after the storm. Most people do this backwards — and wonder why the cold stops working after 20 minutes.',
     points: [
-      '**Vasoconstriction** — cold at **2–8°C** constricts the dilated **meningeal vessels** pressing on sensitized nerve tissue: pressure reduced at the throbbing\'s source.',
-      '**The 20-minute rule** — beyond 20 min, the body triggers **paradoxical vasodilation** and undoes the effect. Sessions are capped and cycled.',
-      '**S-Class Hydrogel** — holds therapeutic temperature **30 min** per freeze cycle. Seam-welded barrier keeps condensation off skin.',
+      '**Vasoconstriction** — Controlled cold at **0–4°C** constricts dilated meningeal vessels, reducing throbbing pressure at the source.',
+      '**20-minute limit** — Sessions cap at **20 minutes** to prevent paradoxical vasodilation from reversing relief.',
+      '**S-Class Hydrogel** — Maintains therapeutic temperature for **30 minutes** per freeze cycle with condensation-proof sealing.',
     ],
     table: [
-      ['Temperature', '2–8°C therapeutic'],
+      ['Temperature', '0–4°C therapeutic'],
       ['Max continuous', '20 min'],
       ['Cold retention', '30 min per cycle'],
       ['Shell', 'medical-grade neoprene'],
@@ -95,16 +88,14 @@ const PILLARS = [
     number: '04',
     phase: 4,
     color: '#F5D76E',
-    textColor: '#7A6010',
     mechanism: 'AUDITORY MASKING',
     product: 'Acoustic Silence Sleep Buds',
-    mechTitle: 'Brown Noise, not White.',
     differentiator:
-      '"White Noise is full-spectrum noise. For a sensitized auditory system, it\'s a new stressor disguised as a solution. Brown Noise masks. It doesn\'t add."',
+      'White Noise is full-spectrum noise. For a sensitized auditory system, it\'s a new stressor disguised as a solution. Brown Noise masks. It doesn\'t add.',
     points: [
-      '**Passive first** — **30 dB** of mechanical attenuation turns an 80 dB cabin into a **50 dB** quiet office, before any audio plays.',
-      '**Brown, not White** — low-frequency rumble **masks** environmental load. White Noise adds high-frequency energy a sensitized system reads as a **new irritant**.',
-      '**Sub-1.3cm shell** — sits below the pillow-pressure threshold. Standard 2–3cm buds create a new **tactile trigger** for allodynia; this eliminates it.',
+      '**Passive isolation** — Mechanical attenuation delivers **30 dB** of quiet before any sound plays.',
+      '**Brown noise masking** — Low-frequency brown noise masks sudden acoustic spikes without introducing high-frequency irritation.',
+      '**Sub-1.3cm shell** — Low-profile enclosure sits below the pillow line, preventing pressure points and allodynia triggers.',
     ],
     table: [
       ['Attenuation', '30 dB passive'],
@@ -123,19 +114,17 @@ const PILLARS = [
     number: '05',
     phase: 5,
     color: '#8BB8FF',
-    textColor: '#2B4F8A',
     mechanism: 'TRIGEMINOCERVICAL DECOMPRESSION',
     product: 'Cervical Axis Module',
-    mechTitle: 'The neck is a migraine generator.',
     differentiator:
-      '"Your migraine doesn\'t start at your temples. For a lot of people, it starts three inches lower — in a nerve bundle at the base of the skull that every cranial-only device on the market ignores completely."',
+      'Your migraine doesn\'t start at your temples. For a lot of people, it starts three inches lower — in a nerve bundle at the base of the skull that every cranial-only device on the market ignores completely.',
     points: [
-      '**Shared relay** — **C0–C2** nerve fibers converge with the trigeminal pathway at the **trigeminocervical complex**. Neck tension lowers the threshold for the entire pain cascade.',
-      '**Occipital decompression** — tight suboccipitals compress the **occipital nerves**, generating continuous low-grade pain signal that fills the neurological bucket.',
-      '**A second gate** — the Neuro-Massager closes the **cranial** gate; this closes the **cervical** one. Two gates, two locations. The only Pillar built for desk, drive, and wind-down.',
+      '**Shared relay** — **C1–C2** nerve fibers converge with the trigeminal pathway at the trigeminocervical complex, where neck tension triggers migraine cascades.',
+      '**Occipital decompression** — Ergonomic curvature decompresses suboccipital nerves, relieving persistent muscular loading.',
+      '**Dual-gate relief** — While cranial massage closes the upper gate, cervical decompression arrests lower spinal inputs.',
     ],
     table: [
-      ['Target', 'C0–C2 vertebrae'],
+      ['Target', 'C1–C2 vertebrae'],
       ['Wear', '60 min continuous'],
       ['Action', 'occipital decompression'],
       ['Context', 'desk · drive · wind-down'],
@@ -208,7 +197,7 @@ function ExpandedContent({ pillar, reduce }: { pillar: Pillar; reduce: boolean }
     <div className="fp__expanded">
       {/* LEFT — copy */}
       <div className="fp__copy">
-        <p className="fp__mech-title">{pillar.mechTitle}</p>
+        {/* Step 3: Redundant mechTitle ("Gate Control Theory.") removed entirely */}
 
         <ul className="fp__points">
           {pillar.points.map((point, i) => (
@@ -224,52 +213,43 @@ function ExpandedContent({ pillar, reduce }: { pillar: Pillar; reduce: boolean }
             {pillar.table.map(([label, value]) => (
               <tr key={label}>
                 <th scope="row">{label}</th>
-                <td style={{ color: pillar.textColor }}>{value}</td>
+                <td>{value}</td>
               </tr>
             ))}
           </tbody>
         </table>
 
-        <div className="fp__quote" style={{ borderLeft: `3px solid ${pillar.color}` }}>
-          <p>{pillar.differentiator}</p>
+        {/* Step 5: Simplified pull-quote as a quiet aside without decorative colored border */}
+        <div className="fp__aside">
+          <p>&ldquo;{pillar.differentiator.replace(/^["']|["']$/g, '')}&rdquo;</p>
         </div>
       </div>
 
-      {/* RIGHT — 3-image bento */}
+      {/* RIGHT — cohesive 2-image pair (Step 6) */}
       <motion.div
-        className="fp__bento"
-        initial={reduce ? { opacity: 1, x: 0 } : { opacity: 0, x: 14 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.5, delay: reduce ? 0 : 0.2, ease: [0, 0, 0.2, 1] }}
+        className="fp__image-pair"
+        initial={reduce ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: reduce ? 0 : 0.15, ease: [0, 0, 0.2, 1] }}
       >
-        <div className="fp__bento-hero" style={{ background: `${pillar.color}18` }}>
+        <div className="fp__image-card">
           <ProductImage
             src={pillar.images.hero.src}
             alt={pillar.images.hero.alt}
             width={600}
-            height={760}
+            height={450}
             phaseColor={pillar.color}
             sizes="(max-width: 767px) 100vw, 25vw"
           />
         </div>
-        <div className="fp__bento-cell" style={{ background: `${pillar.color}14` }}>
-          <ProductImage
-            src={pillar.images.detail.src}
-            alt={pillar.images.detail.alt}
-            width={400}
-            height={300}
-            phaseColor={pillar.color}
-            sizes="(max-width: 767px) 100vw, 12vw"
-          />
-        </div>
-        <div className="fp__bento-cell" style={{ background: `${pillar.color}10` }}>
+        <div className="fp__image-card">
           <ProductImage
             src={pillar.images.use.src}
             alt={pillar.images.use.alt}
-            width={400}
-            height={300}
+            width={600}
+            height={450}
             phaseColor={pillar.color}
-            sizes="(max-width: 767px) 100vw, 12vw"
+            sizes="(max-width: 767px) 100vw, 25vw"
           />
         </div>
       </motion.div>
@@ -306,17 +286,14 @@ function PillarRow({
         aria-expanded={isActive}
         aria-controls={`pillar-body-${pillar.id}`}
       >
-        <div className="fp__dissolve">
-          <DissolveBlock color={pillar.color} label={pillar.number} height={40} solid={0.42} pixel={5} />
+        {/* Step 1: Monochrome badge with minimal phase indicator dot */}
+        <div className="fp__badge">
+          <span className="fp__badge-dot" style={{ background: pillar.color }} aria-hidden="true" />
+          <span>{pillar.number}</span>
         </div>
 
         <div className="fp__names">
-          <p
-            className="fp__mechanism"
-            style={{ color: isActive ? pillar.textColor : '#BEBAB4' }}
-          >
-            {pillar.mechanism}
-          </p>
+          <p className="fp__mechanism">{pillar.mechanism}</p>
           <p className="fp__product">{pillar.product}</p>
         </div>
 
@@ -340,11 +317,11 @@ function PillarRow({
           transition={{ duration: reduce ? 0.01 : 0.35, ease: [0.4, 0, 0.2, 1] }}
           aria-hidden="true"
         >
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
             <path
               d="M5 7.5L10 12.5L15 7.5"
               stroke="currentColor"
-              strokeWidth="1.5"
+              strokeWidth="1.6"
               strokeLinecap="round"
               strokeLinejoin="round"
             />
@@ -365,8 +342,8 @@ function PillarRow({
               reduce
                 ? { height: { duration: 0.01 }, opacity: { duration: 0.01 } }
                 : {
-                    height: { duration: 0.45, ease: [0.4, 0, 0.2, 1] },
-                    opacity: { duration: 0.3, ease: 'easeOut', delay: 0.12 },
+                    height: { duration: 0.4, ease: [0.4, 0, 0.2, 1] },
+                    opacity: { duration: 0.25, ease: 'easeOut', delay: 0.1 },
                   }
             }
             style={{ overflow: 'hidden' }}
@@ -388,18 +365,18 @@ export default function FivePillars() {
   }
 
   return (
-    <section id="five-pillars" className="fp has-grid-rules" aria-label="The five pillars — why it works">
+    <section id="five-pillars" className="fp" aria-label="The five pillars — why it works">
       <div className="fp__inner">
         {/* HEADER */}
         <div className="fp__head">
           <p className="fp__eyebrow">The Engineering</p>
           <h2 className="fp__h2">
-            <span>Here&apos;s why it</span>
-            <span className="fp__h2-italic">actually works.</span>
+            <span className="fp__h2-l1">Here&apos;s why it actually works.</span>
+            <span className="fp__h2-l2">Five synchronized pillars, one daily protocol.</span>
           </h2>
           <p className="fp__sub">
-            Five documented neurological mechanisms. Each product exists because of a specific,
-            documented science — not the other way around. Every number has a reason.
+            Five documented neurological mechanisms. Each product exists because of a specific
+            science — not the other way around. Every parameter has a reason.
           </p>
         </div>
 
@@ -422,247 +399,269 @@ export default function FivePillars() {
         .fp {
           position: relative;
           overflow: hidden;
-          background: var(--color-bg);
-          padding: clamp(48px, 6.5vw, 84px) max(46px, 5.5vw);
+          background: var(--color-bg-primary, #FAFAF9);
+          padding: clamp(40px, 5vw, 64px) max(32px, 4.5vw);
         }
         .fp__inner {
           position: relative;
           z-index: 1;
-          max-width: var(--container-max);
+          max-width: var(--container-max, 1280px);
           margin: 0 auto;
         }
 
-        /* Header */
+        /* Header — tightened vertical rhythm (Step 7) */
         .fp__head {
-          margin-bottom: 44px;
+          margin-bottom: 28px;
           max-width: 600px;
         }
         .fp__eyebrow {
           font-family: var(--font-mono);
           font-size: 11px;
-          font-weight: 400;
-          letter-spacing: 0.16em;
+          font-weight: 600;
+          letter-spacing: 0.12em;
           text-transform: uppercase;
-          color: #8F8981;
-          margin-bottom: 20px;
+          color: var(--color-text-secondary, #6B6B6B);
+          margin-bottom: 8px;
         }
         .fp__h2 {
           font-family: var(--font-display);
-          font-size: clamp(36px, 5vw, 62px);
-          font-weight: 400;
-          line-height: 1.05;
-          letter-spacing: -0.04em;
-          margin-bottom: 20px;
+          font-size: var(--text-display-lg);
+          line-height: var(--leading-heading);
+          letter-spacing: var(--tracking-heading);
+          margin-bottom: 12px;
         }
-        .fp__h2 span {
+        .fp__h2-l1 {
           display: block;
-          color: var(--color-text-primary);
+          font-weight: 700;
+          color: var(--color-text-primary, #0F0F0F);
         }
-        .fp__h2 .fp__h2-italic,
-        .fp__h2-italic {
-          font-style: italic;
-          color: #C4503A;
+        .fp__h2-l2 {
+          display: block;
+          font-weight: 500;
+          font-size: clamp(16px, 1.8vw, 20px);
+          color: var(--color-text-secondary, #6B6B6B);
+          margin-top: 6px;
         }
         .fp__sub {
           font-family: var(--font-body);
-          font-size: 16px;
-          line-height: 1.65;
-          letter-spacing: 0;
-          color: #666666;
-          max-width: 460px;
+          font-size: 14.5px;
+          line-height: 1.55;
+          color: var(--color-text-secondary, #6B6B6B);
+          max-width: 480px;
           margin: 0;
         }
 
         /* Accordion */
         .fp__accordion {
-          border-top: 1px solid rgba(26,26,26,0.15);
+          border-top: 1px solid rgba(15, 15, 15, 0.08);
         }
         .fp__row {
-          border-bottom: 1px solid rgba(26,26,26,0.12);
+          border-bottom: 1px solid rgba(15, 15, 15, 0.08);
         }
 
-        /* Row header */
+        /* Row header — Step 7 tightened spacing */
         .fp__header {
           width: 100%;
           display: flex;
           align-items: center;
-          gap: 20px;
-          padding: 16px 0;
+          gap: 16px;
+          padding: 13px 0;
           background: transparent;
           border: none;
           cursor: pointer;
           text-align: left;
-          border-radius: 4px;
+          border-radius: 6px;
           transition: background 150ms ease;
-          min-height: var(--touch-min);
         }
         .fp__header:hover:not(.fp__header--active) {
-          background: rgba(26,26,26,0.02);
+          background: rgba(15, 15, 15, 0.02);
         }
         .fp__header:hover:not(.fp__header--active) .fp__thumb {
-          opacity: 1 !important;
+          opacity: 0.9 !important;
         }
         .fp__header--active {
           cursor: default;
         }
         .fp__header:focus-visible {
-          outline: 2px solid #1A1A1A;
+          outline: 2px solid #0F0F0F;
           outline-offset: 3px;
-          border-radius: 4px;
         }
-        .fp__dissolve {
-          width: 64px;
+
+        /* Step 1: Plain solid badge with minimal phase indicator dot */
+        .fp__badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          height: 28px;
+          padding: 0 8px;
+          border-radius: 6px;
+          background: var(--color-bg-secondary, #F2F1ED);
+          border: 1px solid rgba(15, 15, 15, 0.08);
           flex-shrink: 0;
         }
+        .fp__badge-dot {
+          width: 7px;
+          height: 7px;
+          border-radius: 50%;
+          flex-shrink: 0;
+        }
+        .fp__badge span {
+          font-family: var(--font-mono);
+          font-size: 11px;
+          font-weight: 700;
+          color: var(--color-text-primary, #0F0F0F);
+          line-height: 1;
+        }
+
         .fp__names {
           flex: 1;
           min-width: 0;
         }
         .fp__mechanism {
           font-family: var(--font-mono);
-          font-size: 10px;
+          font-size: 10.5px;
           font-weight: 700;
-          letter-spacing: 0.14em;
+          letter-spacing: 0.12em;
           text-transform: uppercase;
-          margin-bottom: 5px;
-          transition: color 200ms ease;
+          color: #7D766E;
+          margin: 0 0 3px 0;
         }
         .fp__product {
           font-family: var(--font-display);
-          font-size: 18px;
-          font-weight: 400;
-          color: var(--color-text-primary);
+          font-size: 17px;
+          font-weight: 700;
+          line-height: 1.25;
+          color: var(--color-text-primary, #1A1A1A);
           margin: 0;
-          letter-spacing: -0.02em;
+          letter-spacing: -0.01em;
         }
         .fp__thumb {
-          width: 64px;
-          height: 48px;
-          border-radius: 4px;
+          width: 58px;
+          height: 44px;
+          border-radius: 6px;
           overflow: hidden;
           flex-shrink: 0;
-          transition: opacity 200ms ease;
+          transition: opacity 160ms ease;
+          border: 1px solid rgba(26, 26, 26, 0.08);
         }
         .fp__chevron {
           flex-shrink: 0;
-          color: #BEBAB4;
+          color: #7D766E;
           display: flex;
         }
 
-        /* Expanded content */
+        /* Expanded content — Step 7 tightened vertical rhythm */
         .fp__expanded {
-          padding-top: 32px;
-          padding-bottom: 52px;
+          padding-top: 18px;
+          padding-bottom: 28px;
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 56px;
+          gap: 40px;
           align-items: start;
         }
-        .fp__mech-title {
-          font-family: var(--font-display);
-          font-size: 22px;
-          font-style: italic;
-          font-weight: 400;
-          color: var(--color-text-primary);
-          letter-spacing: -0.02em;
-          margin-bottom: 20px;
+        .fp__copy {
+          min-width: 0;
         }
+
+        /* Bullets — Step 4 condensed copy, Step 2 uniform charcoal color */
         .fp__points {
           list-style: none;
-          margin: 0 0 28px;
+          margin: 0 0 18px;
           padding: 0;
           display: flex;
           flex-direction: column;
-          gap: 14px;
-          max-width: 480px;
+          gap: 9px;
+          max-width: 520px;
         }
         .fp__point {
           display: flex;
           align-items: flex-start;
-          gap: 12px;
+          gap: 10px;
         }
         .fp__point-marker {
           flex-shrink: 0;
-          width: 8px;
-          height: 8px;
-          border-radius: 2px;
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
           margin-top: 7px;
         }
         .fp__point-text {
           font-family: var(--font-body);
-          font-size: 15px;
-          line-height: 1.65;
-          letter-spacing: 0;
-          color: #666666;
+          font-size: 13.5px;
+          font-weight: 400;
+          line-height: 1.5;
+          color: #4A4A4A;
         }
         .fp__point-text strong {
-          font-weight: 700;
-          color: var(--color-text-primary);
+          font-weight: 600;
+          color: #1A1A1A;
         }
+
+        /* Spec table — Step 4 specs preserved 100%, Step 2 uniform charcoal color */
         .fp__table {
           width: 100%;
-          max-width: 420px;
+          max-width: 440px;
           border-collapse: collapse;
-          margin-bottom: 28px;
+          margin-bottom: 16px;
         }
         .fp__table tr {
-          border-bottom: 1px solid rgba(26,26,26,0.1);
+          border-bottom: 1px solid rgba(26, 26, 26, 0.08);
         }
         .fp__table tr:first-child {
-          border-top: 1px solid rgba(26,26,26,0.1);
+          border-top: 1px solid rgba(26, 26, 26, 0.08);
         }
         .fp__table th,
         .fp__table td {
           font-family: var(--font-mono);
           font-size: 11px;
-          letter-spacing: 0.05em;
-          padding: 8px 4px;
+          padding: 6px 4px;
           text-align: left;
         }
         .fp__table th {
-          font-weight: 400;
+          font-weight: 500;
           color: #7D766E;
           text-transform: uppercase;
-          font-size: 10.5px;
-          letter-spacing: 0.1em;
-          width: 40%;
+          letter-spacing: 0.08em;
+          width: 38%;
         }
         .fp__table td {
-          font-weight: 700;
-        }
-        .fp__quote {
-          padding-left: 16px;
-        }
-        .fp__quote p {
-          font-family: var(--font-display);
-          font-size: 14px;
-          font-style: italic;
-          line-height: 1.7;
-          color: #444444;
-          margin: 0;
+          font-weight: 600;
+          color: #1A1A1A;
         }
 
-        /* Bento */
-        .fp__bento {
+        /* Step 5: Simplified pull-quote as a quiet aside (no colored border, muted text) */
+        .fp__aside {
+          padding: 0;
+          margin-top: 14px;
+        }
+        .fp__aside p {
+          font-family: var(--font-body);
+          font-size: 12.5px;
+          line-height: 1.5;
+          color: #666666;
+          margin: 0;
+          font-style: normal;
+        }
+
+        /* Step 6: Cohesive 2-image pair with matching crop and aspect ratio */
+        .fp__image-pair {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          grid-template-rows: 1fr 1fr;
-          gap: 8px;
-          height: 380px;
+          gap: 12px;
+          align-self: start;
         }
-        .fp__bento-hero {
-          grid-row: span 2;
-          border-radius: 6px;
+        .fp__image-card {
+          aspect-ratio: 4 / 3;
+          border-radius: 10px;
           overflow: hidden;
-        }
-        .fp__bento-cell {
-          border-radius: 6px;
-          overflow: hidden;
+          background: #FAF5EE;
+          border: 1px solid rgba(26, 26, 26, 0.08);
         }
         .fp .fp__img {
           width: 100%;
           height: 100%;
           object-fit: cover;
+          display: block;
         }
         .fp__img-fallback {
           width: 100%;
@@ -685,19 +684,11 @@ export default function FivePillars() {
         @media (max-width: 767px) {
           .fp__expanded {
             grid-template-columns: 1fr;
-            gap: 32px;
+            gap: 24px;
           }
-          .fp__bento {
-            grid-template-columns: 1fr;
-            grid-template-rows: auto auto auto;
-            height: auto;
-          }
-          .fp__bento-hero {
-            grid-row: auto;
-          }
-          .fp__bento-hero,
-          .fp__bento-cell {
-            aspect-ratio: 4/3;
+          .fp__image-pair {
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
           }
           .fp__product {
             font-size: 16px;
@@ -705,9 +696,6 @@ export default function FivePillars() {
           .fp__points,
           .fp__table {
             max-width: 100%;
-          }
-          .fp__dissolve {
-            width: 48px;
           }
           .fp__header {
             gap: 12px;

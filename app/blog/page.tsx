@@ -1,11 +1,12 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import { POSTS } from '../../lib/blog'
 import Footer from '../../components/Footer'
 
 export const metadata: Metadata = {
-  title: 'The Journal — CrownCalm',
+  title: 'The Journal: CrownCalm',
   description:
-    'Field notes for the sensitized mind. Practical, honest writing on living well with a migraine brain — no jargon, no pamphlets.',
+    'Field notes for the sensitized mind. Practical, honest writing on living well with a migraine brain. No jargon, no pamphlets.',
 }
 
 export default function BlogIndex() {
@@ -14,6 +15,7 @@ export default function BlogIndex() {
   return (
     <>
       <main className="journal">
+
         {/* ---- Header ---- */}
         <header className="journal__head">
           <p className="journal__eyebrow">The Journal</p>
@@ -78,7 +80,7 @@ export default function BlogIndex() {
         .journal {
           max-width: 1200px;
           margin: 0 auto;
-          padding: calc(var(--nav-height) + 72px) var(--padding-page-x) 96px;
+          padding: calc(var(--nav-height) + 64px) var(--padding-page-x) 96px;
         }
         .journal__head {
           max-width: 720px;

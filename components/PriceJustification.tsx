@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, useInView, useReducedMotion } from 'framer-motion'
 import Image from 'next/image'
+import { ShaderBackground } from '@/components/ui/kk'
 
 const EASE: [number, number, number, number] = [0, 0, 0.2, 1]
 
@@ -44,7 +45,7 @@ const COST_DATA = [
     per: '',
     fiveYear: 345,
     recurring: false,
-    ring: '#C4503A',
+    ring: '#0F0F0F',
     isCrownCalm: true,
   },
 ]
@@ -160,6 +161,11 @@ export default function PriceJustification() {
 
   return (
     <section id="price" className="price">
+      {/* ── WebGL Mesh Drift Shader Background ── */}
+      <div className="price__shader-wrap" aria-hidden="true">
+        <ShaderBackground className="price__shader-canvas" />
+      </div>
+
       <div className="price__scene" aria-label="Sanctuary Suite value comparison">
         <Image
           src="/images/products/suite-hero.png"
@@ -174,8 +180,8 @@ export default function PriceJustification() {
           <header className="price__header">
             <p className="price__eyebrow">Five-year cost comparison</p>
             <h2 className="price__h2">
-              The cost of migraine care,
-              <span className="price__h2-italic">made visible.</span>
+              <span className="price__h2-l1">The cost of migraine care,</span>
+              <span className="price__h2-l2">made visible.</span>
             </h2>
             <p className="price__sub">
               A one-time Sanctuary Suite purchase compared with common recurring options.
@@ -253,7 +259,26 @@ export default function PriceJustification() {
             <p className="price__guarantee-body">Use the complete protocol for 30 days. If it does not meaningfully reduce your sensory burden, receive a full refund.</p>
           </div>
 
-          <button type="button" className="price__cta">Begin the Protocol — ${PRICE}</button>
+          <button
+            type="button"
+            className="price__cta"
+            onClick={() => {
+              const buyBtn = document.querySelector('.sp__cta-btn') as HTMLElement | null
+              if (buyBtn) {
+                buyBtn.scrollIntoView({ behavior: 'smooth', block: 'center' })
+                buyBtn.focus()
+                return
+              }
+              const cartBtn = document.querySelector('.nav__cart-btn') as HTMLButtonElement | null
+              if (cartBtn) {
+                cartBtn.click()
+                return
+              }
+              window.location.href = '/products/sanctuary-suite'
+            }}
+          >
+            Begin the Protocol
+          </button>
           <p className="price__hsa">HSA / FSA eligible · Free US shipping</p>
         </motion.aside>
       </div>
@@ -261,583 +286,466 @@ export default function PriceJustification() {
       <style>{`
         .price {
           position: relative;
+          padding: clamp(64px, 7vw, 96px) max(20px, 4vw);
+          background: #020617;
+          border-top: 1px solid rgba(255, 255, 255, 0.1);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
           overflow: hidden;
-          background: var(--color-bg);
-          padding: clamp(48px, 6.5vw, 84px) max(46px, 5.5vw);
-        }
-        .price__inner {
-          position: relative;
-          z-index: 1;
-          max-width: var(--container-max);
-          margin: 0 auto;
+          isolation: isolate;
+          scroll-margin-top: 100px;
         }
 
-        /* HEADER */
-        .price__header {
-          margin-bottom: 40px;
-          max-width: 560px;
-        }
-        .price__eyebrow {
-          font-family: var(--font-mono);
-          font-size: 11px;
-          letter-spacing: 0.16em;
-          text-transform: uppercase;
-          color: #8F8981;
-          margin-bottom: 20px;
-        }
-        .price__h2 {
-          font-family: var(--font-display);
-          font-size: clamp(36px, 5vw, 62px);
-          font-weight: 400;
-          line-height: 1.05;
-          letter-spacing: -0.04em;
-          margin-bottom: 20px;
-        }
-        .price__h2 span { display: block; color: var(--color-text-primary); }
-        .price__h2 .price__h2-italic { font-style: italic; color: #C4503A; }
-        .price__sub {
-          font-family: var(--font-body);
-          font-size: 16px;
-          line-height: 1.65;
-          letter-spacing: 0;
-          color: #5C5C5C;
-          max-width: 460px;
-          margin: 0;
-        }
-
-        /* GRID */
-        .price__grid {
-          display: grid;
-          grid-template-columns: 52fr 48fr;
-          gap: 56px;
-          align-items: start;
-        }
-
-        .price__col-label {
-          font-family: var(--font-mono);
-          font-size: 11px;
-          font-weight: 700;
-          letter-spacing: 0.14em;
-          text-transform: uppercase;
-          color: #7D766E;
-          margin-bottom: 28px;
-        }
-
-        /* DATA RINGS */
-        .price__rings {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 28px 20px;
-        }
-        .price__ring-cell {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          text-align: center;
-          padding: 20px 12px 16px;
-          border: 1px solid rgba(26,26,26,0.08);
-          border-radius: 10px;
-          background: rgba(255,255,255,0.28);
-        }
-        .price__ring-cell--cc {
-          border: 1px solid rgba(26,26,26,0.22);
-          background: rgba(255,255,255,0.5);
-        }
-        .price__ring-wrap {
-          position: relative;
-          margin-bottom: 14px;
-        }
-        .price__ring-center {
+        /* ── Dynamic WebGL Shader Canvas ── */
+        .price__shader-wrap {
           position: absolute;
           inset: 0;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          gap: 3px;
-        }
-        .price__ring-amount {
-          font-family: var(--font-mono);
-          font-size: 19px;
-          font-weight: 700;
-          letter-spacing: -0.03em;
-          color: var(--color-text-primary);
-          line-height: 1;
-          margin: 0;
-        }
-        .price__ring-amount--cc { color: #C4503A; }
-        .price__ring-per {
-          font-size: 11px;
-          font-weight: 400;
-          color: #7D766E;
-          letter-spacing: 0;
-        }
-        .price__ring-cadence {
-          font-family: var(--font-mono);
-          font-size: 10px;
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
-          color: #8F8981;
-          margin: 0;
-        }
-        .price__ring-name {
-          font-family: var(--font-mono);
-          font-size: 12px;
-          font-weight: 700;
-          letter-spacing: 0.06em;
-          color: var(--color-text-primary);
-          margin: 0 0 3px;
-        }
-        .price__ring-name--cc {
-          font-family: var(--font-display);
-          font-size: 16px;
-          font-style: italic;
-          font-weight: 400;
-          letter-spacing: -0.01em;
-        }
-        .price__ring-sub {
-          font-family: var(--font-mono);
-          font-size: 10.5px;
-          color: #8F8981;
-          letter-spacing: 0.05em;
-          margin: 0 0 10px;
-        }
-        .price__ring-5yr {
-          font-family: var(--font-mono);
-          font-size: 11px;
-          font-weight: 700;
-          color: #5C5C5C;
-          letter-spacing: 0.02em;
-          margin: 0;
-          padding-top: 8px;
-          border-top: 1px dashed rgba(26,26,26,0.14);
           width: 100%;
-        }
-        .price__ring-5yr span {
-          font-weight: 400;
-          color: #8F8981;
-          font-size: 10px;
-          letter-spacing: 0.06em;
-          text-transform: uppercase;
-        }
-        .price__ring-5yr--cc { color: #C4503A; }
-
-        .price__rings-note {
-          font-family: var(--font-mono);
-          font-size: 10.5px;
-          color: #8F8981;
-          line-height: 1.7;
-          letter-spacing: 0.04em;
-          margin: 20px 0 0;
-        }
-
-        /* Modern testimonial callout */
-        .price__quote {
-          margin: 28px 0 0;
-          padding: 26px 26px 22px;
-          background: var(--color-surface);
-          border: 1px solid rgba(26,26,26,0.08);
-          border-radius: 16px;
-          box-shadow: 0 12px 32px -22px rgba(26,26,26,0.22);
-        }
-        .price__quote-mark {
-          display: block;
-          font-family: var(--font-display);
-          font-size: 56px;
-          line-height: 0.6;
-          color: var(--color-text-primary);
-          margin-bottom: 8px;
-          user-select: none;
-        }
-        .price__quote-text {
-          font-family: var(--font-display);
-          font-size: clamp(18px, 1.8vw, 22px);
-          font-weight: 500;
-          line-height: 1.35;
-          letter-spacing: -0.02em;
-          text-wrap: pretty;
-          color: var(--color-text-primary);
-          margin: 0 0 20px;
-        }
-        .price__quote-foot {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          padding-top: 18px;
-          border-top: 1px solid rgba(26,26,26,0.08);
-        }
-        .price__quote-avatar {
-          flex-shrink: 0;
-          width: 46px; height: 46px;
-          border-radius: 50%;
+          height: 100%;
+          pointer-events: none;
+          z-index: 0;
           overflow: hidden;
-          box-shadow: 0 0 0 1px rgba(26,26,26,0.08);
-        }
-        .price__quote-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        .price__quote-meta { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
-        .price__quote-name {
-          font-family: var(--font-mono);
-          font-size: 13px; font-weight: 700;
-          letter-spacing: 0.02em;
-          color: var(--color-text-primary);
-        }
-        .price__quote-role {
-          font-family: var(--font-mono);
-          font-size: 10px;
-          letter-spacing: 0.06em;
-          text-transform: uppercase;
-          color: #8F8981;
         }
 
-        /* VALUE STACK */
-        .price__stack { margin: 0; }
-        .price__stack-row {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          gap: 12px;
-          padding: 12px 0;
-          border-bottom: 1px solid rgba(26,26,26,0.08);
-        }
-        .price__stack-term {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          margin: 0;
-        }
-        .price__dot {
-          width: 6px;
-          height: 6px;
-          border-radius: 50%;
-          flex-shrink: 0;
-        }
-        .price__stack-name {
-          font-family: var(--font-mono);
-          font-size: 12px;
-          color: #5C5C5C;
-          letter-spacing: 0.03em;
-        }
-        .price__stack-name--bonus {
-          color: var(--color-text-primary);
-          font-weight: 700;
-        }
-        .price__stack-tag {
-          font-family: var(--font-mono);
-          font-size: 9.5px;
-          color: #8F8981;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          margin-left: 8px;
-        }
-        .price__stack-value {
-          font-family: var(--font-mono);
-          font-size: 12px;
-          color: #7D766E;
-          letter-spacing: -0.01em;
-          flex-shrink: 0;
-          margin: 0;
-        }
-        .price__stack-value--bonus {
-          color: var(--color-text-primary);
-          font-weight: 700;
-        }
-
-        .price__total-row {
-          display: flex;
-          justify-content: space-between;
-          padding: 14px 0;
-          border-bottom: 1.5px solid rgba(26,26,26,0.20);
-        }
-        .price__total-label {
-          font-family: var(--font-mono);
-          font-size: 11px;
-          color: #7D766E;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
-        }
-        .price__total-value {
-          font-family: var(--font-mono);
-          font-size: 13px;
-          color: #7D766E;
-          font-weight: 700;
-          letter-spacing: -0.01em;
-        }
-
-        .price__price-row {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 20px 0 24px;
-        }
-        .price__suite-name {
-          font-family: var(--font-display);
-          font-size: 22px;
-          font-style: italic;
-          font-weight: 400;
-          color: var(--color-text-primary);
-          margin: 0 0 4px;
-        }
-        .price__suite-sub {
-          font-family: var(--font-mono);
-          font-size: 10.5px;
-          color: #8F8981;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
-          margin: 0;
-        }
-        .price__price-figure { text-align: right; }
-        .price__price-amount {
-          font-family: var(--font-mono);
-          font-size: 28px;
-          font-weight: 700;
-          color: var(--color-text-primary);
-          letter-spacing: -0.03em;
-          margin: 0 0 2px;
-          line-height: 1;
-        }
-        .price__price-save {
-          font-family: var(--font-mono);
-          font-size: 10px;
-          color: #C4503A;
-          font-weight: 700;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
-          margin: 0;
-        }
-
-        .price__guarantee {
-          background: rgba(26,26,26,0.03);
-          border: 1px solid rgba(26,26,26,0.10);
-          border-radius: 6px;
-          padding: 20px;
-          margin-bottom: 16px;
-        }
-        .price__guarantee-title {
-          font-family: var(--font-mono);
-          font-size: 11px;
-          font-weight: 700;
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
-          color: var(--color-text-primary);
-          margin-bottom: 10px;
-        }
-        .price__guarantee-body {
-          font-family: var(--font-body);
-          font-size: 14.5px;
-          line-height: 1.6;
-          color: #5C5C5C;
-          letter-spacing: 0;
-          margin: 0;
-        }
-
-        .price__hsa {
-          font-family: var(--font-body);
-          font-size: 14px;
-          color: #7D766E;
-          letter-spacing: 0;
-          line-height: 1.55;
-        }
-
-        .price__cta {
+        .price__shader-canvas {
+          position: absolute;
+          inset: 0;
           width: 100%;
-          height: 56px;
-          margin-top: 24px;
-          background: #1A1A1A;
-          color: #F2ECE4;
-          font-family: var(--font-mono);
-          font-size: 11px;
-          font-weight: 700;
-          letter-spacing: 0.16em;
-          text-transform: uppercase;
-          border: none;
-          border-radius: 6px;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transition: background 150ms ease, box-shadow 150ms ease;
+          height: 100%;
+          display: block;
         }
-        .price__cta:hover {
-          background: #2E2E2E;
-          box-shadow: 0 6px 18px rgba(0,0,0,0.16);
-        }
-        .price__cta:active { background: #111111; box-shadow: none; }
 
-        .price__subcta {
-          font-family: var(--font-mono);
-          font-size: 10.5px;
-          color: #7D766E;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
-          text-align: center;
-          margin-top: 14px;
-          max-width: none;
-        }
-        .price__subcta-link {
-          background: none;
-          border: none;
-          border-bottom: 1px solid rgba(26,26,26,0.20);
-          cursor: pointer;
-          padding: 0 0 2px;
-          font-family: inherit;
-          font-size: inherit;
-          color: inherit;
-          letter-spacing: inherit;
-          text-transform: inherit;
-          transition: border-color 150ms ease;
-        }
-        .price__subcta-link:hover { border-bottom-color: var(--color-text-primary); }
-
-        /* Layered editorial value scene */
-        .price {
-          padding: clamp(48px, 7vw, 96px) max(20px, 4vw);
-          background: var(--color-bg);
-        }
+        /* ── Framed Scene Container ── */
         .price__scene {
           position: relative;
-          max-width: var(--container-max);
+          z-index: 1;
+          max-width: var(--container-max, 1280px);
           min-height: 760px;
           margin: 0 auto;
           overflow: hidden;
-          border-radius: 24px;
-          background: var(--color-text-primary);
+          border-radius: 28px;
+          background: rgba(3, 10, 24, 0.28);
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
+          border: 1px solid rgba(255, 255, 255, 0.14);
+          box-shadow: 0 32px 90px -15px rgba(2, 6, 23, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.15);
           isolation: isolate;
         }
+
         .price__scene-image {
           z-index: -3;
           object-fit: cover;
           object-position: center;
           transform: scale(1.04);
+          opacity: 0.18;
+          mix-blend-mode: luminosity;
         }
+
         .price__scene-shade {
           position: absolute;
           inset: 0;
           z-index: -2;
-          background: rgba(26, 26, 26, .24);
+          background: radial-gradient(ellipse 90% 80% at 50% 30%, rgba(14, 26, 52, 0.35) 0%, rgba(5, 9, 18, 0.62) 100%);
         }
+
+        /* Comparison Board: Off-White Card inside Dark Section */
         .price__board {
           position: absolute;
-          /* right inset = card footprint (width + offset) minus the intended 28px layer overlap,
-             so the card never covers chart content at any viewport width */
-          inset: clamp(28px, 5vw, 64px) calc(min(350px, 34vw) + clamp(18px, 3vw, 40px) - 28px) clamp(28px, 5vw, 64px) clamp(28px, 5vw, 64px);
+          inset: clamp(28px, 4vw, 56px) calc(min(360px, 34vw) + clamp(18px, 3vw, 40px) - 24px) clamp(28px, 4vw, 56px) clamp(28px, 4vw, 56px);
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          gap: 36px;
-          padding: clamp(28px, 4vw, 52px);
-          border: 1px solid rgba(255, 255, 255, .38);
-          border-radius: 18px;
-          background: rgba(221, 226, 215, .92);
-          backdrop-filter: blur(12px);
-          color: var(--color-text-primary);
+          gap: 32px;
+          padding: clamp(28px, 3.5vw, 48px);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 24px;
+          background: #FAFAF9;
+          box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+          color: #0F0F0F;
         }
-        .price__header { max-width: 620px; margin: 0; }
-        .price__eyebrow { margin-bottom: 14px; color: var(--color-primary); }
+
+        .price__header { max-width: 600px; margin: 0; }
+
+        .price__eyebrow {
+          font-family: var(--font-mono);
+          font-size: 11px;
+          font-weight: 600;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: #6B6B6B;
+          margin-bottom: 12px;
+        }
+
         .price__h2 {
+          font-family: var(--font-display);
           max-width: 15ch;
-          margin-bottom: 14px;
-          font-size: clamp(38px, 4.6vw, 64px);
-          line-height: .98;
+          margin: 0 0 12px 0;
+          font-size: clamp(34px, 4vw, 56px);
+          line-height: var(--leading-heading);
+          letter-spacing: var(--tracking-heading);
         }
-        .price__h2 .price__h2-italic { display: block; color: var(--color-warm); font-style: italic; }
-        .price__sub { max-width: 46ch; font-size: 15px; color: var(--color-text-secondary); }
+
+        .price__h2-l1 {
+          display: block;
+          font-weight: 700;
+          color: #0F0F0F;
+        }
+
+        .price__h2-l2 {
+          display: block;
+          font-weight: 500;
+          color: #6B6B6B;
+          margin-top: 4px;
+        }
+
+        .price__sub {
+          font-family: var(--font-body);
+          max-width: 44ch;
+          font-size: 14.5px;
+          line-height: 1.5;
+          color: #555555;
+          margin: 0;
+        }
+
         .price__comparison {
           display: grid;
-          grid-template-columns: 110px minmax(0, 1fr);
+          grid-template-columns: 100px minmax(0, 1fr);
           gap: 28px;
           align-items: end;
         }
-        .price__index { display: flex; flex-direction: column; gap: 8px; }
+
+        .price__index { display: flex; flex-direction: column; gap: 6px; }
+
         .price__index span {
           font-family: var(--font-display);
-          font-size: clamp(60px, 7vw, 92px);
-          line-height: .8;
-          letter-spacing: -.06em;
+          font-size: clamp(56px, 6.5vw, 84px);
+          line-height: 0.8;
+          letter-spacing: -0.06em;
+          color: #1A1A1A;
         }
-        .price__index small, .price__chart-head, .price__source {
+
+        .price__index small {
           font-family: var(--font-mono);
+          font-size: 9px;
+          color: #7D766E;
           text-transform: uppercase;
-          letter-spacing: .1em;
+          letter-spacing: 0.1em;
         }
-        .price__index small { font-size: 9px; color: var(--color-text-secondary); }
+
         .price__chart-wrap { min-width: 0; }
+
         .price__chart-head {
           display: flex;
           justify-content: space-between;
           gap: 16px;
           margin-bottom: 14px;
           padding-bottom: 10px;
-          border-bottom: 1px solid rgba(26, 26, 26, .14);
-          font-size: 9px;
-          color: var(--color-text-secondary);
+          border-bottom: 1px solid rgba(26, 26, 26, 0.12);
+          font-family: var(--font-mono);
+          font-size: 9.5px;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          color: #7D766E;
         }
-        .price__chart-head p { margin: 0; font-weight: 700; color: var(--color-text-primary); }
+
+        .price__chart-head p { margin: 0; font-weight: 700; color: #1A1A1A; }
+
         .price__bars {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
           gap: 12px;
-          height: 220px;
+          height: 200px;
           align-items: end;
         }
-        .price__bar-cell { display: flex; min-width: 0; height: 100%; flex-direction: column; justify-content: flex-end; text-align: center; }
-        .price__bar-value { margin-bottom: 6px; font-family: var(--font-display); font-size: 15px; color: var(--color-text-primary); }
-        .price__bar-track { position: relative; height: 124px; border-bottom: 1px solid rgba(26,26,26,.18); }
+
+        .price__bar-cell {
+          display: flex;
+          min-width: 0;
+          height: 100%;
+          flex-direction: column;
+          justify-content: flex-end;
+          text-align: center;
+        }
+
+        .price__bar-value {
+          margin-bottom: 6px;
+          font-family: var(--font-display);
+          font-size: 14.5px;
+          font-weight: 600;
+          color: #1A1A1A;
+        }
+
+        .price__bar-track {
+          position: relative;
+          height: 120px;
+          border-bottom: 1.5px solid rgba(26, 26, 26, 0.18);
+        }
+
         .price__bar-fill {
           position: absolute;
-          right: 10%;
+          right: 8%;
           bottom: 0;
-          left: 10%;
+          left: 8%;
           min-height: 8px;
-          background: var(--color-primary);
+          background: #B0A9A0;
+          border-radius: 4px 4px 0 0;
         }
-        .price__bar-cell:nth-child(2) .price__bar-fill { background: var(--color-text-secondary); }
-        .price__bar-cell:nth-child(3) .price__bar-fill { background: var(--color-text-primary); }
-        .price__bar-cell--cc .price__bar-fill { background: var(--color-warm); }
-        .price__bar-cell--cc .price__bar-value { color: var(--color-warm); }
-        .price__bar-name { min-height: 30px; margin: 9px 0 2px; font-family: var(--font-mono); font-size: 9px; line-height: 1.4; color: var(--color-text-primary); }
-        .price__bar-cadence { margin: 0; font-family: var(--font-mono); font-size: 8px; text-transform: uppercase; letter-spacing: .08em; color: var(--color-text-tertiary); }
-        .price__source { margin-top: 14px; font-size: 8px; line-height: 1.5; color: var(--color-text-tertiary); }
 
+        .price__bar-cell:nth-child(2) .price__bar-fill { background: #7D766E; }
+        .price__bar-cell:nth-child(3) .price__bar-fill { background: #444444; }
+        .price__bar-cell--cc .price__bar-fill { background: #1A1A1A; }
+        .price__bar-cell--cc .price__bar-value { color: #1A1A1A; font-weight: 700; }
+
+        .price__bar-name {
+          min-height: 30px;
+          margin: 9px 0 2px;
+          font-family: var(--font-mono);
+          font-size: 9px;
+          line-height: 1.4;
+          color: #1A1A1A;
+        }
+
+        .price__bar-cadence {
+          margin: 0;
+          font-family: var(--font-mono);
+          font-size: 8px;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          color: #7D766E;
+        }
+
+        .price__source {
+          margin-top: 14px;
+          font-family: var(--font-mono);
+          font-size: 8px;
+          line-height: 1.5;
+          color: #7D766E;
+        }
+
+        /* What's Included: Light Cream Card inside Dark Section */
         .price__included-card {
           position: absolute;
           top: 50%;
           right: clamp(18px, 3vw, 40px);
-          width: min(350px, 34vw);
+          width: min(360px, 34vw);
           transform: translateY(-50%);
           padding: 28px;
-          border: 1px solid rgba(255, 255, 255, .52);
-          border-radius: 16px;
-          background: rgba(242, 236, 228, .96);
-          box-shadow: 0 24px 70px rgba(26, 26, 26, .24);
-          backdrop-filter: blur(14px);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 24px;
+          background: #FAFAF9;
+          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
         }
-        .price__included-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-        .price__included-head .price__col-label { margin: 0; color: var(--color-primary); }
-        .price__included-head > span { font-family: var(--font-mono); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: var(--color-text-tertiary); }
-        .price__stack { margin-top: 18px; }
-        .price__stack-row { padding: 9px 0; }
-        .price__dot { background: var(--color-primary); }
-        .price__stack-name { font-size: 10px; line-height: 1.35; color: var(--color-text-secondary); }
-        .price__stack-value { font-size: 10px; }
-        .price__stack-tag { font-size: 8px; color: var(--color-warm); }
-        .price__total-row { padding: 12px 0; }
-        .price__price-row { padding: 16px 0; }
-        .price__suite-name { font-size: 19px; }
-        .price__price-amount { font-family: var(--font-display); font-size: 30px; }
-        .price__guarantee { margin-bottom: 14px; padding: 14px; background: var(--color-primary-subtle); }
-        .price__guarantee-title { margin-bottom: 6px; color: var(--color-primary); }
-        .price__guarantee-body { font-size: 12px; line-height: 1.5; }
-        .price__cta { height: 48px; margin-top: 0; background: var(--color-text-primary); color: var(--color-bg); }
-        .price__hsa { margin: 12px 0 0; font-family: var(--font-mono); font-size: 9px; text-align: center; text-transform: uppercase; letter-spacing: .08em; }
+
+        .price__included-head {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 16px;
+        }
+
+        .price__included-head .price__col-label {
+          margin: 0;
+          font-family: var(--font-mono);
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: #1A1A1A;
+        }
+
+        .price__included-head > span {
+          font-family: var(--font-mono);
+          font-size: 9px;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          color: #7D766E;
+        }
+
+        .price__stack { margin: 16px 0 0; }
+
+        .price__stack-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 12px;
+          padding: 8px 0;
+          border-bottom: 1px solid rgba(26, 26, 26, 0.08);
+        }
+
+        .price__stack-term {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          margin: 0;
+        }
+
+        .price__dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          flex-shrink: 0;
+          background: #1A1A1A;
+        }
+
+        .price__stack-name {
+          font-family: var(--font-mono);
+          font-size: 10px;
+          line-height: 1.35;
+          color: #444444;
+        }
+
+        .price__stack-name--bonus {
+          color: #1A1A1A;
+          font-weight: 700;
+        }
+
+        .price__stack-tag {
+          font-family: var(--font-mono);
+          font-size: 8px;
+          color: #7D766E;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          margin-left: 6px;
+        }
+
+        .price__stack-value {
+          font-family: var(--font-mono);
+          font-size: 10px;
+          color: #1A1A1A;
+          margin: 0;
+        }
+
+        .price__total-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 10px 0;
+          border-bottom: 1.5px solid rgba(26, 26, 26, 0.15);
+        }
+
+        .price__total-label {
+          font-family: var(--font-mono);
+          font-size: 10px;
+          color: #7D766E;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+        }
+
+        .price__total-value {
+          font-family: var(--font-mono);
+          font-size: 11px;
+          color: #7D766E;
+          font-weight: 700;
+        }
+
+        .price__price-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 14px 0 16px;
+        }
+
+        .price__suite-name {
+          font-family: var(--font-display);
+          font-size: 18px;
+          font-style: italic;
+          color: #1A1A1A;
+          margin: 0 0 2px;
+        }
+
+        .price__suite-sub {
+          font-family: var(--font-mono);
+          font-size: 9px;
+          color: #7D766E;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+          margin: 0;
+        }
+
+        .price__price-figure { text-align: right; }
+
+        .price__price-amount {
+          font-family: var(--font-display);
+          font-size: 28px;
+          font-weight: 700;
+          color: #1A1A1A;
+          margin: 0;
+          line-height: 1;
+        }
+
+        .price__price-save {
+          font-family: var(--font-mono);
+          font-size: 9px;
+          color: #C4503A;
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          margin: 2px 0 0;
+        }
+
+        .price__guarantee {
+          margin-bottom: 14px;
+          padding: 14px 16px;
+          background: #F0EAE0;
+          border: 1px solid rgba(26, 26, 26, 0.08);
+          border-radius: 12px;
+        }
+
+        .price__guarantee-title {
+          font-family: var(--font-mono);
+          font-size: 10px;
+          font-weight: 700;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          color: #1A1A1A;
+          margin: 0 0 4px;
+        }
+
+        .price__guarantee-body {
+          font-family: var(--font-body);
+          font-size: 12px;
+          line-height: 1.5;
+          color: #555555;
+          margin: 0;
+        }
+
+        .price__cta {
+          width: 100%;
+          height: 50px;
+          background: #1A1A1A;
+          color: #FAF5EE;
+          font-family: var(--font-mono);
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: background 160ms ease, box-shadow 160ms ease;
+        }
+
+        .price__cta:hover {
+          background: #333333;
+          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+        }
+
+        .price__hsa {
+          margin: 10px 0 0;
+          font-family: var(--font-mono);
+          font-size: 9px;
+          text-align: center;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          color: #7D766E;
+        }
 
         @media (max-width: 900px) {
-          /* stacked layout flows naturally — no fixed heights, no pinned overlap */
           .price__scene {
             min-height: 0;
             display: flex;
             flex-direction: column;
-            padding: 28px;
-            gap: 28px;
+            padding: 24px;
+            gap: 24px;
           }
           .price__board { position: relative; inset: auto; min-height: 0; }
           .price__included-card {
@@ -847,20 +755,24 @@ export default function PriceJustification() {
             transform: none;
           }
         }
+
         @media (max-width: 600px) {
           .price { padding: 36px 14px; }
-          .price__scene { border-radius: 16px; padding: 14px; gap: 14px; }
-          .price__scene-image { object-position: 38% center; }
-          .price__board { gap: 28px; padding: 24px 18px; border-radius: 12px; }
-          .price__h2 { font-size: 38px; }
-          .price__comparison { grid-template-columns: 1fr; gap: 18px; }
+          .price__scene { border-radius: 18px; padding: 14px; gap: 14px; }
+          .price__board { gap: 24px; padding: 20px 16px; border-radius: 16px; }
+          .price__h2 { font-size: 34px; }
+          .price__comparison { grid-template-columns: 1fr; gap: 16px; }
           .price__index { flex-direction: row; align-items: flex-end; justify-content: space-between; }
-          .price__index span { font-size: 54px; }
+          .price__index span { font-size: 50px; }
           .price__chart-head span { display: none; }
-          .price__bars { gap: 6px; height: 230px; }
-          .price__bar-name { font-size: 8px; }
-          .price__bar-value { font-size: 13px; }
-          .price__included-card { padding: 22px 18px; border-radius: 12px; }
+          .price__bars { gap: 6px; height: 210px; }
+          .price__included-card { padding: 20px 16px; border-radius: 16px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .price__shader-wrap {
+            opacity: 0.9;
+          }
         }
       `}</style>
     </section>

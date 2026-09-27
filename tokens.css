@@ -19,6 +19,8 @@
   --color-bg:           #000000;  /* page background — always black */
   --color-surface:      #0a0a0a;  /* cards, panels over bg */
   --color-surface-raised: #111111; /* elevated dialogs, dropdowns */
+  --color-charcoal-warm: #191817; /* rich dark warm charcoal */
+  --color-bg-warm-dark: #191817;
 
   /* Brand accents */
   --color-primary:      #2563EB;  /* main accent — buttons, links, active states */
@@ -53,43 +55,49 @@
    * ───────────────────────────────────────────── */
 
   /* Font families */
-  --font-display:  'Playfair Display', Georgia, serif;
-  --font-mono:     'Space Mono', 'Courier New', monospace;
-  --font-body:     'Lora', Georgia, 'Times New Roman', serif;
+  --font-display: var(--font-geist-sans), 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: var(--font-geist-sans), 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body:    var(--font-geist-sans), 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono:    var(--font-geist-mono), 'Geist Mono', ui-monospace, monospace;
+  --font-fraunces: 'Fraunces', Georgia, serif;
+  --font-general-sans: 'General Sans', var(--font-body), -apple-system, BlinkMacSystemFont, sans-serif;
 
-  /* Google Fonts import — add to app/layout.tsx head:
-     https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@400;700&display=swap
-  */
+  /* Type scale — display (Geist) */
+  --text-display-xl:  clamp(36px, 5vw, 66px);   /* hero headline */
+  --text-display-lg:  clamp(30px, 4vw, 54px);   /* section hero */
+  --text-display-md:  clamp(24px, 3vw, 36px);   /* product names in expander */
+  --text-display-sm:  clamp(18px, 2vw, 24px);   /* section headlines */
 
-  /* Type scale — display */
-  --text-display-xl:  clamp(52px, 8vw, 96px);   /* hero headline */
-  --text-display-lg:  72px;                       /* section hero — Playfair, wt 400 */
-  --text-display-md:  clamp(36px, 5vw, 56px);    /* product names in expander */
-  --text-display-sm:  clamp(28px, 4vw, 40px);    /* section headlines */
-
-  /* Type scale — body (Space Mono) */
-  --text-body-lg:     17px;    /* primary reading */
+  /* Type scale — body (Geist) */
+  --text-body-lg:     16px;    /* primary reading */
   --text-body-md:     14px;    /* secondary / labels */
-  --text-body-sm:     12px;    /* eyebrows, captions, specs */
+  --text-body-sm:     13px;    /* eyebrows, captions, specs */
+  --text-body-xs:     12px;
 
   /* Line heights */
-  --leading-display:  1.0;     /* hero — tight */
-  --leading-heading:  1.15;    /* section headings */
-  --leading-body:     1.8;     /* paragraphs */
-  --leading-mono:     1.5;     /* space mono body copy */
+  --leading-display:  1.1;     /* hero — tight */
+  --leading-heading:  1.2;     /* section headings */
+  --leading-body:     1.6;     /* paragraphs */
+  --leading-mono:     1.5;     /* mono body copy */
 
   /* Letter spacing */
-  --tracking-display: -0.05em; /* large display headings */
-  --tracking-heading: -0.02em;
-  --tracking-body:    0.00em;
-  --tracking-mono:    0.10em;  /* space mono — always slightly open */
-  --tracking-eyebrow: 0.16em;  /* all-caps eyebrow labels */
+  --tracking-display: -0.02em;  /* large display headings */
+  --tracking-heading: -0.015em;
+  --tracking-body:    0;
+  --tracking-mono:    0;
+  --tracking-eyebrow: 0.08em;   /* all-caps eyebrow labels */
 
   /* Font weights */
-  --weight-display:   400;     /* Playfair — regular is already heavy */
+  --weight-display:      600;
+  --weight-display-bd:   700;
   --weight-display-bold: 700;
-  --weight-mono:      400;
-  --weight-mono-bold: 700;
+  --weight-body:         400;
+  --weight-body-md:      500;
+  --weight-body-bd:      600;
+  --weight-mono:         400;
+  --weight-mono-md:      500;
+  --weight-mono-bd:      600;
+  --weight-mono-bold:    600;
 
   /* Max line lengths */
   --measure-body:     60ch;    /* body text columns — never wider */
@@ -199,7 +207,7 @@
    * ───────────────────────────────────────────── */
 
   /* Nav */
-  --nav-height:           64px;
+  --nav-height:           102px;
   --nav-blur:             20px;
   --nav-bg-scrolled:      rgba(0, 0, 0, 0.75);
   --nav-border-scrolled:  var(--border-subtle);

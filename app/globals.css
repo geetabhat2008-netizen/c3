@@ -8,9 +8,8 @@
   --color-accent: var(--color-warm);
   --color-surface: var(--color-surface-inset);
   --font-sans: var(--font-body);
-  --font-serif: var(--font-display);
-  --font-mono: var(--font-mono-src);
+  --font-serif: var(--font-fraunces, 'Fraunces', Georgia, serif);
+  --font-mono: var(--font-mono);
 }
 
-/* tokens.css owns the reset, base type, fonts, and color system.
-   ponytail: no create-next-app overrides here — they fought the cream theme. */
+/* tokens.css owns the reset, base type, fonts, and color system. */

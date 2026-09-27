@@ -42,3 +42,6 @@ next-env.d.ts
 
 # reference-only files (not part of build)
 reference/
+
+# local IDE config
+.claude/

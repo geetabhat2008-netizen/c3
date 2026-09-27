@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { POSTS, getPost, type BlogBlock } from '../../../lib/blog'
 import Footer from '../../../components/Footer'
@@ -14,9 +15,9 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params
   const post = getPost(slug)
-  if (!post) return { title: 'The Journal — CrownCalm' }
+  if (!post) return { title: 'The Journal: CrownCalm' }
   return {
-    title: `${post.title} — CrownCalm Journal`,
+    title: `${post.title}: CrownCalm Journal`,
     description: post.dek,
   }
 }

@@ -89,11 +89,11 @@ const TRIGGERS: [string, string][] = [
   ['#D2B6F7', 'Screen Time'],
 ]
 
-const TAGS: { label: string; bg: string; border: string; text: string }[] = [
-  { label: 'Gate Control', bg: 'rgba(210,182,247,0.30)', border: 'rgba(210,182,247,0.60)', text: '#6B3FA0' },
-  { label: 'Spectral Filter', bg: 'rgba(229,150,255,0.20)', border: 'rgba(229,150,255,0.50)', text: '#8B3FAF' },
-  { label: 'Vasoconstriction', bg: 'rgba(245,176,97,0.25)', border: 'rgba(245,176,97,0.60)', text: '#8B5E1A' },
-  { label: 'Auditory Masking', bg: 'rgba(245,215,110,0.25)', border: 'rgba(245,215,110,0.60)', text: '#7A6010' },
+const TAGS: { label: string; dot: string }[] = [
+  { label: 'Gate Control', dot: '#D2B6F7' },
+  { label: 'Spectral Filter', dot: '#E596FF' },
+  { label: 'Vasoconstriction', dot: '#F5B061' },
+  { label: 'Auditory Masking', dot: '#FCD667' },
 ]
 
 const DRAINS: [string, string][] = [
@@ -120,7 +120,7 @@ export default function MechanismSection() {
         }
 
   return (
-    <section id="mechanism" className="mech has-grid-rules" aria-label="The real cost and the mechanism">
+    <section id="mechanism" className="mech" aria-label="The real cost and the mechanism">
       <div className="mech__inner">
         {/* ── PART A — the cost ── */}
         <div className="mech__cost-panel">
@@ -128,7 +128,8 @@ export default function MechanismSection() {
             <div>
               <p className="mech__eyebrow">The real cost of migraine</p>
               <h2 className="mech__hook">
-                It was never <span className="italic">just a headache.</span>
+                <span className="mech__hook-l1">It was never just a headache.</span>
+                <span className="mech__hook-l2">Three neurological registers of impact.</span>
               </h2>
             </div>
             <p className="mech__intro">
@@ -154,9 +155,8 @@ export default function MechanismSection() {
         <div className="mech__physics">
           <div className="mech__copy">
             <h2 className="mech__h2">
-              <span>Your migraines</span>
-              <span>aren&apos;t random.</span>
-              <span className="italic">They&apos;re physics.</span>
+              <span className="mech__h2-l1">Your migraines aren&apos;t random.</span>
+              <span className="mech__h2-l2">They&apos;re threshold physics.</span>
             </h2>
 
             <p className="mech__p">
@@ -171,11 +171,8 @@ export default function MechanismSection() {
 
             <div className="mech__tags">
               {TAGS.map((t) => (
-                <span key={t.label} className="mech__tag" style={{
-                  background: t.bg,
-                  borderColor: t.border,
-                  color: t.text
-                }}>
+                <span key={t.label} className="mech__tag">
+                  <span className="mech__tag-dot" style={{ background: t.dot }} aria-hidden />
                   {t.label}
                 </span>
               ))}
@@ -209,8 +206,8 @@ export default function MechanismSection() {
                     <path d="M46,30 L154,30 L148,172 Q148,194 130,194 L70,194 Q52,194 52,172 Z" />
                   </clipPath>
                   <linearGradient id="liquidGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stopColor="#E8624A" stopOpacity="0.32" />
-                    <stop offset="100%" stopColor="#C4503A" stopOpacity="0.24" />
+                    <stop offset="0%" stopColor="#4A7FC9" stopOpacity="0.4" />
+                    <stop offset="100%" stopColor="#2563EB" stopOpacity="0.22" />
                   </linearGradient>
                   <filter id="meniscus">
                     <feTurbulence baseFrequency="0.02" numOctaves="2" seed="1" />
@@ -271,7 +268,7 @@ export default function MechanismSection() {
         .mech {
           position: relative;
           overflow: hidden;
-          background: var(--color-bg);
+          background: var(--color-bg-primary, #FAFAF9);
           padding: var(--padding-section-y) 0;
         }
         .mech__inner {
@@ -285,9 +282,9 @@ export default function MechanismSection() {
         /* ---- Part A: compact cost summary ---- */
         .mech__cost-panel {
           overflow: hidden;
-          border: 1px solid var(--border-default);
+          border: 1px solid rgba(15, 15, 15, 0.08);
           border-radius: var(--radius-card);
-          background: var(--color-surface-inset);
+          background: var(--color-bg-secondary, #F2F1ED);
         }
         .mech__head {
           display: flex;
@@ -295,7 +292,7 @@ export default function MechanismSection() {
           justify-content: space-between;
           gap: var(--space-6);
           padding: var(--space-6);
-          border-bottom: 1px solid var(--border-default);
+          border-bottom: 1px solid rgba(15, 15, 15, 0.08);
         }
         .mech__eyebrow {
           margin-bottom: var(--space-3);
@@ -304,22 +301,31 @@ export default function MechanismSection() {
           font-weight: var(--weight-mono-bd);
           letter-spacing: var(--tracking-eyebrow);
           text-transform: uppercase;
-          color: var(--color-primary);
+          color: var(--color-text-secondary);
         }
         .mech__hook {
           font-family: var(--font-display);
-          font-size: clamp(34px, 4vw, 50px);
-          font-weight: var(--weight-display);
-          line-height: 1;
-          letter-spacing: var(--tracking-display);
+          font-size: var(--text-display-lg);
+          line-height: var(--leading-heading);
+          letter-spacing: var(--tracking-heading);
+        }
+        .mech__hook-l1 {
+          display: block;
+          font-weight: 700;
           color: var(--color-text-primary);
         }
-        .mech__hook .italic { font-style: italic; color: var(--color-warm); }
+        .mech__hook-l2 {
+          display: block;
+          font-weight: 500;
+          color: var(--color-text-secondary);
+          margin-top: 4px;
+        }
         .mech__intro {
           max-width: 34ch;
           font-family: var(--font-body);
-          font-size: 15px;
-          line-height: 1.55;
+          font-size: var(--text-body-md);
+          font-weight: var(--weight-body);
+          line-height: var(--leading-body);
           color: var(--color-text-secondary);
         }
         .mech__registers {
@@ -332,7 +338,7 @@ export default function MechanismSection() {
           gap: var(--space-4);
           min-width: 0;
           padding: var(--space-5);
-          border-right: 1px solid var(--border-default);
+          border-right: 1px solid rgba(15, 15, 15, 0.08);
         }
         .mech__reg:last-child { border-right: 0; }
         .mech__reg-icon {
@@ -342,9 +348,10 @@ export default function MechanismSection() {
           flex: 0 0 36px;
           align-items: center;
           justify-content: center;
-          border: 1px solid var(--border-default);
+          border: 1px solid rgba(15, 15, 15, 0.12);
           border-radius: 50%;
-          color: var(--color-primary);
+          background: #FFFFFF;
+          color: var(--color-text-primary);
         }
         .mech__reg-icon svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.5; }
         .mech__reg-label {
@@ -353,20 +360,22 @@ export default function MechanismSection() {
           font-weight: var(--weight-mono-bd);
           letter-spacing: .12em;
           text-transform: uppercase;
-          color: var(--color-primary);
+          color: var(--color-text-secondary);
         }
         .mech__reg-word {
           margin-top: 2px;
           font-family: var(--font-display);
-          font-size: 22px;
-          line-height: 1.15;
+          font-size: var(--text-display-sm);
+          font-weight: var(--weight-display-bd);
+          line-height: var(--leading-heading);
           color: var(--color-text-primary);
         }
         .mech__reg-line {
           margin-top: var(--space-2);
           font-family: var(--font-body);
-          font-size: 14px;
-          line-height: 1.5;
+          font-size: var(--text-body-sm);
+          font-weight: var(--weight-body);
+          line-height: var(--leading-body);
           color: var(--color-text-secondary);
         }
 
@@ -374,7 +383,7 @@ export default function MechanismSection() {
         .mech__physics {
           margin-top: var(--space-11);
           padding-top: var(--space-9);
-          border-top: 1px solid var(--border-subtle);
+          border-top: 1px solid rgba(15, 15, 15, 0.08);
           display: grid;
           grid-template-columns: 48fr 52fr;
           gap: var(--space-8);
@@ -383,40 +392,60 @@ export default function MechanismSection() {
 
         .mech__h2 {
           font-family: var(--font-display);
-          font-size: clamp(36px, 5vw, 64px);
-          font-weight: var(--weight-display);
-          line-height: 1.05;
-          letter-spacing: -0.04em;
-          color: var(--color-text-primary);
+          font-size: var(--text-display-lg);
+          line-height: var(--leading-heading);
+          letter-spacing: var(--tracking-heading);
           margin-bottom: var(--space-6);
         }
-        .mech__h2 span { display: block; }
-        .mech__h2 .italic { font-style: italic; color: var(--color-warm); margin-top: 4px; }
+        .mech__h2-l1 {
+          display: block;
+          font-weight: 700;
+          color: var(--color-text-primary);
+        }
+        .mech__h2-l2 {
+          display: block;
+          font-weight: 500;
+          color: var(--color-text-secondary);
+          margin-top: 4px;
+        }
         .mech__p {
           font-family: var(--font-body);
-          font-size: 16px;
-          line-height: 1.7;
-          letter-spacing: 0;
-          color: #555555;
+          font-size: var(--text-body-md);
+          font-weight: var(--weight-body);
+          line-height: var(--leading-body);
+          letter-spacing: var(--tracking-body);
+          color: var(--color-text-secondary);
           max-width: 440px;
         }
         .mech__p + .mech__p { margin-top: var(--space-4); }
 
-        .mech__tags { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: 28px; }
+        .mech__tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
         .mech__tag {
+          display: inline-flex;
+          align-items: center;
+          gap: 7px;
           font-family: var(--font-mono);
-          font-size: 10px;
-          font-weight: var(--weight-mono-bd);
-          letter-spacing: 0.12em;
+          font-size: 11px;
+          font-weight: var(--weight-mono-md);
+          letter-spacing: 0.06em;
           text-transform: uppercase;
-          padding: 5px 11px;
-          border-radius: var(--radius-tag);
-          border: 1px solid;
+          padding: 6px 14px;
+          border-radius: 9999px;
+          background: var(--color-bg-secondary, #F2F1ED);
+          border: 1px solid rgba(15, 15, 15, 0.08);
+          color: var(--color-text-primary, #0F0F0F);
           transition: transform 180ms var(--ease-out), box-shadow 180ms var(--ease-out);
         }
         .mech__tag:hover {
           transform: translateY(-2px);
-          box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+          box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+          background: #EBEAE4;
+        }
+        .mech__tag-dot {
+          width: 7px;
+          height: 7px;
+          border-radius: 50%;
+          flex-shrink: 0;
         }
 
         .mech__cta {
@@ -431,13 +460,13 @@ export default function MechanismSection() {
           text-transform: uppercase;
           color: var(--color-text-primary);
           text-decoration: none;
-          border-bottom: 1.5px solid rgba(26,26,26,0.25);
+          border-bottom: 1.5px solid rgba(15, 15, 15, 0.25);
           padding-bottom: 3px;
           transition: border-color 220ms var(--ease-default), color 220ms var(--ease-default);
         }
         .mech__cta:hover {
           border-bottom-color: var(--color-text-primary);
-          color: var(--color-warm);
+          color: var(--color-text-primary);
         }
         .mech__cta-arrow { display: inline-block; transition: transform 240ms var(--ease-out); }
         .mech__cta:hover .mech__cta-arrow { transform: translateY(4px); }
@@ -566,6 +595,8 @@ export default function MechanismSection() {
           .mech__reg:last-child { border-bottom: 0; }
           .mech__reg-word { font-size: 20px; }
           .mech__physics { margin-top: var(--space-9); padding-top: var(--space-7); }
+          .mech__drains { gap: 4px; justify-content: space-between; padding: 0 2px; }
+          .mech__drain { font-size: 8.5px; letter-spacing: 0.04em; white-space: nowrap; }
         }
       `}</style>
     </section>

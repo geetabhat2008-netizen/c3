@@ -6,7 +6,7 @@ import Image from 'next/image'
 
 const TABS = [
   {
-    id: 'morning', label: 'Morning', time: '6–9am', image: '/images/lifestyle/morning-session.png',
+    id: 'morning', label: 'Morning', time: '6–8 am', image: '/images/lifestyle/morning-session.png',
     alt: 'A woman using the Neuro-Massager during a quiet morning routine', title: 'Morning Focus',
     body: 'Start with the gate already closed — 15 quiet minutes before the day begins.',
     stat: '15', unit: 'min', statTitle: 'before your day begins', statBody: 'Rhythmic compression helps close the pain gate before daily sensory load builds.',
@@ -24,10 +24,10 @@ const TABS = [
     alt: 'A woman resting with the Cryo-Compression Core in a dim room', title: 'At the First Sign',
     body: 'Cold at the vascular source, in the right order — before the attack fully arrives.',
     stat: '20', unit: 'min', statTitle: 'at first onset', statBody: 'Targeted cooling constricts inflamed vessels while gentle pressure settles the signal.',
-    mode: 'Cryo Relief', spec1: '2–8°C', spec2: '20 min max', quote: 'The first time I used the cryo wrap in the right order, the attack never fully arrived.', name: 'A.S.',
+    mode: 'Cryo Relief', spec1: '0–4°C', spec2: '20 min max', quote: 'The first time I used the cryo wrap in the right order, the attack never fully arrived.', name: 'A.S.',
   },
   {
-    id: 'sleep', label: 'Sleep', time: '10pm–6am', image: '/images/lifestyle/sleep-buds.png',
+    id: 'sleep', label: 'Sleep', time: '10pm–7am', image: '/images/lifestyle/sleep-buds.png',
     alt: 'A woman sleeping on her side wearing the Acoustic Silence Sleep Buds', title: 'Rest & Sleep',
     body: 'Mask the room without pillow pressure, so sensory load does not follow you into sleep.',
     stat: '30', unit: 'dB', statTitle: 'of disruption masked', statBody: 'Low-profile buds deliver brown noise for side-sleep comfort through the night.',
@@ -38,7 +38,7 @@ const TABS = [
     alt: 'A man wearing the Cervical Axis Module at a modern desk', title: 'At the Desk',
     body: 'Decompress the second gate cranial devices cannot reach while you continue your day.',
     stat: '60', unit: 'min', statTitle: 'of targeted decompression', statBody: 'The cervical module addresses upper-neck tension without interrupting desk work.',
-    mode: 'Desk Mode', spec1: 'C0–C2 target', spec2: '60 min wear', quote: 'The neck module is the only piece I wear on calls. My afternoon threshold is higher.', name: 'R.P.',
+    mode: 'Desk Mode', spec1: 'C1–C2 target', spec2: '60 min wear', quote: 'The neck module is the only piece I wear on calls. My afternoon threshold is higher.', name: 'R.P.',
   },
 ] as const
 
@@ -137,7 +137,7 @@ export default function ProtocolInYourDay() {
         .piyd__header { display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; margin-bottom: 34px; }
         .piyd__header > div { max-width: 720px; }
         .piyd__eyebrow { margin: 0 0 12px; font: 700 10px/1.4 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--color-primary); }
-        .piyd__header h2 { margin: 0; font: 400 clamp(36px, 4.5vw, 58px)/1 var(--font-display); letter-spacing: -.035em; color: var(--color-text-primary); }
+        .piyd__header h2 { margin: 0; font-family: var(--font-display); font-size: var(--text-display-md); font-weight: var(--weight-display); line-height: var(--leading-heading); letter-spacing: var(--tracking-heading); color: var(--color-text-primary); }
         .piyd__lede { max-width: 620px; margin: 16px 0 0; font: 400 15px/1.6 var(--font-body); color: var(--color-text-secondary); }
         .piyd__cta { display: inline-flex; min-height: 46px; flex: 0 0 auto; align-items: center; gap: 12px; padding: 0 20px; border: 1px solid var(--color-text-primary); border-radius: 999px; font: 700 10px/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--color-text-primary); }
         .piyd__tabs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 18px; }
@@ -163,19 +163,19 @@ export default function ProtocolInYourDay() {
         .piyd__time { position: absolute; top: 28px; left: 28px; padding: 10px 16px; border: 1px solid rgba(255,255,255,.7); border-radius: 999px; background: rgba(20,18,16,.42); font: 700 10px/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--color-surface-inset); backdrop-filter: blur(8px); }
         .piyd__image-copy { position: absolute; right: 24px; bottom: 24px; left: 24px; max-width: 520px; padding: 22px; border-radius: 12px; background: rgba(20,18,16,.58); color: var(--color-surface-inset); backdrop-filter: blur(6px); }
         .piyd__image-copy p { margin: 0 0 14px; font: 700 11px/1.3 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--color-surface-inset); }
-        .piyd__image-copy h3 { max-width: 19ch; margin: 0; font: 400 clamp(25px, 3vw, 38px)/1.2 var(--font-display); letter-spacing: -.02em; color: var(--color-surface-inset); text-wrap: pretty; }
+        .piyd__image-copy h3 { max-width: 19ch; margin: 0; font-family: var(--font-display); font-size: clamp(22px, 2.6vw, 32px); font-weight: var(--weight-display); line-height: 1.25; letter-spacing: var(--tracking-heading); color: var(--color-surface-inset); text-wrap: pretty; }
         .piyd__details { display: grid; grid-template-rows: 1fr .8fr; gap: 18px; min-width: 0; }
         .piyd__top-cards { display: grid; grid-template-columns: .9fr 1.1fr; gap: 18px; }
         .piyd__stat-card, .piyd__mode-card, .piyd__quote { margin: 0; border: 1px solid var(--border-default); border-radius: 18px; }
         .piyd__stat-card { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 30px 24px; border-color: var(--moment-accent); background: var(--moment-deep); text-align: center; color: var(--color-surface-inset); transition: background-color .24s ease, border-color .24s ease; }
         .piyd__ring { display: grid; width: 106px; height: 106px; place-items: center; border: 9px solid rgba(242,236,228,.32); border-top-color: var(--moment-accent); border-radius: 50%; transform: rotate(18deg); }
-        .piyd__ring span { font: 400 31px/1 var(--font-display); transform: rotate(-18deg); }
+        .piyd__ring span { font-family: var(--font-display); font-weight: var(--weight-display); font-size: 28px; line-height: 1; transform: rotate(-18deg); }
         .piyd__ring small { margin-left: 3px; font: 700 10px/1 var(--font-mono); text-transform: uppercase; }
-        .piyd__stat-card h3 { margin: 22px 0 8px; font: 400 21px/1.2 var(--font-display); }
+        .piyd__stat-card h3 { margin: 22px 0 8px; font-family: var(--font-display); font-size: 20px; font-weight: var(--weight-display); line-height: 1.2; }
         .piyd__stat-card p { max-width: 24ch; margin: 0; font: 400 12px/1.5 var(--font-body); color: rgba(255,255,255,.78); }
         .piyd__mode-card { display: flex; flex-direction: column; justify-content: space-between; padding: 24px; background: var(--color-surface-inset); }
         .piyd__mode-chip { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 14px; padding: 18px; border-radius: 12px; background: var(--moment-soft); color: var(--color-text-primary); transition: background-color .24s ease; }
-        .piyd__mode-chip strong { grid-column: 1 / -1; font: 400 22px/1.1 var(--font-display); color: var(--moment-deep); }
+        .piyd__mode-chip strong { grid-column: 1 / -1; font-family: var(--font-display); font-size: 20px; font-weight: var(--weight-display); line-height: 1.2; color: var(--moment-deep); }
         .piyd__mode-chip span { padding-top: 9px; border-top: 1px solid var(--border-default); font: 700 9px/1.3 var(--font-mono); text-transform: uppercase; letter-spacing: .06em; }
         .piyd__mode-card > p { margin: 24px 0 4px; font: 400 18px/1.4 var(--font-body); color: var(--color-text-primary); }
         .piyd__quote { position: relative; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; padding: clamp(26px, 3.2vw, 38px); border-color: rgba(26,26,26,.15); background: var(--color-surface-inset); box-shadow: none; }
@@ -184,7 +184,7 @@ export default function ProtocolInYourDay() {
         .piyd__quote-top { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
         .piyd__quote-top > span { font: 700 9px/1 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--color-text-tertiary); }
         .piyd__stars { margin: 0; font: 700 12px/1 var(--font-mono); letter-spacing: .16em; color: var(--moment-deep); }
-        .piyd__quote blockquote { position: relative; z-index: 1; max-width: 30ch; margin: 22px 0 26px; font: 400 clamp(22px, 2.2vw, 29px)/1.28 var(--font-display); letter-spacing: -.02em; color: var(--color-text-primary); text-wrap: pretty; }
+        .piyd__quote blockquote { position: relative; z-index: 1; max-width: 30ch; margin: 22px 0 26px; font-family: var(--font-display); font-size: clamp(20px, 2vw, 26px); font-weight: var(--weight-display); line-height: 1.35; letter-spacing: var(--tracking-heading); color: var(--color-text-primary); text-wrap: pretty; }
         .piyd__quote figcaption { position: relative; z-index: 1; display: flex; align-items: center; gap: 12px; padding-top: 18px; border-top: 1px solid rgba(26,26,26,.12); }
         .piyd__author-mark { display: inline-flex; width: 38px; height: 38px; flex: 0 0 38px; align-items: center; justify-content: center; margin: 0; border-radius: 50%; background: var(--moment-soft); font: 700 10px/1 var(--font-mono); letter-spacing: .06em; color: var(--moment-deep); }
         .piyd__author-copy { display: flex; min-width: 0; flex-direction: column; gap: 4px; margin: 0; }

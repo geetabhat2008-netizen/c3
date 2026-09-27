@@ -102,7 +102,7 @@ export default function PainAcknowledgment() {
   const layer = PAIN_LAYERS[active]
 
   return (
-    <section className="pain has-grid-rules">
+    <section className="pain">
       <div className="pain__inner">
         {/* HEADER */}
         <div className="pain__header">
@@ -111,15 +111,14 @@ export default function PainAcknowledgment() {
               The Three Layers
             </motion.p>
             <h2 className="pain__h2">
-              <motion.span {...fadeUp(0.1)}>You know exactly</motion.span>
-              <motion.span className="pain__h2-italic" {...fadeUp(0.15)}>
-                what this costs.
+              <motion.span className="pain__h2-l1" {...fadeUp(0.1)}>You know exactly what this costs.</motion.span>
+              <motion.span className="pain__h2-l2" {...fadeUp(0.15)}>
+                Not the clinical version. The real one.
               </motion.span>
             </h2>
           </div>
           <motion.p className="pain__sub" {...fadeUp(0.2)}>
-            Before anything else — we want you to know we understand the full
-            weight of it. Not the clinical version. The real one.
+            Before anything else, we understand the full weight of lost days, cancelled plans, and living through pain management.
           </motion.p>
         </div>
 
@@ -305,22 +304,30 @@ export default function PainAcknowledgment() {
         }
         .pain__h2 {
           font-family: var(--font-display);
-          font-size: clamp(30px, 4vw, 48px);
-          font-weight: 400;
-          line-height: 1.05;
-          letter-spacing: -0.04em;
-          color: var(--color-text-primary);
+          font-size: var(--text-display-md);
+          line-height: var(--leading-heading);
+          letter-spacing: var(--tracking-heading);
           margin: 0;
         }
-        .pain__h2 span { display: block; }
-        .pain__h2 .pain__h2-italic { font-style: italic; }
+        .pain__h2-l1 {
+          display: block;
+          font-weight: 700;
+          color: var(--color-text-primary);
+        }
+        .pain__h2-l2 {
+          display: block;
+          font-weight: 500;
+          color: var(--color-text-secondary);
+          margin-top: 4px;
+        }
         .pain__sub {
           font-family: var(--font-body);
-          font-size: 15px;
-          color: #5C5C5C;
-          line-height: 1.7;
-          letter-spacing: 0;
-          max-width: 360px;
+          font-size: var(--text-body-md);
+          font-weight: var(--weight-body);
+          color: var(--color-text-secondary);
+          line-height: var(--leading-body);
+          letter-spacing: var(--tracking-body);
+          max-width: 400px;
           margin: 0 0 6px;
         }
 
@@ -471,11 +478,11 @@ export default function PainAcknowledgment() {
         }
         .pain__lead {
           font-family: var(--font-display);
-          font-size: clamp(24px, 2.9vw, 36px);
-          font-style: italic;
-          font-weight: 400;
-          line-height: 1.22;
-          letter-spacing: -0.02em;
+          font-size: clamp(22px, 2.6vw, 32px);
+          font-style: normal;
+          font-weight: var(--weight-display);
+          line-height: 1.25;
+          letter-spacing: var(--tracking-heading);
           color: var(--color-text-primary);
           margin: 0 0 28px;
           text-wrap: balance;
@@ -483,17 +490,18 @@ export default function PainAcknowledgment() {
         .pain__stmt {
           position: relative;
           font-family: var(--font-body);
-          font-size: 15px;
+          font-size: var(--text-body-md);
+          font-weight: var(--weight-body);
           color: #5C5C5C;
-          line-height: 1.7;
-          letter-spacing: 0;
+          line-height: var(--leading-body);
+          letter-spacing: var(--tracking-body);
           margin-bottom: 14px;
           padding-left: 18px;
         }
         .pain__stmt:last-child { margin-bottom: 0; }
         .pain__stmt--accent {
           color: var(--color-text-primary);
-          font-weight: 700;
+          font-weight: var(--weight-body-bd);
         }
         .pain__stmt-marker {
           position: absolute;
@@ -513,11 +521,12 @@ export default function PainAcknowledgment() {
         }
         .pain__pivot-quote {
           font-family: var(--font-display);
-          font-size: clamp(18px, 2.4vw, 28px);
-          font-style: italic;
-          font-weight: 400;
+          font-size: var(--text-display-sm);
+          font-style: normal;
+          font-weight: var(--weight-display);
           color: var(--color-text-primary);
-          letter-spacing: -0.02em;
+          letter-spacing: var(--tracking-heading);
+          line-height: var(--leading-heading);
           margin: 0 auto 16px;
           max-width: none;
         }

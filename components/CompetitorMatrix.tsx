@@ -257,7 +257,7 @@ export default function CompetitorMatrix() {
           <p className="cm__eyebrow">The Comparison</p>
           <h2 className="cm__title">
             <span className="cm__title-line">You haven&apos;t failed.</span>
-            <span className="cm__title-line cm__title-line--accent">Single mechanisms have.</span>
+            <span className="cm__title-line cm__title-line--sub">Single mechanisms have.</span>
           </h2>
         </motion.div>
 
@@ -435,24 +435,10 @@ export default function CompetitorMatrix() {
 
       <style jsx global>{`
         .cm {
-          background: #f2ece4;
+          background: var(--color-bg-primary, #FAFAF9);
           padding: clamp(48px, 6.5vw, 84px) max(46px, 5.5vw);
           position: relative;
           overflow: hidden;
-        }
-        .cm::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          pointer-events: none;
-          z-index: 0;
-          background-image: repeating-linear-gradient(
-            to right,
-            rgba(26, 26, 26, 0.055) 0px,
-            rgba(26, 26, 26, 0.055) 1px,
-            transparent 1px,
-            transparent 25%
-          );
         }
         .cm__inner {
           position: relative;
@@ -467,41 +453,40 @@ export default function CompetitorMatrix() {
         .cm__eyebrow {
           font-family: var(--font-mono);
           font-size: 11px;
-          font-weight: 400;
+          font-weight: 600;
           letter-spacing: 0.16em;
           text-transform: uppercase;
-          color: #8F8981;
+          color: var(--color-text-secondary, #6B6B6B);
           margin: 0 0 20px;
         }
         .cm__title {
-          font-family: var(--font-serif);
-          font-size: clamp(36px, 5vw, 62px);
-          font-weight: 400;
-          line-height: 1.05;
-          letter-spacing: -0.04em;
+          font-family: var(--font-display);
+          font-size: var(--text-display-lg);
+          line-height: var(--leading-heading);
+          letter-spacing: var(--tracking-heading);
           margin: 0;
         }
         .cm__title-line {
           display: block;
-          color: #1a1a1a;
+          font-weight: 700;
+          color: var(--color-text-primary, #0F0F0F);
         }
-        .cm__title-line--accent {
-          font-style: italic;
-          color: #c4503a;
+        .cm__title-line--sub {
+          display: block;
+          font-weight: 500;
+          font-size: clamp(16px, 1.8vw, 20px);
+          color: var(--color-text-secondary, #6B6B6B);
+          margin-top: 6px;
         }
 
         /* ---------- 3D raised card ---------- */
         .cm__card {
           position: relative;
-          background: #FAF5EE;
-          border: 1px solid rgba(26, 26, 26, 0.10);
-          border-radius: 12px;
+          background: #FAFAF9;
+          border: 1px solid rgba(15, 15, 15, 0.08);
+          border-radius: 16px;
           padding: 20px 24px;
-          box-shadow:
-            inset 0 1px 0 rgba(255, 255, 255, 0.85),
-            0 1px 2px rgba(26, 26, 26, 0.06),
-            0 10px 24px rgba(26, 26, 26, 0.09),
-            0 28px 56px rgba(26, 26, 26, 0.10);
+          box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
         }
         .cm__card::after {
           content: '';
@@ -595,12 +580,12 @@ export default function CompetitorMatrix() {
           line-height: 1.3;
         }
         .cm__prod-name--crown {
-          font-family: var(--font-serif);
+          font-family: var(--font-display);
           font-size: 15px;
-          font-weight: 400;
-          font-style: italic;
+          font-weight: var(--weight-display);
+          font-style: normal;
           color: #1a1a1a;
-          letter-spacing: -0.01em;
+          letter-spacing: var(--tracking-heading);
           text-transform: none;
         }
         .cm__prod-sub {
@@ -753,12 +738,13 @@ export default function CompetitorMatrix() {
           text-align: center;
         }
         .cm__quote {
-          font-family: var(--font-serif);
-          font-size: clamp(18px, 2.6vw, 28px);
-          font-style: italic;
-          font-weight: 400;
+          font-family: var(--font-display);
+          font-size: var(--text-display-sm);
+          font-style: normal;
+          font-weight: var(--weight-display);
           color: #1a1a1a;
-          letter-spacing: -0.02em;
+          letter-spacing: var(--tracking-heading);
+          line-height: var(--leading-heading);
           margin: 0 0 20px;
           text-wrap: balance;
         }
